@@ -71,6 +71,8 @@ nav{display:flex;align-items:center;gap:28px;height:70px}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 .nav .btn{margin-left:4px}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--edge-2);border-radius:10px;width:42px;height:42px;color:var(--ink);font-size:20px;cursor:pointer}
+.lang-select{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;background:var(--surface);color:var(--ink);border:1px solid var(--edge-2);border-radius:10px;padding:8px 8px;cursor:pointer}
+.lang-select:hover{border-color:var(--accent)}
 
 /* hero */
 .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,72px)}
@@ -235,15 +237,19 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
     <nav>
       <a href="#top" class="logo">Stoq<b>zy</b></a>
       <div class="nav-links">
-        <a href="#funcionalidades">Funcionalidades</a>
-        <a href="#como">Como funciona</a>
-        <a href="#seguranca">Segurança</a>
-        <a href="#precos">Preços</a>
+        <a href="#funcionalidades" data-i18n="nav.features">Funcionalidades</a>
+        <a href="#como" data-i18n="nav.how">Como funciona</a>
+        <a href="#seguranca" data-i18n="nav.security">Segurança</a>
+        <a href="#precos" data-i18n="nav.pricing">Preços</a>
         <a href="#faq">FAQ</a>
       </div>
+      <select id="lang" class="lang-select" aria-label="Idioma / Language">
+        <option value="pt">PT</option><option value="en">EN</option><option value="es">ES</option>
+        <option value="fr">FR</option><option value="de">DE</option><option value="it">IT</option>
+      </select>
       <button class="theme-btn" id="theme" aria-label="Mudar tema" title="Mudar tema">◐</button>
-      <a href="#precos" class="btn btn-ghost">Ver planos</a>
-      <a href="#precos" class="btn btn-primary">Começar grátis</a>
+      <a href="#precos" class="btn btn-ghost" data-i18n="nav.viewPlans">Ver planos</a>
+      <a href="#precos" class="btn btn-primary" data-i18n="nav.startFree">Começar grátis</a>
       <button class="menu-btn" id="menu" aria-label="Menu">☰</button>
     </nav>
   </div>
@@ -254,17 +260,17 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <div class="wrap">
     <section class="hero">
       <div class="hero-copy">
-        <span class="hero-badge"><span class="pill">Novo</span> Extensão para Chrome · 21 países</span>
-        <h1 class="hero-title">A tua loja Vinted em <em>piloto automático</em></h1>
-        <p class="lede">Republica os parados, repõe os vendidos, responde a quem dá like e mostra a margem real. Tudo ao ritmo de um humano cuidadoso.</p>
+        <span class="hero-badge"><span class="pill" data-i18n="hero.new">Novo</span> <span data-i18n="hero.badge">Extensão para Chrome · 21 países</span></span>
+        <h1 class="hero-title" data-i18n-html="hero.title">A tua loja Vinted em <em>piloto automático</em></h1>
+        <p class="lede" data-i18n="hero.lede">Republica os parados, repõe os vendidos, responde a quem dá like e mostra a margem real. Tudo ao ritmo de um humano cuidadoso.</p>
         <div class="hero-cta">
-          <a href="#precos" class="btn btn-primary">Começar grátis</a>
-          <a href="#como" class="btn btn-ghost">Ver como funciona</a>
+          <a href="#precos" class="btn btn-primary" data-i18n="hero.ctaStart">Começar grátis</a>
+          <a href="#como" class="btn btn-ghost" data-i18n="hero.ctaHow">Ver como funciona</a>
         </div>
         <div class="trust">
-          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Sem aceder às tuas passwords</span>
-          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Corre no teu browser</span>
-          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Cancelas quando quiseres</span>
+          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="hero.t1">Sem aceder às tuas passwords</span></span>
+          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="hero.t2">Corre no teu browser</span></span>
+          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="hero.t3">Cancelas quando quiseres</span></span>
         </div>
       </div>
       <div class="hero-visual reveal">
@@ -290,13 +296,13 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <!-- BANDA DE CONFIANÇA -->
   <div class="band">
     <div class="wrap">
-      <div class="stat"><b>21</b><span>países da Vinted</span></div>
+      <div class="stat"><b>21</b><span data-i18n="band.1">países da Vinted</span></div>
       <div class="sep"></div>
-      <div class="stat"><b>20</b><span>estilos de edição de foto</span></div>
+      <div class="stat"><b>20</b><span data-i18n="band.2">estilos de edição de foto</span></div>
       <div class="sep"></div>
-      <div class="stat"><b>0</b><span>servidores a tocar na tua conta</span></div>
+      <div class="stat"><b>0</b><span data-i18n="band.3">servidores a tocar na tua conta</span></div>
       <div class="sep"></div>
-      <div class="stat"><b>24/7</b><span>ao teu ritmo, com pausas</span></div>
+      <div class="stat"><b>24/7</b><span data-i18n="band.4">ao teu ritmo, com pausas</span></div>
     </div>
   </div>
 
@@ -304,14 +310,14 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <section class="blk" id="como">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="eyebrow">Como funciona</span>
-        <h2>Três passos, e depois esquece.</h2>
-        <p>Instalas, ligas o que quiseres, e o Stoqzy trabalha em segundo plano — sempre com um separador da Vinted aberto.</p>
+        <span class="eyebrow" data-i18n="how.eyebrow">Como funciona</span>
+        <h2 data-i18n="how.h2">Três passos, e depois esquece.</h2>
+        <p data-i18n="how.p">Instalas, ligas o que quiseres, e o Stoqzy trabalha em segundo plano — sempre com um separador da Vinted aberto.</p>
       </div>
       <div class="steps">
-        <div class="step reveal"><span class="n">Passo 01</span><h3>Instala a extensão</h3><p>Adicionas o Stoqzy ao Chrome e entras na tua conta Vinted como sempre. Ele lê o teu armário — nunca a tua palavra-passe.</p></div>
-        <div class="step reveal"><span class="n">Passo 02</span><h3>Liga o que quiseres</h3><p>Escolhes o que corre sozinho: republicar, repor, baixar preços, falar com interessados. Ou pede ao assistente para configurar por ti.</p></div>
-        <div class="step reveal"><span class="n">Passo 03</span><h3>Trabalha ao teu ritmo</h3><p>O Stoqzy age espaçado, com limites e pausas, como um humano atento. Ao primeiro sinal estranho, pára sozinho.</p></div>
+        <div class="step reveal"><span class="n" data-i18n="how.s1n">Passo 01</span><h3 data-i18n="how.s1h">Instala a extensão</h3><p data-i18n="how.s1p">Adicionas o Stoqzy ao Chrome e entras na tua conta Vinted como sempre. Ele lê o teu armário — nunca a tua palavra-passe.</p></div>
+        <div class="step reveal"><span class="n" data-i18n="how.s2n">Passo 02</span><h3 data-i18n="how.s2h">Liga o que quiseres</h3><p data-i18n="how.s2p">Escolhes o que corre sozinho: republicar, repor, baixar preços, falar com interessados. Ou pede ao assistente para configurar por ti.</p></div>
+        <div class="step reveal"><span class="n" data-i18n="how.s3n">Passo 03</span><h3 data-i18n="how.s3h">Trabalha ao teu ritmo</h3><p data-i18n="how.s3p">O Stoqzy age espaçado, com limites e pausas, como um humano atento. Ao primeiro sinal estranho, pára sozinho.</p></div>
       </div>
     </div>
   </section>
@@ -320,20 +326,20 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <section class="blk" id="funcionalidades" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow">Funcionalidades</span>
-        <h2>Tudo o que fazias à mão, todos os dias.</h2>
-        <p>Agora acontece sozinho — com limites de segurança que não se desligam.</p>
+        <span class="eyebrow" data-i18n="feat.eyebrow">Funcionalidades</span>
+        <h2 data-i18n="feat.h2">Tudo o que fazias à mão, todos os dias.</h2>
+        <p data-i18n="feat.p">Agora acontece sozinho — com limites de segurança que não se desligam.</p>
       </div>
       <div class="feat-grid">
-        <div class="feat reveal"><div class="ic">🔁</div><span class="ftag">Republicar</span><h3>Repositor de parados</h3><p>Artigos esquecidos voltam ao topo do feed com fotos genuinamente editadas — nunca a mesma edição duas vezes.</p></div>
-        <div class="feat reveal"><div class="ic">📦</div><span class="ftag">Stock</span><h3>Repõe os vendidos</h3><p>Vendeu? O anúncio renasce sozinho quando a venda fecha. Stock reabastecido sem levantares um dedo.</p></div>
-        <div class="feat reveal"><div class="ic">❤️</div><span class="ftag">Mensagens</span><h3>Interessados</h3><p>Quem dá like recebe uma mensagem humana com o teu desconto — um clique, um de cada vez, sem spam.</p></div>
-        <div class="feat reveal"><div class="ic">📉</div><span class="ftag">Preço</span><h3>Descidas inteligentes</h3><p>Os parados descem devagar, com piso que protege a margem. Escolhes o modo: cauteloso, equilibrado ou ativo.</p></div>
-        <div class="feat reveal"><div class="ic">💰</div><span class="ftag">Contabilidade</span><h3>Margem real</h3><p>Ficha por artigo com custo e SKU: sabes o que ganhas de verdade, que marcas vendem e onde está o dinheiro preso.</p></div>
-        <div class="feat reveal"><div class="ic">📊</div><span class="ftag">Análise</span><h3>Que produto mais vende</h3><p>Junta as variantes do mesmo produto e mostra o ranking — e sugere subir o preço ao que está a voar.</p></div>
-        <div class="feat reveal"><div class="ic">✨</div><span class="ftag">Fotos</span><h3>Edição de fotos</h3><p>20 estilos e retoques ao píxel, para cada republicação sair diferente da anterior sem perder qualidade.</p></div>
-        <div class="feat reveal"><div class="ic">🤖</div><span class="ftag">Assistente</span><h3>Configura por ti</h3><p>Pergunta por palavras tuas — ou deixa o assistente aplicar as definições certas por ti, num clique.</p></div>
-        <div class="feat reveal"><div class="ic">🌍</div><span class="ftag">Alcance</span><h3>Multi-país</h3><p>Funciona nos 21 mercados da Vinted, com a moeda certa de cada artigo. A tua conta, onde quer que ela esteja.</p></div>
+        <div class="feat reveal"><div class="ic">🔁</div><span class="ftag" data-i18n="feat.1t">Republicar</span><h3 data-i18n="feat.1h">Repositor de parados</h3><p data-i18n="feat.1p">Artigos esquecidos voltam ao topo do feed com fotos genuinamente editadas — nunca a mesma edição duas vezes.</p></div>
+        <div class="feat reveal"><div class="ic">📦</div><span class="ftag" data-i18n="feat.2t">Stock</span><h3 data-i18n="feat.2h">Repõe os vendidos</h3><p data-i18n="feat.2p">Vendeu? O anúncio renasce sozinho quando a venda fecha. Stock reabastecido sem levantares um dedo.</p></div>
+        <div class="feat reveal"><div class="ic">❤️</div><span class="ftag" data-i18n="feat.3t">Mensagens</span><h3 data-i18n="feat.3h">Interessados</h3><p data-i18n="feat.3p">Quem dá like recebe uma mensagem humana com o teu desconto — um clique, um de cada vez, sem spam.</p></div>
+        <div class="feat reveal"><div class="ic">📉</div><span class="ftag" data-i18n="feat.4t">Preço</span><h3 data-i18n="feat.4h">Descidas inteligentes</h3><p data-i18n="feat.4p">Os parados descem devagar, com piso que protege a margem. Escolhes o modo: cauteloso, equilibrado ou ativo.</p></div>
+        <div class="feat reveal"><div class="ic">💰</div><span class="ftag" data-i18n="feat.5t">Contabilidade</span><h3 data-i18n="feat.5h">Margem real</h3><p data-i18n="feat.5p">Ficha por artigo com custo e SKU: sabes o que ganhas de verdade, que marcas vendem e onde está o dinheiro preso.</p></div>
+        <div class="feat reveal"><div class="ic">📊</div><span class="ftag" data-i18n="feat.6t">Análise</span><h3 data-i18n="feat.6h">Que produto mais vende</h3><p data-i18n="feat.6p">Junta as variantes do mesmo produto e mostra o ranking — e sugere subir o preço ao que está a voar.</p></div>
+        <div class="feat reveal"><div class="ic">✨</div><span class="ftag" data-i18n="feat.7t">Fotos</span><h3 data-i18n="feat.7h">Edição de fotos</h3><p data-i18n="feat.7p">20 estilos e retoques ao píxel, para cada republicação sair diferente da anterior sem perder qualidade.</p></div>
+        <div class="feat reveal"><div class="ic">🤖</div><span class="ftag" data-i18n="feat.8t">Assistente</span><h3 data-i18n="feat.8h">Configura por ti</h3><p data-i18n="feat.8p">Pergunta por palavras tuas — ou deixa o assistente aplicar as definições certas por ti, num clique.</p></div>
+        <div class="feat reveal"><div class="ic">🌍</div><span class="ftag" data-i18n="feat.9t">Alcance</span><h3 data-i18n="feat.9h">Multi-país</h3><p data-i18n="feat.9p">Funciona nos 21 mercados da Vinted, com a moeda certa de cada artigo. A tua conta, onde quer que ela esteja.</p></div>
       </div>
     </div>
   </section>
@@ -343,10 +349,10 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
     <div class="wrap">
       <div class="photos reveal">
         <div>
-          <span class="eyebrow">Fotos</span>
-          <h2>Fotos novas a cada republicação.</h2>
-          <p>Reenviar a mesma foto é o que denuncia um anúncio republicado. O Stoqzy altera de verdade cada imagem — recorte, luz, cor, inclinação — com 20 estilos e retoques ao píxel, sem nunca repetir a edição anterior no mesmo artigo.</p>
-          <a href="#precos" class="btn btn-ghost">Ver nos planos</a>
+          <span class="eyebrow" data-i18n="photos.eyebrow">Fotos</span>
+          <h2 data-i18n="photos.h2">Fotos novas a cada republicação.</h2>
+          <p data-i18n="photos.p">Reenviar a mesma foto é o que denuncia um anúncio republicado. O Stoqzy altera de verdade cada imagem — recorte, luz, cor, inclinação — com 20 estilos e retoques ao píxel, sem nunca repetir a edição anterior no mesmo artigo.</p>
+          <a href="#precos" class="btn btn-ghost" data-i18n="photos.cta">Ver nos planos</a>
         </div>
         <div class="photo-strip" aria-hidden="true">
           <div class="ph a"><span class="tag">original</span></div>
@@ -365,15 +371,15 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
     <div class="wrap">
       <div class="safe reveal">
         <div>
-          <span class="eyebrow">Segurança primeiro</span>
-          <h2>A tua conta vale mais do que a pressa.</h2>
-          <p class="i">O Stoqzy foi construído por quem gere dezenas de contas Vinted todos os dias. Cada decisão põe a segurança da conta antes da velocidade.</p>
+          <span class="eyebrow" data-i18n="safe.eyebrow">Segurança primeiro</span>
+          <h2 data-i18n="safe.h2">A tua conta vale mais do que a pressa.</h2>
+          <p class="i" data-i18n="safe.p">O Stoqzy foi construído por quem gere dezenas de contas Vinted todos os dias. Cada decisão põe a segurança da conta antes da velocidade.</p>
         </div>
         <ul>
-          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Ritmo humano, não de robô.</b><span>Limites por hora e por dia, pausas com variação, horas ativas. Nunca uma rajada de ações.</span></span></li>
-          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Pára ao primeiro sinal.</b><span>Se a Vinted mostrar um bloqueio ou captcha, o Stoqzy pára tudo e avisa-te. Nunca insiste.</span></span></li>
-          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Corre no teu browser.</b><span>Nenhum servidor nosso toca na Vinted. Uma fuga do nosso lado nunca compromete a tua conta.</span></span></li>
-          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Sem passwords, sem magia.</b><span>Usa a tua sessão, como tu. Não pede nem guarda a tua palavra-passe da Vinted.</span></span></li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b data-i18n="safe.1b">Ritmo humano, não de robô.</b><span data-i18n="safe.1p">Limites por hora e por dia, pausas com variação, horas ativas. Nunca uma rajada de ações.</span></span></li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b data-i18n="safe.2b">Pára ao primeiro sinal.</b><span data-i18n="safe.2p">Se a Vinted mostrar um bloqueio ou captcha, o Stoqzy pára tudo e avisa-te. Nunca insiste.</span></span></li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b data-i18n="safe.3b">Corre no teu browser.</b><span data-i18n="safe.3p">Nenhum servidor nosso toca na Vinted. Uma fuga do nosso lado nunca compromete a tua conta.</span></span></li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b data-i18n="safe.4b">Sem passwords, sem magia.</b><span data-i18n="safe.4p">Usa a tua sessão, como tu. Não pede nem guarda a tua palavra-passe da Vinted.</span></span></li>
         </ul>
       </div>
     </div>
@@ -383,50 +389,50 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <section class="blk" id="precos" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="eyebrow">Preços</span>
-        <h2>Começa grátis. Sobe quando a loja pedir.</h2>
-        <p class="center" style="margin:0 auto">Sem fidelização. Cancelas quando quiseres, e voltas ao plano grátis sem perder os teus dados.</p>
+        <span class="eyebrow" data-i18n="price.eyebrow">Preços</span>
+        <h2 data-i18n="price.h2">Começa grátis. Sobe quando a loja pedir.</h2>
+        <p class="center" style="margin:0 auto" data-i18n="price.p">Sem fidelização. Cancelas quando quiseres, e voltas ao plano grátis sem perder os teus dados.</p>
         <div class="price-toggle" role="group" aria-label="Ciclo de pagamento">
-          <button id="pm" class="on" type="button">Mensal</button>
-          <button id="pa" type="button">Anual <span class="save">−2 meses</span></button>
+          <button id="pm" class="on" type="button" data-i18n="price.monthly">Mensal</button>
+          <button id="pa" type="button"><span data-i18n="price.annual">Anual</span> <span class="save" data-i18n="price.save">−2 meses</span></button>
         </div>
       </div>
       <div class="plans">
         <div class="plan reveal">
-          <span class="pname">Grátis</span>
+          <span class="pname" data-i18n="price.free">Grátis</span>
           <div class="price">0 €</div>
-          <p class="ptag">Para conheceres a tua loja a sério.</p>
+          <p class="ptag" data-i18n="price.freeTag">Para conheceres a tua loja a sério.</p>
           <ul>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Armário, vendas e saldo</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Números e margem real</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Ações manuais com ritmo seguro</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.f1">Armário, vendas e saldo</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.f2">Números e margem real</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.f3">Ações manuais com ritmo seguro</span></li>
           </ul>
-          <a href="#top" class="btn btn-ghost">Instalar grátis</a>
+          <a href="#top" class="btn btn-ghost" data-i18n="price.installFree">Instalar grátis</a>
         </div>
         <div class="plan pop reveal">
           <span class="pname">Pro</span>
           <div class="price"><span id="pro-price">9,99 €</span><small id="pro-cycle"> /mês</small></div>
-          <p class="ptag">Para quem vende a sério e quer o tempo de volta.</p>
+          <p class="ptag" data-i18n="price.proTag">Para quem vende a sério e quer o tempo de volta.</p>
           <ul>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Tudo do Grátis</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Repositor de parados e vendidos</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Descidas de preço automáticas</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Mensagens a interessados</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Edição de fotos (20 estilos)</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.p1">Tudo do Grátis</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.p2">Repositor de parados e vendidos</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.p3">Descidas de preço automáticas</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.p4">Mensagens a interessados</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.p5">Edição de fotos (20 estilos)</span></li>
           </ul>
-          <a href="#top" class="btn btn-primary">Experimentar Pro</a>
+          <a href="#top" class="btn btn-primary" data-i18n="price.tryPro">Experimentar Pro</a>
         </div>
         <div class="plan reveal">
-          <span class="pname">Equipa</span>
-          <div class="price">Sob<small> consulta</small></div>
-          <p class="ptag">Para quem gere muitas contas num só sítio.</p>
+          <span class="pname" data-i18n="price.team">Equipa</span>
+          <div class="price" data-i18n="price.custom">Sob<small> consulta</small></div>
+          <p class="ptag" data-i18n="price.teamTag">Para quem gere muitas contas num só sítio.</p>
           <ul>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Tudo do Pro</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Painel central multi-conta</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Assistente com IA (créditos)</li>
-            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Suporte prioritário</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.t1">Tudo do Pro</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.t2">Painel central multi-conta</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.t3">Assistente com IA (créditos)</span></li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="price.t4">Suporte prioritário</span></li>
           </ul>
-          <a href="mailto:ola@stoqzy.com" class="btn btn-ghost">Falar connosco</a>
+          <a href="mailto:ola@stoqzy.com" class="btn btn-ghost" data-i18n="price.contact">Falar connosco</a>
         </div>
       </div>
     </div>
@@ -436,16 +442,16 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <section class="blk" id="faq" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="eyebrow">Perguntas</span>
-        <h2>O que costumam perguntar</h2>
+        <span class="eyebrow" data-i18n="faq.eyebrow">Perguntas</span>
+        <h2 data-i18n="faq.h2">O que costumam perguntar</h2>
       </div>
       <div class="faq">
-        <details class="reveal"><summary>É seguro para a minha conta?</summary><p>É a razão de o Stoqzy existir. Todas as ações passam por limites de ritmo humano — janelas por hora e por dia, pausas com variação, horas ativas — e ao primeiro sinal de bloqueio ou captcha ele pára sozinho e avisa-te. Nunca há rajadas de ações.</p></details>
-        <details class="reveal"><summary>Precisas da minha palavra-passe da Vinted?</summary><p>Não. O Stoqzy corre no teu próprio browser e usa a sessão que já tens aberta, tal como tu quando navegas. Não pede, não vê e não guarda a tua palavra-passe.</p></details>
-        <details class="reveal"><summary>Funciona no meu país?</summary><p>Sim — o Stoqzy funciona nos 21 mercados da Vinted, com a moeda certa de cada artigo. Não importa se vendes em Portugal, Espanha, França, Alemanha ou qualquer outro.</p></details>
-        <details class="reveal"><summary>Onde estão os meus dados?</summary><p>As tuas fichas, custos e definições ficam no teu browser. Nenhum servidor nosso fala com a Vinted — por isso mesmo uma falha do nosso lado nunca compromete a tua conta.</p></details>
-        <details class="reveal"><summary>Posso cancelar quando quiser?</summary><p>Sim, sem fidelização. Se cancelares o Pro, voltas ao plano grátis e continuas a ver o teu armário, vendas e margem — não perdes nada.</p></details>
-        <details class="reveal"><summary>Substitui a extensão que eu já usava?</summary><p>Faz tudo o que essas ferramentas fazem — e mais — sem servidores a tocar na tua conta. Foi escrito de raiz por quem revende na Vinted todos os dias.</p></details>
+        <details class="reveal"><summary data-i18n="faq.q1">É seguro para a minha conta?</summary><p data-i18n="faq.a1">É a razão de o Stoqzy existir. Todas as ações passam por limites de ritmo humano — janelas por hora e por dia, pausas com variação, horas ativas — e ao primeiro sinal de bloqueio ou captcha ele pára sozinho e avisa-te. Nunca há rajadas de ações.</p></details>
+        <details class="reveal"><summary data-i18n="faq.q2">Precisas da minha palavra-passe da Vinted?</summary><p data-i18n="faq.a2">Não. O Stoqzy corre no teu próprio browser e usa a sessão que já tens aberta, tal como tu quando navegas. Não pede, não vê e não guarda a tua palavra-passe.</p></details>
+        <details class="reveal"><summary data-i18n="faq.q3">Funciona no meu país?</summary><p data-i18n="faq.a3">Sim — o Stoqzy funciona nos 21 mercados da Vinted, com a moeda certa de cada artigo. Não importa se vendes em Portugal, Espanha, França, Alemanha ou qualquer outro.</p></details>
+        <details class="reveal"><summary data-i18n="faq.q4">Onde estão os meus dados?</summary><p data-i18n="faq.a4">As tuas fichas, custos e definições ficam no teu browser. Nenhum servidor nosso fala com a Vinted — por isso mesmo uma falha do nosso lado nunca compromete a tua conta.</p></details>
+        <details class="reveal"><summary data-i18n="faq.q5">Posso cancelar quando quiser?</summary><p data-i18n="faq.a5">Sim, sem fidelização. Se cancelares o Pro, voltas ao plano grátis e continuas a ver o teu armário, vendas e margem — não perdes nada.</p></details>
+        <details class="reveal"><summary data-i18n="faq.q6">Substitui a extensão que eu já usava?</summary><p data-i18n="faq.a6">Faz tudo o que essas ferramentas fazem — e mais — sem servidores a tocar na tua conta. Foi escrito de raiz por quem revende na Vinted todos os dias.</p></details>
       </div>
     </div>
   </section>
@@ -454,9 +460,9 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <section class="blk" style="padding-top:0">
     <div class="wrap">
       <div class="steps">
-        <div class="step reveal"><span class="n">Ajuda</span><h3>Guia dentro da app</h3><p>Cada funcionalidade tem o seu guia e um assistente que responde às tuas dúvidas — sem sair da extensão.</p></div>
-        <div class="step reveal"><span class="n">Contacto</span><h3>Falamos contigo</h3><p>Dúvidas, sugestões ou um problema? Escreve para <a href="mailto:ola@stoqzy.com" style="color:var(--accent)">ola@stoqzy.com</a> e respondemos.</p></div>
-        <div class="step reveal"><span class="n">Feito por quem vende</span><h3>Não por quem nunca vendeu</h3><p>O Stoqzy nasceu da gestão real de dezenas de contas Vinted, todos os dias. As decisões vêm da prática.</p></div>
+        <div class="step reveal"><span class="n" data-i18n="sup.1n">Ajuda</span><h3 data-i18n="sup.1h">Guia dentro da app</h3><p data-i18n="sup.1p">Cada funcionalidade tem o seu guia e um assistente que responde às tuas dúvidas — sem sair da extensão.</p></div>
+        <div class="step reveal"><span class="n" data-i18n="sup.2n">Contacto</span><h3 data-i18n="sup.2h">Falamos contigo</h3><p data-i18n-html="sup.2p">Dúvidas, sugestões ou um problema? Escreve para <a href="mailto:ola@stoqzy.com" style="color:var(--accent)">ola@stoqzy.com</a> e respondemos.</p></div>
+        <div class="step reveal"><span class="n" data-i18n="sup.3n">Feito por quem vende</span><h3 data-i18n="sup.3h">Não por quem nunca vendeu</h3><p data-i18n="sup.3p">O Stoqzy nasceu da gestão real de dezenas de contas Vinted, todos os dias. As decisões vêm da prática.</p></div>
       </div>
     </div>
   </section>
@@ -465,9 +471,9 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   <section class="blk" style="padding-top:0">
     <div class="wrap">
       <div class="cta-final reveal">
-        <h2>Devolve-te as horas que a Vinted te tira.</h2>
-        <p>Instala o Stoqzy, liga o que quiseres, e deixa a tua loja trabalhar sozinha — com a calma de quem sabe o que faz.</p>
-        <a href="#precos" class="btn btn-primary">Começar grátis</a>
+        <h2 data-i18n="cta.h2">Devolve-te as horas que a Vinted te tira.</h2>
+        <p data-i18n="cta.p">Instala o Stoqzy, liga o que quiseres, e deixa a tua loja trabalhar sozinha — com a calma de quem sabe o que faz.</p>
+        <a href="#precos" class="btn btn-primary" data-i18n="cta.btn">Começar grátis</a>
       </div>
     </div>
   </section>
@@ -478,34 +484,269 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="#top" class="logo">Stoq<b>zy</b></a>
-        <p>A tua loja Vinted em piloto automático, ao ritmo de um humano cuidadoso.</p>
+        <p data-i18n="foot.tag">A tua loja Vinted em piloto automático, ao ritmo de um humano cuidadoso.</p>
       </div>
       <div class="foot-col">
-        <h4>Produto</h4>
-        <a href="#funcionalidades">Funcionalidades</a>
-        <a href="#como">Como funciona</a>
-        <a href="#seguranca">Segurança</a>
-        <a href="#precos">Preços</a>
+        <h4 data-i18n="foot.product">Produto</h4>
+        <a href="#funcionalidades" data-i18n="nav.features">Funcionalidades</a>
+        <a href="#como" data-i18n="nav.how">Como funciona</a>
+        <a href="#seguranca" data-i18n="nav.security">Segurança</a>
+        <a href="#precos" data-i18n="nav.pricing">Preços</a>
       </div>
       <div class="foot-col">
-        <h4>Recursos</h4>
-        <a href="#faq">Perguntas frequentes</a>
-        <a href="mailto:ola@stoqzy.com">Suporte</a>
-        <a href="#precos">Planos</a>
+        <h4 data-i18n="foot.resources">Recursos</h4>
+        <a href="#faq" data-i18n="foot.faq">Perguntas frequentes</a>
+        <a href="mailto:ola@stoqzy.com" data-i18n="foot.support">Suporte</a>
+        <a href="#precos" data-i18n="foot.plans">Planos</a>
       </div>
       <div class="foot-col">
-        <h4>Contacto</h4>
+        <h4 data-i18n="foot.contact">Contacto</h4>
         <a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a>
       </div>
     </div>
     <div class="foot-bottom">
       © 2026 Stoqzy · stoqzy.com<br>
-      O Stoqzy é um produto independente e não é afiliado, patrocinado nem aprovado pela Vinted. «Vinted» é marca registada dos respetivos titulares.
+      <span data-i18n="foot.disclaimer">O Stoqzy é um produto independente e não é afiliado, patrocinado nem aprovado pela Vinted. «Vinted» é marca registada dos respetivos titulares.</span>
     </div>
   </div>
 </footer>
 
 <script>
+  // ===== i18n: PT é o base no HTML; estes dicionários traduzem por chave =====
+  const I18N={
+    en:{
+      "nav.features":"Features","nav.how":"How it works","nav.security":"Security","nav.pricing":"Pricing","nav.viewPlans":"View plans","nav.startFree":"Start free",
+      "hero.new":"New","hero.badge":"Chrome extension · 21 countries","hero.title":"Your Vinted shop on <em>autopilot</em>","hero.lede":"Reposts your stale listings, relists the sold ones, replies to likes and shows your real margin. All at the pace of a careful human.","hero.ctaStart":"Start free","hero.ctaHow":"See how it works","hero.t1":"Never touches your password","hero.t2":"Runs in your browser","hero.t3":"Cancel anytime",
+      "band.1":"Vinted countries","band.2":"photo edit styles","band.3":"servers touching your account","band.4":"at your pace, with pauses",
+      "how.eyebrow":"How it works","how.h2":"Three steps, then forget it.","how.p":"Install, turn on what you want, and Stoqzy works in the background, always with a Vinted tab open.",
+      "how.s1n":"Step 01","how.s1h":"Install the extension","how.s1p":"Add Stoqzy to Chrome and log in to Vinted as usual. It reads your wardrobe, never your password.",
+      "how.s2n":"Step 02","how.s2h":"Turn on what you want","how.s2p":"Choose what runs on its own: reposting, relisting, price drops, messaging likers. Or ask the assistant to set it up for you.",
+      "how.s3n":"Step 03","how.s3h":"Works at your pace","how.s3p":"Stoqzy acts spaced out, with limits and pauses, like an attentive human. At the first odd sign, it stops on its own.",
+      "feat.eyebrow":"Features","feat.h2":"Everything you did by hand, every day.","feat.p":"Now it happens on its own, with safety limits that never switch off.",
+      "feat.1t":"Repost","feat.1h":"Repost stale items","feat.1p":"Forgotten listings return to the top of the feed with genuinely edited photos, never the same edit twice.",
+      "feat.2t":"Stock","feat.2h":"Relist the sold ones","feat.2p":"Sold? The listing comes back on its own when the sale closes. Stock refilled without lifting a finger.",
+      "feat.3t":"Messages","feat.3h":"Likers","feat.3p":"Whoever likes gets a human message with your discount, one click, one at a time, no spam.",
+      "feat.4t":"Price","feat.4h":"Smart price drops","feat.4p":"Stale items drop slowly, with a floor that protects your margin. You pick the mode: cautious, balanced or active.",
+      "feat.5t":"Accounting","feat.5h":"Real margin","feat.5p":"A record per item with cost and SKU: you know what you truly earn, which brands sell, and where money is stuck.",
+      "feat.6t":"Insight","feat.6h":"What sells most","feat.6p":"Groups the variants of the same product and ranks them, and suggests raising the price on the ones flying off.",
+      "feat.7t":"Photos","feat.7h":"Photo editing","feat.7p":"20 styles and pixel-level touch-ups, so each repost looks different from the last without losing quality.",
+      "feat.8t":"Assistant","feat.8h":"Sets it up for you","feat.8p":"Ask in your own words, or let the assistant apply the right settings for you in one click.",
+      "feat.9t":"Reach","feat.9h":"Multi-country","feat.9p":"Works across all 21 Vinted markets, with each item's correct currency. Your account, wherever it is.",
+      "photos.eyebrow":"Photos","photos.h2":"Fresh photos on every repost.","photos.p":"Reuploading the same photo is what gives a repost away. Stoqzy truly changes each image, crop, light, colour, tilt, with 20 styles and pixel-level touch-ups, never repeating the previous edit on the same item.","photos.cta":"See in plans",
+      "safe.eyebrow":"Security first","safe.h2":"Your account is worth more than speed.","safe.p":"Stoqzy was built by someone who runs dozens of Vinted accounts every day. Every decision puts account safety before speed.",
+      "safe.1b":"Human pace, not a bot.","safe.1p":"Limits per hour and per day, pauses with variation, active hours. Never a burst of actions.",
+      "safe.2b":"Stops at the first sign.","safe.2p":"If Vinted shows a block or captcha, Stoqzy stops everything and tells you. It never insists.",
+      "safe.3b":"Runs in your browser.","safe.3p":"No server of ours touches Vinted. A leak on our side never compromises your account.",
+      "safe.4b":"No passwords, no magic.","safe.4p":"It uses your session, like you do. It never asks for or stores your Vinted password.",
+      "price.eyebrow":"Pricing","price.h2":"Start free. Upgrade when the shop asks.","price.p":"No lock-in. Cancel whenever you like and go back to free without losing your data.","price.monthly":"Monthly","price.annual":"Annual","price.save":"−2 months",
+      "price.free":"Free","price.freeTag":"To get to know your shop for real.","price.f1":"Wardrobe, sales and balance","price.f2":"Stats and real margin","price.f3":"Manual actions at a safe pace","price.installFree":"Install free",
+      "price.proTag":"For sellers who want their time back.","price.p1":"Everything in Free","price.p2":"Repost stale and sold items","price.p3":"Automatic price drops","price.p4":"Messages to likers","price.p5":"Photo editing (20 styles)","price.tryPro":"Try Pro",
+      "price.team":"Team","price.custom":"On<small> request</small>","price.teamTag":"For running many accounts in one place.","price.t1":"Everything in Pro","price.t2":"Central multi-account panel","price.t3":"AI assistant (credits)","price.t4":"Priority support","price.contact":"Talk to us",
+      "faq.eyebrow":"Questions","faq.h2":"What people usually ask",
+      "faq.q1":"Is it safe for my account?","faq.a1":"It is the reason Stoqzy exists. Every action goes through human-pace limits, windows per hour and per day, pauses with variation, active hours, and at the first sign of a block or captcha it stops on its own and tells you. There are never bursts of actions.",
+      "faq.q2":"Do you need my Vinted password?","faq.a2":"No. Stoqzy runs in your own browser and uses the session you already have open, just like you when you browse. It never asks for, sees or stores your password.",
+      "faq.q3":"Does it work in my country?","faq.a3":"Yes, Stoqzy works across all 21 Vinted markets, with each item's correct currency. It doesn't matter whether you sell in Portugal, Spain, France, Germany or anywhere else.",
+      "faq.q4":"Where is my data?","faq.a4":"Your records, costs and settings stay in your browser. No server of ours talks to Vinted, so even a failure on our side never compromises your account.",
+      "faq.q5":"Can I cancel anytime?","faq.a5":"Yes, no lock-in. If you cancel Pro, you go back to the free plan and keep seeing your wardrobe, sales and margin. You lose nothing.",
+      "faq.q6":"Does it replace the extension I used?","faq.a6":"It does everything those tools do, and more, without servers touching your account. It was written from scratch by someone who resells on Vinted every day.",
+      "sup.1n":"Help","sup.1h":"Guide inside the app","sup.1p":"Each feature has its own guide and an assistant that answers your questions, without leaving the extension.",
+      "sup.2n":"Contact","sup.2h":"We talk to you","sup.2p":"Questions, ideas or a problem? Write to <a href=\"mailto:ola@stoqzy.com\" style=\"color:var(--accent)\">ola@stoqzy.com</a> and we reply.",
+      "sup.3n":"Built by a seller","sup.3h":"Not by someone who never sold","sup.3p":"Stoqzy grew out of really running dozens of Vinted accounts, every day. The decisions come from practice.",
+      "cta.h2":"Give yourself back the hours Vinted takes.","cta.p":"Install Stoqzy, turn on what you want, and let your shop run on its own, with the calm of knowing what it's doing.","cta.btn":"Start free",
+      "foot.tag":"Your Vinted shop on autopilot, at the pace of a careful human.","foot.product":"Product","foot.resources":"Resources","foot.faq":"FAQ","foot.support":"Support","foot.plans":"Plans","foot.contact":"Contact","foot.disclaimer":"Stoqzy is an independent product and is not affiliated with, sponsored or endorsed by Vinted. “Vinted” is a trademark of its respective owners."
+    },
+    es:{
+      "nav.features":"Funciones","nav.how":"Cómo funciona","nav.security":"Seguridad","nav.pricing":"Precios","nav.viewPlans":"Ver planes","nav.startFree":"Empezar gratis",
+      "hero.new":"Nuevo","hero.badge":"Extensión de Chrome · 21 países","hero.title":"Tu tienda de Vinted en <em>piloto automático</em>","hero.lede":"Republica lo parado, vuelve a publicar lo vendido, responde a los favoritos y muestra tu margen real. Todo al ritmo de una persona cuidadosa.","hero.ctaStart":"Empezar gratis","hero.ctaHow":"Ver cómo funciona","hero.t1":"Nunca toca tu contraseña","hero.t2":"Funciona en tu navegador","hero.t3":"Cancela cuando quieras",
+      "band.1":"países de Vinted","band.2":"estilos de edición de foto","band.3":"servidores tocando tu cuenta","band.4":"a tu ritmo, con pausas",
+      "how.eyebrow":"Cómo funciona","how.h2":"Tres pasos y a olvidarte.","how.p":"Instalas, activas lo que quieras y Stoqzy trabaja en segundo plano, siempre con una pestaña de Vinted abierta.",
+      "how.s1n":"Paso 01","how.s1h":"Instala la extensión","how.s1p":"Añades Stoqzy a Chrome y entras en Vinted como siempre. Lee tu armario, nunca tu contraseña.",
+      "how.s2n":"Paso 02","how.s2h":"Activa lo que quieras","how.s2p":"Eliges qué corre solo: republicar, reponer, bajar precios, hablar con favoritos. O pide al asistente que lo configure por ti.",
+      "how.s3n":"Paso 03","how.s3h":"Trabaja a tu ritmo","how.s3p":"Stoqzy actúa espaciado, con límites y pausas, como una persona atenta. Ante la primera señal rara, se detiene solo.",
+      "feat.eyebrow":"Funciones","feat.h2":"Todo lo que hacías a mano, cada día.","feat.p":"Ahora pasa solo, con límites de seguridad que no se apagan.",
+      "feat.1t":"Republicar","feat.1h":"Republica lo parado","feat.1p":"Los artículos olvidados vuelven arriba del feed con fotos realmente editadas, nunca la misma edición dos veces.",
+      "feat.2t":"Stock","feat.2h":"Repone lo vendido","feat.2p":"¿Vendido? El anuncio vuelve solo cuando se cierra la venta. Stock repuesto sin mover un dedo.",
+      "feat.3t":"Mensajes","feat.3h":"Favoritos","feat.3p":"Quien da like recibe un mensaje humano con tu descuento, un clic, uno a uno, sin spam.",
+      "feat.4t":"Precio","feat.4h":"Bajadas inteligentes","feat.4p":"Lo parado baja despacio, con un mínimo que protege tu margen. Eliges el modo: cauto, equilibrado o activo.",
+      "feat.5t":"Cuentas","feat.5h":"Margen real","feat.5p":"Una ficha por artículo con coste y SKU: sabes lo que ganas de verdad, qué marcas venden y dónde está el dinero parado.",
+      "feat.6t":"Análisis","feat.6h":"Qué vende más","feat.6p":"Junta las variantes del mismo producto y las clasifica, y sugiere subir el precio a lo que vuela.",
+      "feat.7t":"Fotos","feat.7h":"Edición de fotos","feat.7p":"20 estilos y retoques al píxel, para que cada republicación salga distinta de la anterior sin perder calidad.",
+      "feat.8t":"Asistente","feat.8h":"Lo configura por ti","feat.8p":"Pregunta con tus palabras, o deja que el asistente aplique los ajustes correctos por ti en un clic.",
+      "feat.9t":"Alcance","feat.9h":"Multipaís","feat.9p":"Funciona en los 21 mercados de Vinted, con la moneda correcta de cada artículo. Tu cuenta, esté donde esté.",
+      "photos.eyebrow":"Fotos","photos.h2":"Fotos nuevas en cada republicación.","photos.p":"Volver a subir la misma foto es lo que delata una republicación. Stoqzy cambia de verdad cada imagen, recorte, luz, color, inclinación, con 20 estilos y retoques al píxel, sin repetir nunca la edición anterior en el mismo artículo.","photos.cta":"Ver en los planes",
+      "safe.eyebrow":"Seguridad primero","safe.h2":"Tu cuenta vale más que la prisa.","safe.p":"Stoqzy lo creó quien gestiona decenas de cuentas de Vinted cada día. Cada decisión pone la seguridad de la cuenta antes que la velocidad.",
+      "safe.1b":"Ritmo humano, no de bot.","safe.1p":"Límites por hora y por día, pausas con variación, horas activas. Nunca una ráfaga de acciones.",
+      "safe.2b":"Se detiene a la primera señal.","safe.2p":"Si Vinted muestra un bloqueo o captcha, Stoqzy lo para todo y te avisa. Nunca insiste.",
+      "safe.3b":"Funciona en tu navegador.","safe.3p":"Ningún servidor nuestro toca Vinted. Una filtración de nuestro lado nunca compromete tu cuenta.",
+      "safe.4b":"Sin contraseñas, sin magia.","safe.4p":"Usa tu sesión, como tú. No pide ni guarda tu contraseña de Vinted.",
+      "price.eyebrow":"Precios","price.h2":"Empieza gratis. Sube cuando la tienda lo pida.","price.p":"Sin permanencia. Cancela cuando quieras y vuelve al plan gratis sin perder tus datos.","price.monthly":"Mensual","price.annual":"Anual","price.save":"−2 meses",
+      "price.free":"Gratis","price.freeTag":"Para conocer tu tienda de verdad.","price.f1":"Armario, ventas y saldo","price.f2":"Métricas y margen real","price.f3":"Acciones manuales a ritmo seguro","price.installFree":"Instalar gratis",
+      "price.proTag":"Para quien vende en serio y quiere su tiempo.","price.p1":"Todo lo del plan Gratis","price.p2":"Republicar parado y vendido","price.p3":"Bajadas de precio automáticas","price.p4":"Mensajes a favoritos","price.p5":"Edición de fotos (20 estilos)","price.tryPro":"Probar Pro",
+      "price.team":"Equipo","price.custom":"Bajo<small> consulta</small>","price.teamTag":"Para gestionar muchas cuentas en un sitio.","price.t1":"Todo lo de Pro","price.t2":"Panel central multicuenta","price.t3":"Asistente con IA (créditos)","price.t4":"Soporte prioritario","price.contact":"Habla con nosotros",
+      "faq.eyebrow":"Preguntas","faq.h2":"Lo que se suele preguntar",
+      "faq.q1":"¿Es seguro para mi cuenta?","faq.a1":"Es la razón de que Stoqzy exista. Cada acción pasa por límites de ritmo humano, ventanas por hora y por día, pausas con variación, horas activas, y a la primera señal de bloqueo o captcha se detiene solo y te avisa. Nunca hay ráfagas de acciones.",
+      "faq.q2":"¿Necesitas mi contraseña de Vinted?","faq.a2":"No. Stoqzy funciona en tu propio navegador y usa la sesión que ya tienes abierta, igual que tú al navegar. No pide, no ve ni guarda tu contraseña.",
+      "faq.q3":"¿Funciona en mi país?","faq.a3":"Sí, Stoqzy funciona en los 21 mercados de Vinted, con la moneda correcta de cada artículo. Da igual si vendes en Portugal, España, Francia, Alemania o cualquier otro.",
+      "faq.q4":"¿Dónde están mis datos?","faq.a4":"Tus fichas, costes y ajustes se quedan en tu navegador. Ningún servidor nuestro habla con Vinted, así que ni un fallo de nuestro lado compromete tu cuenta.",
+      "faq.q5":"¿Puedo cancelar cuando quiera?","faq.a5":"Sí, sin permanencia. Si cancelas Pro, vuelves al plan gratis y sigues viendo tu armario, ventas y margen. No pierdes nada.",
+      "faq.q6":"¿Sustituye la extensión que usaba?","faq.a6":"Hace todo lo que hacen esas herramientas, y más, sin servidores tocando tu cuenta. Está escrito desde cero por quien revende en Vinted cada día.",
+      "sup.1n":"Ayuda","sup.1h":"Guía dentro de la app","sup.1p":"Cada función tiene su guía y un asistente que responde tus dudas, sin salir de la extensión.",
+      "sup.2n":"Contacto","sup.2h":"Hablamos contigo","sup.2p":"¿Dudas, ideas o un problema? Escribe a <a href=\"mailto:ola@stoqzy.com\" style=\"color:var(--accent)\">ola@stoqzy.com</a> y respondemos.",
+      "sup.3n":"Hecho por quien vende","sup.3h":"No por quien nunca vendió","sup.3p":"Stoqzy nació de gestionar de verdad decenas de cuentas de Vinted, cada día. Las decisiones vienen de la práctica.",
+      "cta.h2":"Recupera las horas que Vinted te quita.","cta.p":"Instala Stoqzy, activa lo que quieras y deja que tu tienda funcione sola, con la calma de quien sabe lo que hace.","cta.btn":"Empezar gratis",
+      "foot.tag":"Tu tienda de Vinted en piloto automático, al ritmo de una persona cuidadosa.","foot.product":"Producto","foot.resources":"Recursos","foot.faq":"Preguntas frecuentes","foot.support":"Soporte","foot.plans":"Planes","foot.contact":"Contacto","foot.disclaimer":"Stoqzy es un producto independiente y no está afiliado, patrocinado ni aprobado por Vinted. “Vinted” es marca registrada de sus respectivos titulares."
+    },
+    fr:{
+      "nav.features":"Fonctions","nav.how":"Comment ça marche","nav.security":"Sécurité","nav.pricing":"Tarifs","nav.viewPlans":"Voir les offres","nav.startFree":"Commencer gratuitement",
+      "hero.new":"Nouveau","hero.badge":"Extension Chrome · 21 pays","hero.title":"Ta boutique Vinted en <em>pilote automatique</em>","hero.lede":"Elle republie les annonces qui dorment, remet en vente les articles vendus, répond aux favoris et montre ta marge réelle. Le tout au rythme d'un humain soigneux.","hero.ctaStart":"Commencer gratuitement","hero.ctaHow":"Voir comment ça marche","hero.t1":"Ne touche jamais ton mot de passe","hero.t2":"Fonctionne dans ton navigateur","hero.t3":"Annule quand tu veux",
+      "band.1":"pays Vinted","band.2":"styles de retouche photo","band.3":"serveurs touchant ton compte","band.4":"à ton rythme, avec des pauses",
+      "how.eyebrow":"Comment ça marche","how.h2":"Trois étapes, puis tu oublies.","how.p":"Tu installes, tu actives ce que tu veux, et Stoqzy travaille en arrière-plan, toujours avec un onglet Vinted ouvert.",
+      "how.s1n":"Étape 01","how.s1h":"Installe l'extension","how.s1p":"Tu ajoutes Stoqzy à Chrome et tu te connectes à Vinted comme d'habitude. Il lit ton dressing, jamais ton mot de passe.",
+      "how.s2n":"Étape 02","how.s2h":"Active ce que tu veux","how.s2p":"Tu choisis ce qui tourne seul : republier, remettre en vente, baisser les prix, parler aux favoris. Ou demande à l'assistant de tout régler pour toi.",
+      "how.s3n":"Étape 03","how.s3h":"Travaille à ton rythme","how.s3p":"Stoqzy agit espacé, avec des limites et des pauses, comme un humain attentif. Au premier signe étrange, il s'arrête seul.",
+      "feat.eyebrow":"Fonctions","feat.h2":"Tout ce que tu faisais à la main, chaque jour.","feat.p":"Maintenant ça se fait tout seul, avec des limites de sécurité qui ne se coupent pas.",
+      "feat.1t":"Republier","feat.1h":"Republie les articles qui dorment","feat.1p":"Les annonces oubliées remontent en haut du fil avec des photos vraiment retouchées, jamais la même retouche deux fois.",
+      "feat.2t":"Stock","feat.2h":"Remet en vente les vendus","feat.2p":"Vendu ? L'annonce revient seule quand la vente se clôture. Stock reconstitué sans lever le petit doigt.",
+      "feat.3t":"Messages","feat.3h":"Favoris","feat.3p":"Celui qui met en favori reçoit un message humain avec ta remise, un clic, un à la fois, sans spam.",
+      "feat.4t":"Prix","feat.4h":"Baisses intelligentes","feat.4p":"Les invendus baissent lentement, avec un plancher qui protège ta marge. Tu choisis le mode : prudent, équilibré ou actif.",
+      "feat.5t":"Comptes","feat.5h":"Marge réelle","feat.5p":"Une fiche par article avec coût et SKU : tu sais ce que tu gagnes vraiment, quelles marques vendent et où l'argent est bloqué.",
+      "feat.6t":"Analyse","feat.6h":"Ce qui vend le plus","feat.6p":"Regroupe les variantes d'un même produit et les classe, et suggère d'augmenter le prix de ce qui part vite.",
+      "feat.7t":"Photos","feat.7h":"Retouche photo","feat.7p":"20 styles et retouches au pixel, pour que chaque republication soit différente de la précédente sans perdre en qualité.",
+      "feat.8t":"Assistant","feat.8h":"Règle tout pour toi","feat.8p":"Pose ta question avec tes mots, ou laisse l'assistant appliquer les bons réglages pour toi en un clic.",
+      "feat.9t":"Portée","feat.9h":"Multi-pays","feat.9p":"Fonctionne sur les 21 marchés Vinted, avec la bonne devise de chaque article. Ton compte, où qu'il soit.",
+      "photos.eyebrow":"Photos","photos.h2":"Des photos neuves à chaque republication.","photos.p":"Reposter la même photo, c'est ce qui trahit une republication. Stoqzy modifie vraiment chaque image, cadrage, lumière, couleur, inclinaison, avec 20 styles et des retouches au pixel, sans jamais répéter la retouche précédente sur le même article.","photos.cta":"Voir dans les offres",
+      "safe.eyebrow":"La sécurité d'abord","safe.h2":"Ton compte vaut plus que la vitesse.","safe.p":"Stoqzy a été créé par quelqu'un qui gère des dizaines de comptes Vinted chaque jour. Chaque décision met la sécurité du compte avant la vitesse.",
+      "safe.1b":"Rythme humain, pas un bot.","safe.1p":"Limites par heure et par jour, pauses avec variation, heures actives. Jamais une rafale d'actions.",
+      "safe.2b":"S'arrête au premier signe.","safe.2p":"Si Vinted montre un blocage ou un captcha, Stoqzy arrête tout et te prévient. Il n'insiste jamais.",
+      "safe.3b":"Fonctionne dans ton navigateur.","safe.3p":"Aucun de nos serveurs ne touche Vinted. Une fuite de notre côté ne compromet jamais ton compte.",
+      "safe.4b":"Sans mot de passe, sans magie.","safe.4p":"Il utilise ta session, comme toi. Il ne demande ni ne stocke ton mot de passe Vinted.",
+      "price.eyebrow":"Tarifs","price.h2":"Commence gratuitement. Monte quand la boutique le demande.","price.p":"Sans engagement. Annule quand tu veux et reviens au plan gratuit sans perdre tes données.","price.monthly":"Mensuel","price.annual":"Annuel","price.save":"−2 mois",
+      "price.free":"Gratuit","price.freeTag":"Pour vraiment connaître ta boutique.","price.f1":"Dressing, ventes et solde","price.f2":"Statistiques et marge réelle","price.f3":"Actions manuelles au rythme sûr","price.installFree":"Installer gratuitement",
+      "price.proTag":"Pour qui vend sérieusement et veut son temps.","price.p1":"Tout le plan Gratuit","price.p2":"Republier invendus et vendus","price.p3":"Baisses de prix automatiques","price.p4":"Messages aux favoris","price.p5":"Retouche photo (20 styles)","price.tryPro":"Essayer Pro",
+      "price.team":"Équipe","price.custom":"Sur<small> devis</small>","price.teamTag":"Pour gérer beaucoup de comptes au même endroit.","price.t1":"Tout le plan Pro","price.t2":"Tableau multicompte central","price.t3":"Assistant IA (crédits)","price.t4":"Support prioritaire","price.contact":"Parler avec nous",
+      "faq.eyebrow":"Questions","faq.h2":"Ce qu'on demande souvent",
+      "faq.q1":"Est-ce sûr pour mon compte ?","faq.a1":"C'est la raison d'être de Stoqzy. Chaque action passe par des limites de rythme humain, fenêtres par heure et par jour, pauses avec variation, heures actives, et au premier signe de blocage ou de captcha il s'arrête seul et te prévient. Il n'y a jamais de rafales d'actions.",
+      "faq.q2":"As-tu besoin de mon mot de passe Vinted ?","faq.a2":"Non. Stoqzy fonctionne dans ton propre navigateur et utilise la session déjà ouverte, comme toi quand tu navigues. Il ne demande, ne voit ni ne stocke ton mot de passe.",
+      "faq.q3":"Ça marche dans mon pays ?","faq.a3":"Oui, Stoqzy fonctionne sur les 21 marchés Vinted, avec la bonne devise de chaque article. Peu importe que tu vendes au Portugal, en Espagne, en France, en Allemagne ou ailleurs.",
+      "faq.q4":"Où sont mes données ?","faq.a4":"Tes fiches, coûts et réglages restent dans ton navigateur. Aucun de nos serveurs ne parle à Vinted, donc même une panne de notre côté ne compromet jamais ton compte.",
+      "faq.q5":"Puis-je annuler à tout moment ?","faq.a5":"Oui, sans engagement. Si tu annules Pro, tu reviens au plan gratuit et continues à voir ton dressing, tes ventes et ta marge. Tu ne perds rien.",
+      "faq.q6":"Remplace-t-il l'extension que j'utilisais ?","faq.a6":"Il fait tout ce que font ces outils, et plus, sans serveurs qui touchent ton compte. Il est écrit de zéro par quelqu'un qui revend sur Vinted chaque jour.",
+      "sup.1n":"Aide","sup.1h":"Guide dans l'app","sup.1p":"Chaque fonction a son guide et un assistant qui répond à tes questions, sans quitter l'extension.",
+      "sup.2n":"Contact","sup.2h":"On te parle","sup.2p":"Questions, idées ou un souci ? Écris à <a href=\"mailto:ola@stoqzy.com\" style=\"color:var(--accent)\">ola@stoqzy.com</a> et on répond.",
+      "sup.3n":"Fait par un vendeur","sup.3h":"Pas par quelqu'un qui n'a jamais vendu","sup.3p":"Stoqzy est né de la gestion réelle de dizaines de comptes Vinted, chaque jour. Les décisions viennent de la pratique.",
+      "cta.h2":"Récupère les heures que Vinted te prend.","cta.p":"Installe Stoqzy, active ce que tu veux, et laisse ta boutique tourner seule, avec le calme de qui sait ce qu'il fait.","cta.btn":"Commencer gratuitement",
+      "foot.tag":"Ta boutique Vinted en pilote automatique, au rythme d'un humain soigneux.","foot.product":"Produit","foot.resources":"Ressources","foot.faq":"FAQ","foot.support":"Support","foot.plans":"Offres","foot.contact":"Contact","foot.disclaimer":"Stoqzy est un produit indépendant, non affilié, ni sponsorisé ni approuvé par Vinted. « Vinted » est une marque déposée de ses titulaires respectifs."
+    },
+    de:{
+      "nav.features":"Funktionen","nav.how":"So funktioniert's","nav.security":"Sicherheit","nav.pricing":"Preise","nav.viewPlans":"Pläne ansehen","nav.startFree":"Kostenlos starten",
+      "hero.new":"Neu","hero.badge":"Chrome-Erweiterung · 21 Länder","hero.title":"Dein Vinted-Shop auf <em>Autopilot</em>","hero.lede":"Stellt liegengebliebene Anzeigen neu ein, reaktiviert Verkauftes, antwortet auf Likes und zeigt deine echte Marge. Alles im Tempo eines sorgfältigen Menschen.","hero.ctaStart":"Kostenlos starten","hero.ctaHow":"So funktioniert's","hero.t1":"Rührt dein Passwort nie an","hero.t2":"Läuft in deinem Browser","hero.t3":"Jederzeit kündbar",
+      "band.1":"Vinted-Länder","band.2":"Foto-Bearbeitungsstile","band.3":"Server, die dein Konto berühren","band.4":"in deinem Tempo, mit Pausen",
+      "how.eyebrow":"So funktioniert's","how.h2":"Drei Schritte, dann vergiss es.","how.p":"Installieren, einschalten was du willst, und Stoqzy arbeitet im Hintergrund, immer mit einem offenen Vinted-Tab.",
+      "how.s1n":"Schritt 01","how.s1h":"Erweiterung installieren","how.s1p":"Du fügst Stoqzy zu Chrome hinzu und meldest dich wie immer bei Vinted an. Es liest deinen Kleiderschrank, nie dein Passwort.",
+      "how.s2n":"Schritt 02","how.s2h":"Schalte ein, was du willst","how.s2p":"Du wählst, was von allein läuft: neu einstellen, reaktivieren, Preise senken, mit Likern schreiben. Oder lass den Assistenten es für dich einrichten.",
+      "how.s3n":"Schritt 03","how.s3h":"Arbeitet in deinem Tempo","how.s3p":"Stoqzy handelt verteilt, mit Limits und Pausen, wie ein aufmerksamer Mensch. Beim ersten seltsamen Zeichen stoppt es von allein.",
+      "feat.eyebrow":"Funktionen","feat.h2":"Alles, was du täglich von Hand gemacht hast.","feat.p":"Jetzt passiert es von allein, mit Sicherheitslimits, die sich nie abschalten.",
+      "feat.1t":"Neu einstellen","feat.1h":"Liegengebliebenes neu einstellen","feat.1p":"Vergessene Anzeigen kommen mit echt bearbeiteten Fotos wieder nach oben, nie dieselbe Bearbeitung zweimal.",
+      "feat.2t":"Bestand","feat.2h":"Verkauftes reaktivieren","feat.2p":"Verkauft? Die Anzeige kommt von allein zurück, wenn der Verkauf abgeschlossen ist. Bestand aufgefüllt ohne einen Finger zu rühren.",
+      "feat.3t":"Nachrichten","feat.3h":"Liker","feat.3p":"Wer liked, bekommt eine menschliche Nachricht mit deinem Rabatt, ein Klick, einer nach dem anderen, kein Spam.",
+      "feat.4t":"Preis","feat.4h":"Clevere Preissenkungen","feat.4p":"Liegengebliebenes sinkt langsam, mit einer Untergrenze, die deine Marge schützt. Du wählst den Modus: vorsichtig, ausgewogen oder aktiv.",
+      "feat.5t":"Buchhaltung","feat.5h":"Echte Marge","feat.5p":"Eine Karte pro Artikel mit Kosten und SKU: du weißt, was du wirklich verdienst, welche Marken verkaufen und wo Geld feststeckt.",
+      "feat.6t":"Analyse","feat.6h":"Was am meisten verkauft","feat.6p":"Fasst die Varianten desselben Produkts zusammen und ordnet sie, und schlägt vor, den Preis der Renner zu erhöhen.",
+      "feat.7t":"Fotos","feat.7h":"Fotobearbeitung","feat.7p":"20 Stile und Feinschliff bis zum Pixel, damit jede Neueinstellung anders aussieht als die letzte, ohne Qualitätsverlust.",
+      "feat.8t":"Assistent","feat.8h":"Richtet es für dich ein","feat.8p":"Frag in deinen eigenen Worten, oder lass den Assistenten die richtigen Einstellungen in einem Klick anwenden.",
+      "feat.9t":"Reichweite","feat.9h":"Mehrere Länder","feat.9p":"Funktioniert in allen 21 Vinted-Märkten, mit der richtigen Währung jedes Artikels. Dein Konto, wo immer es ist.",
+      "photos.eyebrow":"Fotos","photos.h2":"Frische Fotos bei jeder Neueinstellung.","photos.p":"Dasselbe Foto erneut hochzuladen verrät eine Neueinstellung. Stoqzy verändert jedes Bild wirklich, Zuschnitt, Licht, Farbe, Neigung, mit 20 Stilen und Feinschliff bis zum Pixel, ohne je die vorherige Bearbeitung am selben Artikel zu wiederholen.","photos.cta":"In den Plänen ansehen",
+      "safe.eyebrow":"Sicherheit zuerst","safe.h2":"Dein Konto ist mehr wert als Eile.","safe.p":"Stoqzy wurde von jemandem gebaut, der täglich Dutzende Vinted-Konten führt. Jede Entscheidung stellt die Kontosicherheit vor die Geschwindigkeit.",
+      "safe.1b":"Menschliches Tempo, kein Bot.","safe.1p":"Limits pro Stunde und pro Tag, Pausen mit Variation, aktive Stunden. Nie ein Schwall von Aktionen.",
+      "safe.2b":"Stoppt beim ersten Zeichen.","safe.2p":"Zeigt Vinted eine Sperre oder ein Captcha, stoppt Stoqzy alles und sagt dir Bescheid. Es besteht nie darauf.",
+      "safe.3b":"Läuft in deinem Browser.","safe.3p":"Kein Server von uns berührt Vinted. Ein Leck auf unserer Seite gefährdet nie dein Konto.",
+      "safe.4b":"Keine Passwörter, keine Magie.","safe.4p":"Es nutzt deine Sitzung, wie du. Es fragt nie nach deinem Vinted-Passwort und speichert es nicht.",
+      "price.eyebrow":"Preise","price.h2":"Kostenlos starten. Aufsteigen, wenn der Shop es verlangt.","price.p":"Keine Bindung. Kündige jederzeit und geh zum Gratisplan zurück, ohne deine Daten zu verlieren.","price.monthly":"Monatlich","price.annual":"Jährlich","price.save":"−2 Monate",
+      "price.free":"Gratis","price.freeTag":"Um deinen Shop wirklich kennenzulernen.","price.f1":"Kleiderschrank, Verkäufe und Guthaben","price.f2":"Statistiken und echte Marge","price.f3":"Manuelle Aktionen im sicheren Tempo","price.installFree":"Gratis installieren",
+      "price.proTag":"Für alle, die ernsthaft verkaufen und ihre Zeit zurückwollen.","price.p1":"Alles aus Gratis","price.p2":"Liegengebliebenes und Verkauftes neu einstellen","price.p3":"Automatische Preissenkungen","price.p4":"Nachrichten an Liker","price.p5":"Fotobearbeitung (20 Stile)","price.tryPro":"Pro testen",
+      "price.team":"Team","price.custom":"Auf<small> Anfrage</small>","price.teamTag":"Um viele Konten an einem Ort zu führen.","price.t1":"Alles aus Pro","price.t2":"Zentrales Multi-Konto-Panel","price.t3":"KI-Assistent (Credits)","price.t4":"Priorisierter Support","price.contact":"Sprich mit uns",
+      "faq.eyebrow":"Fragen","faq.h2":"Was oft gefragt wird",
+      "faq.q1":"Ist es sicher für mein Konto?","faq.a1":"Das ist der Grund, warum Stoqzy existiert. Jede Aktion läuft durch Limits im menschlichen Tempo, Fenster pro Stunde und pro Tag, Pausen mit Variation, aktive Stunden, und beim ersten Zeichen einer Sperre oder eines Captchas stoppt es von allein und sagt dir Bescheid. Es gibt nie Aktionsschwälle.",
+      "faq.q2":"Brauchst du mein Vinted-Passwort?","faq.a2":"Nein. Stoqzy läuft in deinem eigenen Browser und nutzt die bereits offene Sitzung, genau wie du beim Surfen. Es fragt, sieht und speichert dein Passwort nie.",
+      "faq.q3":"Funktioniert es in meinem Land?","faq.a3":"Ja, Stoqzy funktioniert in allen 21 Vinted-Märkten, mit der richtigen Währung jedes Artikels. Egal ob du in Portugal, Spanien, Frankreich, Deutschland oder anderswo verkaufst.",
+      "faq.q4":"Wo sind meine Daten?","faq.a4":"Deine Karten, Kosten und Einstellungen bleiben in deinem Browser. Kein Server von uns spricht mit Vinted, also gefährdet selbst ein Ausfall auf unserer Seite nie dein Konto.",
+      "faq.q5":"Kann ich jederzeit kündigen?","faq.a5":"Ja, keine Bindung. Kündigst du Pro, gehst du zum Gratisplan zurück und siehst weiter deinen Kleiderschrank, Verkäufe und Marge. Du verlierst nichts.",
+      "faq.q6":"Ersetzt es die Erweiterung, die ich nutzte?","faq.a6":"Es macht alles, was diese Tools machen, und mehr, ohne dass Server dein Konto berühren. Es wurde von Grund auf von jemandem geschrieben, der täglich auf Vinted weiterverkauft.",
+      "sup.1n":"Hilfe","sup.1h":"Anleitung in der App","sup.1p":"Jede Funktion hat ihre Anleitung und einen Assistenten, der deine Fragen beantwortet, ohne die Erweiterung zu verlassen.",
+      "sup.2n":"Kontakt","sup.2h":"Wir sprechen mit dir","sup.2p":"Fragen, Ideen oder ein Problem? Schreib an <a href=\"mailto:ola@stoqzy.com\" style=\"color:var(--accent)\">ola@stoqzy.com</a> und wir antworten.",
+      "sup.3n":"Von einem Verkäufer gebaut","sup.3h":"Nicht von jemandem, der nie verkauft hat","sup.3p":"Stoqzy entstand aus dem echten Führen von Dutzenden Vinted-Konten, jeden Tag. Die Entscheidungen kommen aus der Praxis.",
+      "cta.h2":"Hol dir die Stunden zurück, die Vinted dir nimmt.","cta.p":"Installiere Stoqzy, schalte ein, was du willst, und lass deinen Shop von allein laufen, mit der Ruhe von jemandem, der weiß, was er tut.","cta.btn":"Kostenlos starten",
+      "foot.tag":"Dein Vinted-Shop auf Autopilot, im Tempo eines sorgfältigen Menschen.","foot.product":"Produkt","foot.resources":"Ressourcen","foot.faq":"FAQ","foot.support":"Support","foot.plans":"Pläne","foot.contact":"Kontakt","foot.disclaimer":"Stoqzy ist ein unabhängiges Produkt und steht in keiner Verbindung zu Vinted, wird nicht von Vinted gesponsert oder unterstützt. „Vinted“ ist eine Marke der jeweiligen Inhaber."
+    },
+    it:{
+      "nav.features":"Funzioni","nav.how":"Come funziona","nav.security":"Sicurezza","nav.pricing":"Prezzi","nav.viewPlans":"Vedi i piani","nav.startFree":"Inizia gratis",
+      "hero.new":"Nuovo","hero.badge":"Estensione Chrome · 21 paesi","hero.title":"Il tuo negozio Vinted in <em>pilota automatico</em>","hero.lede":"Ripubblica gli annunci fermi, rimette in vendita i venduti, risponde ai preferiti e mostra il tuo margine reale. Tutto al ritmo di una persona attenta.","hero.ctaStart":"Inizia gratis","hero.ctaHow":"Guarda come funziona","hero.t1":"Non tocca mai la tua password","hero.t2":"Funziona nel tuo browser","hero.t3":"Disdici quando vuoi",
+      "band.1":"paesi Vinted","band.2":"stili di modifica foto","band.3":"server che toccano il tuo account","band.4":"al tuo ritmo, con pause",
+      "how.eyebrow":"Come funziona","how.h2":"Tre passi, poi dimenticatene.","how.p":"Installi, attivi ciò che vuoi e Stoqzy lavora in background, sempre con una scheda Vinted aperta.",
+      "how.s1n":"Passo 01","how.s1h":"Installa l'estensione","how.s1p":"Aggiungi Stoqzy a Chrome ed entri in Vinted come sempre. Legge il tuo armadio, mai la tua password.",
+      "how.s2n":"Passo 02","how.s2h":"Attiva ciò che vuoi","how.s2p":"Scegli cosa va da solo: ripubblicare, rimettere in vendita, abbassare i prezzi, parlare con i preferiti. O chiedi all'assistente di configurarlo per te.",
+      "how.s3n":"Passo 03","how.s3h":"Lavora al tuo ritmo","how.s3p":"Stoqzy agisce distanziato, con limiti e pause, come una persona attenta. Al primo segnale strano si ferma da solo.",
+      "feat.eyebrow":"Funzioni","feat.h2":"Tutto ciò che facevi a mano, ogni giorno.","feat.p":"Ora succede da solo, con limiti di sicurezza che non si spengono.",
+      "feat.1t":"Ripubblica","feat.1h":"Ripubblica i fermi","feat.1p":"Gli annunci dimenticati tornano in cima al feed con foto davvero modificate, mai la stessa modifica due volte.",
+      "feat.2t":"Scorte","feat.2h":"Rimette in vendita i venduti","feat.2p":"Venduto? L'annuncio torna da solo quando la vendita si chiude. Scorte ricaricate senza muovere un dito.",
+      "feat.3t":"Messaggi","feat.3h":"Preferiti","feat.3p":"Chi mette il cuore riceve un messaggio umano con il tuo sconto, un clic, uno alla volta, senza spam.",
+      "feat.4t":"Prezzo","feat.4h":"Ribassi intelligenti","feat.4p":"I fermi scendono piano, con un minimo che protegge il margine. Scegli la modalità: cauta, equilibrata o attiva.",
+      "feat.5t":"Contabilità","feat.5h":"Margine reale","feat.5p":"Una scheda per articolo con costo e SKU: sai quanto guadagni davvero, quali marche vendono e dove è fermo il denaro.",
+      "feat.6t":"Analisi","feat.6h":"Cosa vende di più","feat.6p":"Unisce le varianti dello stesso prodotto e le classifica, e suggerisce di alzare il prezzo a ciò che va a ruba.",
+      "feat.7t":"Foto","feat.7h":"Modifica foto","feat.7p":"20 stili e ritocchi al pixel, perché ogni ripubblicazione esca diversa dalla precedente senza perdere qualità.",
+      "feat.8t":"Assistente","feat.8h":"Configura per te","feat.8p":"Chiedi con parole tue, o lascia che l'assistente applichi le impostazioni giuste per te in un clic.",
+      "feat.9t":"Portata","feat.9h":"Multi-paese","feat.9p":"Funziona in tutti i 21 mercati Vinted, con la valuta giusta di ogni articolo. Il tuo account, ovunque sia.",
+      "photos.eyebrow":"Foto","photos.h2":"Foto nuove a ogni ripubblicazione.","photos.p":"Ricaricare la stessa foto è ciò che tradisce una ripubblicazione. Stoqzy cambia davvero ogni immagine, taglio, luce, colore, inclinazione, con 20 stili e ritocchi al pixel, senza mai ripetere la modifica precedente sullo stesso articolo.","photos.cta":"Vedi nei piani",
+      "safe.eyebrow":"Prima la sicurezza","safe.h2":"Il tuo account vale più della fretta.","safe.p":"Stoqzy è stato creato da chi gestisce decine di account Vinted ogni giorno. Ogni scelta mette la sicurezza dell'account prima della velocità.",
+      "safe.1b":"Ritmo umano, non un bot.","safe.1p":"Limiti all'ora e al giorno, pause con variazione, ore attive. Mai una raffica di azioni.",
+      "safe.2b":"Si ferma al primo segnale.","safe.2p":"Se Vinted mostra un blocco o un captcha, Stoqzy ferma tutto e ti avvisa. Non insiste mai.",
+      "safe.3b":"Funziona nel tuo browser.","safe.3p":"Nessun nostro server tocca Vinted. Una fuga dal nostro lato non compromette mai il tuo account.",
+      "safe.4b":"Niente password, niente magia.","safe.4p":"Usa la tua sessione, come te. Non chiede né salva la tua password Vinted.",
+      "price.eyebrow":"Prezzi","price.h2":"Inizia gratis. Sali quando il negozio lo chiede.","price.p":"Nessun vincolo. Disdici quando vuoi e torni al piano gratis senza perdere i dati.","price.monthly":"Mensile","price.annual":"Annuale","price.save":"−2 mesi",
+      "price.free":"Gratis","price.freeTag":"Per conoscere davvero il tuo negozio.","price.f1":"Armadio, vendite e saldo","price.f2":"Statistiche e margine reale","price.f3":"Azioni manuali a ritmo sicuro","price.installFree":"Installa gratis",
+      "price.proTag":"Per chi vende sul serio e vuole indietro il suo tempo.","price.p1":"Tutto del Gratis","price.p2":"Ripubblica fermi e venduti","price.p3":"Ribassi di prezzo automatici","price.p4":"Messaggi ai preferiti","price.p5":"Modifica foto (20 stili)","price.tryPro":"Prova Pro",
+      "price.team":"Team","price.custom":"Su<small> richiesta</small>","price.teamTag":"Per gestire molti account in un posto solo.","price.t1":"Tutto del Pro","price.t2":"Pannello centrale multi-account","price.t3":"Assistente con IA (crediti)","price.t4":"Supporto prioritario","price.contact":"Parla con noi",
+      "faq.eyebrow":"Domande","faq.h2":"Cosa chiedono di solito",
+      "faq.q1":"È sicuro per il mio account?","faq.a1":"È la ragione per cui Stoqzy esiste. Ogni azione passa per limiti a ritmo umano, finestre all'ora e al giorno, pause con variazione, ore attive, e al primo segnale di blocco o captcha si ferma da solo e ti avvisa. Non ci sono mai raffiche di azioni.",
+      "faq.q2":"Serve la mia password Vinted?","faq.a2":"No. Stoqzy funziona nel tuo browser e usa la sessione già aperta, proprio come te quando navighi. Non chiede, non vede né salva la tua password.",
+      "faq.q3":"Funziona nel mio paese?","faq.a3":"Sì, Stoqzy funziona in tutti i 21 mercati Vinted, con la valuta giusta di ogni articolo. Non importa se vendi in Portogallo, Spagna, Francia, Germania o altrove.",
+      "faq.q4":"Dove sono i miei dati?","faq.a4":"Le tue schede, i costi e le impostazioni restano nel tuo browser. Nessun nostro server parla con Vinted, quindi nemmeno un guasto dal nostro lato compromette il tuo account.",
+      "faq.q5":"Posso disdire quando voglio?","faq.a5":"Sì, nessun vincolo. Se disdici Pro torni al piano gratis e continui a vedere armadio, vendite e margine. Non perdi nulla.",
+      "faq.q6":"Sostituisce l'estensione che usavo?","faq.a6":"Fa tutto ciò che fanno quegli strumenti, e di più, senza server che toccano il tuo account. È scritto da zero da chi rivende su Vinted ogni giorno.",
+      "sup.1n":"Aiuto","sup.1h":"Guida nell'app","sup.1p":"Ogni funzione ha la sua guida e un assistente che risponde ai tuoi dubbi, senza uscire dall'estensione.",
+      "sup.2n":"Contatto","sup.2h":"Parliamo con te","sup.2p":"Dubbi, idee o un problema? Scrivi a <a href=\"mailto:ola@stoqzy.com\" style=\"color:var(--accent)\">ola@stoqzy.com</a> e rispondiamo.",
+      "sup.3n":"Fatto da chi vende","sup.3h":"Non da chi non ha mai venduto","sup.3p":"Stoqzy è nato dal gestire davvero decine di account Vinted, ogni giorno. Le scelte vengono dalla pratica.",
+      "cta.h2":"Riprenditi le ore che Vinted ti toglie.","cta.p":"Installa Stoqzy, attiva ciò che vuoi e lascia che il tuo negozio vada da solo, con la calma di chi sa cosa fa.","cta.btn":"Inizia gratis",
+      "foot.tag":"Il tuo negozio Vinted in pilota automatico, al ritmo di una persona attenta.","foot.product":"Prodotto","foot.resources":"Risorse","foot.faq":"FAQ","foot.support":"Supporto","foot.plans":"Piani","foot.contact":"Contatto","foot.disclaimer":"Stoqzy è un prodotto indipendente e non è affiliato, sponsorizzato né approvato da Vinted. “Vinted” è un marchio dei rispettivi titolari."
+    }
+  };
+  const PT={}; // PT é o texto original no HTML — guarda-se para poder voltar
+  document.querySelectorAll('[data-i18n],[data-i18n-html]').forEach(el=>{
+    const k=el.getAttribute('data-i18n')||el.getAttribute('data-i18n-html');
+    PT[k]=el.innerHTML;
+  });
+  function aplicarIdioma(lang){
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k=el.getAttribute('data-i18n');
+      const v=lang==='pt'?PT[k]:(I18N[lang]&&I18N[lang][k]);
+      if(v!=null) el.textContent=v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      const k=el.getAttribute('data-i18n-html');
+      const v=lang==='pt'?PT[k]:(I18N[lang]&&I18N[lang][k]);
+      if(v!=null) el.innerHTML=v;
+    });
+    try{localStorage.setItem('stoqzy-lang',lang);}catch(e){}
+    const sel=document.getElementById('lang'); if(sel) sel.value=lang;
+  }
+  (function initLang(){
+    let lang; try{lang=localStorage.getItem('stoqzy-lang');}catch(e){}
+    if(!lang){const n=(navigator.language||'pt').slice(0,2).toLowerCase();lang=I18N[n]?n:(n==='pt'?'pt':'en');}
+    if(lang!=='pt') aplicarIdioma(lang); else document.getElementById('lang').value='pt';
+    document.getElementById('lang').addEventListener('change',e=>aplicarIdioma(e.target.value));
+  })();
+
   // nav com sombra ao rolar
   const hdr=document.getElementById('hdr');
   const onScroll=()=>hdr.classList.toggle('scrolled',window.scrollY>12);
@@ -528,10 +769,12 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   // toggle de preço mensal/anual (anual = 10x o mensal, 2 meses grátis)
   const pm=document.getElementById('pm'),pa=document.getElementById('pa');
   const proP=document.getElementById('pro-price'),proC=document.getElementById('pro-cycle');
+  const SUF={pt:[' /mês',' /ano'],en:[' /mo',' /yr'],es:[' /mes',' /año'],fr:[' /mois',' /an'],de:[' /Mon.',' /Jahr'],it:[' /mese',' /anno']};
   const setCiclo=(anual)=>{
     pm.classList.toggle('on',!anual);pa.classList.toggle('on',anual);
     proP.textContent=anual?'99 €':'9,99 €';
-    proC.textContent=anual?' /ano':' /mês';
+    const L=document.documentElement.lang||'pt';
+    proC.textContent=(SUF[L]||SUF.pt)[anual?1:0];
   };
   pm.addEventListener('click',()=>setCiclo(false));
   pa.addEventListener('click',()=>setCiclo(true));

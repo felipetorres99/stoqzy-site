@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stoqzy — a tua loja Vinted em piloto automático</title>
+  <meta name="description" content="Stoqzy gere a tua loja Vinted: republica parados, repõe vendidos, responde a interessados e mostra a margem real. Ritmo humano, sem riscos parvos.">
+  <style>
+    :root {
+      --bg: #0b0d12; --panel: #12151d; --panel2: #1a1e29; --edge: #262b3a;
+      --ink: #eef1f7; --mute: #9aa3b5; --faint: #6b7385;
+      --accent: #f5b942; --accent-ink: #1a1405; --good: #4ade80;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 22px 0; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+    .logo span { color: var(--accent); }
+    .cta {
+      display: inline-block; background: var(--accent); color: var(--accent-ink);
+      font-weight: 700; padding: 12px 26px; border-radius: 999px; text-decoration: none;
+      transition: filter .15s; font-size: 15px;
+    }
+    .cta:hover { filter: brightness(1.1); }
+    .hero { padding: 72px 0 56px; text-align: center; }
+    .hero h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p.sub { margin: 20px auto 0; max-width: 620px; font-size: 18px; color: var(--mute); }
+    .hero .cta { margin-top: 32px; }
+    .hero .nota { margin-top: 12px; font-size: 13px; color: var(--faint); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; padding: 40px 0; }
+    .card { background: var(--panel); border: 1px solid var(--edge); border-radius: 18px; padding: 22px; }
+    .card .emo { font-size: 26px; }
+    .card h3 { margin: 10px 0 6px; font-size: 17px; }
+    .card p { font-size: 14px; color: var(--mute); }
+    .faixa { background: var(--panel); border: 1px solid var(--edge); border-radius: 20px; padding: 30px; margin: 24px 0; text-align: center; }
+    .faixa strong { color: var(--accent); }
+    .planos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; padding: 8px 0 48px; }
+    .plano { background: var(--panel); border: 1px solid var(--edge); border-radius: 18px; padding: 26px; }
+    .plano.pro { border-color: var(--accent); position: relative; }
+    .plano.pro::before {
+      content: 'Mais popular'; position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 800;
+      padding: 2px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: .08em;
+    }
+    .plano h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); }
+    .plano .preco { font-size: 34px; font-weight: 800; margin: 8px 0 14px; }
+    .plano .preco small { font-size: 14px; font-weight: 500; color: var(--mute); }
+    .plano ul { list-style: none; }
+    .plano li { font-size: 14px; color: var(--mute); padding: 5px 0; }
+    .plano li::before { content: '✓  '; color: var(--good); font-weight: 700; }
+    h2.sec { text-align: center; font-size: clamp(24px, 4vw, 34px); letter-spacing: -0.02em; padding-top: 34px; }
+    p.sec-sub { text-align: center; color: var(--mute); margin: 8px auto 6px; max-width: 560px; font-size: 15px; }
+    footer { border-top: 1px solid var(--edge); padding: 28px 0 40px; text-align: center; color: var(--faint); font-size: 13px; }
+    footer a { color: var(--mute); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">Stoq<span>zy</span></div>
+      <a class="cta" href="#planos">Começar</a>
+    </header>
+
+    <section class="hero">
+      <h1>A tua loja Vinted<br>em <em>piloto automático</em></h1>
+      <p class="sub">
+        Republica os parados com fotos sempre novas, repõe os vendidos sozinho,
+        responde a quem dá like e mostra a tua margem real. Tudo ao ritmo de um
+        humano cuidadoso — porque a tua conta vale mais do que a pressa.
+      </p>
+      <a class="cta" href="#planos">Quero vender mais</a>
+      <p class="nota">Extensão para Chrome · funciona nos 21 países da Vinted · sem aceder às tuas passwords</p>
+    </section>
+
+    <h2 class="sec">O que o Stoqzy faz por ti</h2>
+    <p class="sec-sub">Tudo o que fazias à mão, todos os dias — agora acontece sozinho, com limites de segurança que não se desligam.</p>
+    <section class="grid">
+      <div class="card"><div class="emo">🔁</div><h3>Repositor de parados</h3>
+        <p>Artigos esquecidos voltam ao topo do feed com fotos genuinamente editadas — nunca a mesma edição duas vezes.</p></div>
+      <div class="card"><div class="emo">📦</div><h3>Repõe os vendidos</h3>
+        <p>Vendeu? O anúncio renasce sozinho quando a venda fecha. Stock reabastecido sem levantares um dedo.</p></div>
+      <div class="card"><div class="emo">❤️</div><h3>Interessados</h3>
+        <p>Quem dá like recebe uma mensagem humana com o teu desconto — um clique, um de cada vez, sem spam.</p></div>
+      <div class="card"><div class="emo">📉</div><h3>Descidas inteligentes</h3>
+        <p>Preços dos parados descem devagar, com piso que protege a margem. Tu escolhes o modo: cauteloso, equilibrado ou ativo.</p></div>
+      <div class="card"><div class="emo">💰</div><h3>Margem real</h3>
+        <p>Ficha por artigo com custo e SKU: sabes o que ganhas de verdade, que marcas vendem e onde está o dinheiro preso.</p></div>
+      <div class="card"><div class="emo">🛡️</div><h3>Ritmo humano</h3>
+        <p>Limites por hora e por dia, pausas com jitter, paragem automática ao primeiro sinal estranho. A tua conta primeiro.</p></div>
+    </section>
+
+    <div class="faixa">
+      Feito por quem gere <strong>dezenas de contas Vinted</strong> todos os dias —
+      não por quem nunca vendeu uma peça.
+    </div>
+
+    <h2 class="sec" id="planos">Planos simples</h2>
+    <p class="sec-sub">Começa grátis. Sobe quando a tua loja pedir.</p>
+    <section class="planos">
+      <div class="plano">
+        <h3>Grátis</h3>
+        <div class="preco">0 €</div>
+        <ul>
+          <li>Armário, vendas e saldo</li>
+          <li>Números e margem real</li>
+          <li>Ações manuais com ritmo seguro</li>
+        </ul>
+      </div>
+      <div class="plano pro">
+        <h3>Pro</h3>
+        <div class="preco">9,99 € <small>/mês</small></div>
+        <ul>
+          <li>Tudo do Grátis</li>
+          <li>Repositor de parados e vendidos</li>
+          <li>Descidas de preço automáticas</li>
+          <li>Mensagens a interessados</li>
+          <li>Edição de fotos (20 estilos)</li>
+        </ul>
+      </div>
+      <div class="plano">
+        <h3>Equipa</h3>
+        <div class="preco">Sob consulta</div>
+        <ul>
+          <li>Tudo do Pro</li>
+          <li>Multi-conta central</li>
+          <li>Assistente com IA</li>
+          <li>Suporte prioritário</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="faixa" id="contacto">
+      <strong>Brevemente disponível.</strong> Quer aceder primeiro?
+      Escreve para <a style="color:var(--accent)" href="mailto:ola@stoqzy.com">ola@stoqzy.com</a>
+    </div>
+
+    <footer>
+      © 2026 Stoqzy · stoqzy.com<br>
+      O Stoqzy é um produto independente e não é afiliado, patrocinado nem aprovado pela Vinted.
+      «Vinted» é marca dos respetivos titulares.
+    </footer>
+  </div>
+</body>
+</html>

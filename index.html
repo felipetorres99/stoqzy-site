@@ -426,7 +426,7 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
         </div>
         <div class="plan reveal">
           <span class="pname" data-i18n="price.team">Equipa</span>
-          <div class="price" data-i18n="price.custom">Sob<small> consulta</small></div>
+          <div class="price" data-i18n-html="price.custom">Sob<small> consulta</small></div>
           <p class="ptag" data-i18n="price.teamTag">Para quem gere muitas contas num só sítio.</p>
           <ul>
             <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n-html="price.accounts"><strong>Contas Vinted ilimitadas</strong></span></li>
@@ -728,6 +728,14 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
       "foot.tag":"Il tuo negozio Vinted in pilota automatico, al ritmo di una persona attenta.","foot.product":"Prodotto","foot.resources":"Risorse","foot.faq":"FAQ","foot.support":"Supporto","foot.plans":"Piani","foot.contact":"Contatto","foot.disclaimer":"Stoqzy è un prodotto indipendente e non è affiliato, sponsorizzato né approvato da Vinted. “Vinted” è un marchio dei rispettivi titolari."
     }
   };
+  // Sufixo do preço (/mês, /ano) por idioma — partilhado com o toggle mensal/anual.
+  const SUF={pt:[' /mês',' /ano'],en:[' /mo',' /yr'],es:[' /mes',' /año'],fr:[' /mois',' /an'],de:[' /Mon.',' /Jahr'],it:[' /mese',' /anno']};
+  function atualizarSufixoPreco(){
+    const proC=document.getElementById('pro-cycle'); if(!proC) return;
+    const anual=document.getElementById('pa').classList.contains('on');
+    const L=document.documentElement.lang||'pt';
+    proC.textContent=(SUF[L]||SUF.pt)[anual?1:0];
+  }
   const PT={}; // PT é o texto original no HTML — guarda-se para poder voltar
   document.querySelectorAll('[data-i18n],[data-i18n-html]').forEach(el=>{
     const k=el.getAttribute('data-i18n')||el.getAttribute('data-i18n-html');
@@ -747,6 +755,7 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
     });
     try{localStorage.setItem('stoqzy-lang',lang);}catch(e){}
     const sel=document.getElementById('lang'); if(sel) sel.value=lang;
+    atualizarSufixoPreco(); // o sufixo /mês também acompanha o idioma
   }
   (function initLang(){
     let lang; try{lang=localStorage.getItem('stoqzy-lang');}catch(e){}
@@ -777,12 +786,10 @@ footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:
   // toggle de preço mensal/anual (anual = 10x o mensal, 2 meses grátis)
   const pm=document.getElementById('pm'),pa=document.getElementById('pa');
   const proP=document.getElementById('pro-price'),proC=document.getElementById('pro-cycle');
-  const SUF={pt:[' /mês',' /ano'],en:[' /mo',' /yr'],es:[' /mes',' /año'],fr:[' /mois',' /an'],de:[' /Mon.',' /Jahr'],it:[' /mese',' /anno']};
   const setCiclo=(anual)=>{
     pm.classList.toggle('on',!anual);pa.classList.toggle('on',anual);
     proP.textContent=anual?'99 €':'9,99 €';
-    const L=document.documentElement.lang||'pt';
-    proC.textContent=(SUF[L]||SUF.pt)[anual?1:0];
+    atualizarSufixoPreco();
   };
   pm.addEventListener('click',()=>setCiclo(false));
   pa.addEventListener('click',()=>setCiclo(true));

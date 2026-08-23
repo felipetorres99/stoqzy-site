@@ -1,150 +1,549 @@
 <!doctype html>
 <html lang="pt">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stoqzy — a tua loja Vinted em piloto automático</title>
-  <meta name="description" content="Stoqzy gere a tua loja Vinted: republica parados, repõe vendidos, responde a interessados e mostra a margem real. Ritmo humano, sem riscos parvos.">
-  <style>
-    :root {
-      --bg: #0b0d12; --panel: #12151d; --panel2: #1a1e29; --edge: #262b3a;
-      --ink: #eef1f7; --mute: #9aa3b5; --faint: #6b7385;
-      --accent: #f5b942; --accent-ink: #1a1405; --good: #4ade80;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: var(--bg); color: var(--ink);
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6; -webkit-font-smoothing: antialiased;
-    }
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-    header { padding: 22px 0; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
-    .logo span { color: var(--accent); }
-    .cta {
-      display: inline-block; background: var(--accent); color: var(--accent-ink);
-      font-weight: 700; padding: 12px 26px; border-radius: 999px; text-decoration: none;
-      transition: filter .15s; font-size: 15px;
-    }
-    .cta:hover { filter: brightness(1.1); }
-    .hero { padding: 72px 0 56px; text-align: center; }
-    .hero h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; }
-    .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero p.sub { margin: 20px auto 0; max-width: 620px; font-size: 18px; color: var(--mute); }
-    .hero .cta { margin-top: 32px; }
-    .hero .nota { margin-top: 12px; font-size: 13px; color: var(--faint); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; padding: 40px 0; }
-    .card { background: var(--panel); border: 1px solid var(--edge); border-radius: 18px; padding: 22px; }
-    .card .emo { font-size: 26px; }
-    .card h3 { margin: 10px 0 6px; font-size: 17px; }
-    .card p { font-size: 14px; color: var(--mute); }
-    .faixa { background: var(--panel); border: 1px solid var(--edge); border-radius: 20px; padding: 30px; margin: 24px 0; text-align: center; }
-    .faixa strong { color: var(--accent); }
-    .planos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; padding: 8px 0 48px; }
-    .plano { background: var(--panel); border: 1px solid var(--edge); border-radius: 18px; padding: 26px; }
-    .plano.pro { border-color: var(--accent); position: relative; }
-    .plano.pro::before {
-      content: 'Mais popular'; position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-      background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 800;
-      padding: 2px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: .08em;
-    }
-    .plano h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); }
-    .plano .preco { font-size: 34px; font-weight: 800; margin: 8px 0 14px; }
-    .plano .preco small { font-size: 14px; font-weight: 500; color: var(--mute); }
-    .plano ul { list-style: none; }
-    .plano li { font-size: 14px; color: var(--mute); padding: 5px 0; }
-    .plano li::before { content: '✓  '; color: var(--good); font-weight: 700; }
-    h2.sec { text-align: center; font-size: clamp(24px, 4vw, 34px); letter-spacing: -0.02em; padding-top: 34px; }
-    p.sec-sub { text-align: center; color: var(--mute); margin: 8px auto 6px; max-width: 560px; font-size: 15px; }
-    footer { border-top: 1px solid var(--edge); padding: 28px 0 40px; text-align: center; color: var(--faint); font-size: 13px; }
-    footer a { color: var(--mute); }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stoqzy — a tua loja Vinted em piloto automático</title>
+<meta name="description" content="O Stoqzy republica os parados, repõe os vendidos, responde a quem dá like e mostra a tua margem real na Vinted. Extensão para Chrome, ao ritmo de um humano. 21 países, sem aceder às tuas passwords.">
+<meta property="og:title" content="Stoqzy — a tua loja Vinted em piloto automático">
+<meta property="og:description" content="Republica, repõe, responde e mede a margem — ao ritmo de um humano cuidadoso. Extensão para Chrome, 21 países.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#faf7f1; --surface:#ffffff; --surface-2:#f2ede3; --raise:#fbf9f4;
+  --ink:#1b1710; --muted:#6a6153; --faint:#9a917f; --edge:#e7e0d1; --edge-2:#d8cfbc;
+  --accent:#c67e0a; --accent-ink:#241703; --accent-soft:#f7e8c8;
+  --good:#2f8f56; --good-soft:#e2f2e6;
+  --glow: 40% 0%, rgba(198,126,10,.10);
+  --shadow-s:0 1px 2px rgba(27,23,16,.05); --shadow-m:0 2px 6px rgba(27,23,16,.06),0 12px 32px rgba(27,23,16,.07);
+  --shadow-l:0 8px 24px rgba(27,23,16,.08),0 30px 70px rgba(27,23,16,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0c0a07; --surface:#161209; --surface-2:#1e1810; --raise:#1a150c;
+  --ink:#f4efe4; --muted:#a99f8c; --faint:#736a5a; --edge:#2a2318; --edge-2:#38301f;
+  --accent:#f5b942; --accent-ink:#251803; --accent-soft:#3a2e13;
+  --good:#5cc985; --good-soft:#15271b;
+  --glow: 40% -5%, rgba(245,185,66,.14);
+  --shadow-s:0 1px 2px rgba(0,0,0,.4); --shadow-m:0 2px 8px rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.34);
+  --shadow-l:0 10px 30px rgba(0,0,0,.44),0 36px 80px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --ground:#0c0a07; --surface:#161209; --surface-2:#1e1810; --raise:#1a150c;
+  --ink:#f4efe4; --muted:#a99f8c; --faint:#736a5a; --edge:#2a2318; --edge-2:#38301f;
+  --accent:#f5b942; --accent-ink:#251803; --accent-soft:#3a2e13;
+  --good:#5cc985; --good-soft:#15271b;
+  --glow: 40% -5%, rgba(245,185,66,.14);
+  --shadow-s:0 1px 2px rgba(0,0,0,.4); --shadow-m:0 2px 8px rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.34);
+  --shadow-l:0 10px 30px rgba(0,0,0,.44),0 36px 80px rgba(0,0,0,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"Instrument Sans",system-ui,sans-serif; font-size:17px; line-height:1.62;
+  background-image:radial-gradient(60rem 40rem at var(--glow) 0%, transparent 60%);
+  background-repeat:no-repeat;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;letter-spacing:-.02em;text-wrap:balance;line-height:1.04}
+.mono{font-family:"IBM Plex Mono",monospace}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+
+/* nav */
+header{position:sticky;top:0;z-index:50;transition:background .3s,border-color .3s,box-shadow .3s;border-bottom:1px solid transparent}
+header.scrolled{background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:blur(14px);border-color:var(--edge);box-shadow:var(--shadow-s)}
+nav{display:flex;align-items:center;gap:28px;height:70px}
+.logo{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:23px;letter-spacing:-.03em}
+.logo b{color:var(--accent)}
+.nav-links{display:flex;gap:26px;margin-left:auto;font-size:15px;color:var(--muted)}
+.nav-links a{transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;padding:11px 22px;border-radius:100px;transition:transform .15s,filter .15s,background .15s,border-color .15s;white-space:nowrap;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn-ghost{border-color:var(--edge-2);color:var(--ink);background:var(--surface)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.nav .btn{margin-left:4px}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--edge-2);border-radius:10px;width:42px;height:42px;color:var(--ink);font-size:20px;cursor:pointer}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,72px)}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--edge);border-radius:100px;padding:6px 14px 6px 8px;box-shadow:var(--shadow-s)}
+.hero-badge .pill{background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:11.5px;padding:2px 9px;border-radius:100px}
+h1.hero-title{font-size:clamp(40px,6.4vw,68px);font-weight:800;margin:22px 0 20px}
+h1.hero-title em{font-style:normal;color:var(--accent);position:relative}
+.hero p.lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:33ch}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin:32px 0 18px}
+.trust{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;color:var(--faint);align-items:center}
+.trust span{display:inline-flex;align-items:center;gap:7px}
+.trust svg{color:var(--good)}
+
+/* mock painel */
+.mock{background:linear-gradient(180deg,var(--raise),var(--surface));border:1px solid var(--edge);border-radius:22px;box-shadow:var(--shadow-l);padding:18px;position:relative;transform:rotate(.6deg)}
+.mock::before{content:"";position:absolute;inset:0;border-radius:22px;background:radial-gradient(30rem 12rem at 70% -10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%);pointer-events:none}
+.mock-top{display:flex;align-items:center;gap:9px;padding:4px 6px 14px}
+.mock-top .dot{width:10px;height:10px;border-radius:50%;background:var(--edge-2)}
+.mock-top .title{margin-left:8px;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px}
+.mock-top .title b{color:var(--accent)}
+.mock-stat{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.mock-stat div{background:var(--surface-2);border:1px solid var(--edge);border-radius:12px;padding:11px 12px}
+.mock-stat .k{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em}
+.mock-stat .v{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:19px;margin-top:3px;font-variant-numeric:tabular-nums}
+.mock-stat .v.up{color:var(--good)}
+.mock-row{display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--edge);border-radius:12px;padding:12px 14px;margin-bottom:9px}
+.mock-row .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--accent-soft);font-size:17px;flex:none}
+.mock-row .lbl{font-size:14px;font-weight:500}
+.mock-row .sub{font-size:12px;color:var(--faint)}
+.mock-row .tg{margin-left:auto;width:42px;height:24px;border-radius:100px;background:var(--accent);position:relative;flex:none}
+.mock-row .tg::after{content:"";position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.mock-row.off .tg{background:var(--edge-2)}
+.mock-row.off .tg::after{left:3px;right:auto}
+.mock-row.off .ic{background:var(--surface);border:1px solid var(--edge)}
+
+/* bandas */
+.band{border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);background:var(--surface);padding:24px 0}
+.band .wrap{display:flex;flex-wrap:wrap;gap:14px 40px;align-items:center;justify-content:center;text-align:center}
+.band .stat{display:flex;flex-direction:column}
+.band .stat b{font-family:"Bricolage Grotesque",sans-serif;font-size:26px;color:var(--ink)}
+.band .stat span{font-size:12.5px;color:var(--faint);letter-spacing:.02em}
+.band .sep{width:1px;height:34px;background:var(--edge)}
+
+section.blk{padding:clamp(56px,8vw,96px) 0}
+.sec-head{max-width:60ch;margin-bottom:44px}
+.sec-head h2{font-size:clamp(28px,4.2vw,42px);font-weight:700;margin:12px 0 12px}
+.sec-head p{color:var(--muted);font-size:18px}
+.center{text-align:center;margin-left:auto;margin-right:auto}
+
+/* como funciona */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--edge);border-radius:18px;padding:26px;position:relative;box-shadow:var(--shadow-s)}
+.step .n{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);font-weight:500}
+.step h3{font-size:20px;font-weight:700;margin:14px 0 8px}
+.step p{color:var(--muted);font-size:15.5px}
+
+/* funcionalidades */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feat{background:var(--surface);border:1px solid var(--edge);border-radius:18px;padding:26px;box-shadow:var(--shadow-s);transition:transform .18s,border-color .18s,box-shadow .18s}
+.feat:hover{transform:translateY(-3px);border-color:var(--edge-2);box-shadow:var(--shadow-m)}
+.feat .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:23px;background:var(--accent-soft);margin-bottom:16px}
+.feat h3{font-size:19px;font-weight:700;margin-bottom:7px}
+.feat p{color:var(--muted);font-size:15px}
+
+/* segurança */
+.safe{background:var(--surface);border:1px solid var(--edge);border-radius:24px;padding:clamp(28px,4vw,52px);box-shadow:var(--shadow-m);display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.safe h2{font-size:clamp(26px,3.6vw,38px);font-weight:700;margin:12px 0 14px}
+.safe p.i{color:var(--muted);font-size:17px;margin-bottom:8px}
+.safe ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+.safe li{display:flex;gap:13px;align-items:flex-start}
+.safe li .ck{flex:none;width:26px;height:26px;border-radius:8px;background:var(--good-soft);display:grid;place-items:center;margin-top:2px}
+.safe li b{font-weight:600;display:block}
+.safe li span{color:var(--muted);font-size:14.5px}
+
+/* preços */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.plan{background:var(--surface);border:1px solid var(--edge);border-radius:20px;padding:30px;box-shadow:var(--shadow-s);display:flex;flex-direction:column;gap:6px}
+.plan.pop{border-color:var(--accent);box-shadow:var(--shadow-l);position:relative}
+.plan.pop::before{content:"Mais escolhido";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:4px 14px;border-radius:100px;white-space:nowrap}
+.plan .pname{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.plan .price{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:44px;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.plan .price small{font-family:"Instrument Sans",sans-serif;font-size:15px;font-weight:500;color:var(--muted)}
+.plan .ptag{color:var(--muted);font-size:14px;min-height:42px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin:18px 0 22px;flex:1}
+.plan li{display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
+.plan li svg{flex:none;margin-top:4px;color:var(--good)}
+.plan .btn{width:100%;justify-content:center}
+
+/* faq */
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+details{background:var(--surface);border:1px solid var(--edge);border-radius:14px;padding:2px 22px;box-shadow:var(--shadow-s)}
+details summary{list-style:none;cursor:pointer;padding:19px 0;font-weight:600;font-size:17px;display:flex;align-items:center;gap:14px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--accent);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);font-size:15.5px;padding:0 0 20px}
+
+/* cta final */
+.cta-final{text-align:center;background:var(--surface);border:1px solid var(--edge);border-radius:26px;padding:clamp(40px,6vw,72px) 24px;box-shadow:var(--shadow-m);position:relative;overflow:hidden}
+.cta-final::before{content:"";position:absolute;inset:0;background:radial-gradient(40rem 18rem at 50% 0%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
+.cta-final>*{position:relative}
+.cta-final h2{font-size:clamp(30px,4.6vw,46px);font-weight:800;margin-bottom:14px}
+.cta-final p{color:var(--muted);font-size:18px;max-width:46ch;margin:0 auto 28px}
+
+/* footer */
+footer{border-top:1px solid var(--edge);margin-top:clamp(56px,8vw,96px);padding:clamp(40px,6vw,64px) 0 40px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
+.foot-brand .logo{margin-bottom:12px}
+.foot-brand p{color:var(--muted);font-size:14.5px;max-width:34ch}
+.foot-col h4{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+.foot-col a{display:block;color:var(--muted);font-size:14.5px;padding:5px 0;transition:color .15s}
+.foot-col a:hover{color:var(--accent)}
+.foot-bottom{border-top:1px solid var(--edge);padding-top:24px;color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-btn{background:var(--surface);border:1px solid var(--edge-2);border-radius:10px;width:40px;height:40px;cursor:pointer;color:var(--ink);font-size:16px;display:grid;place-items:center}
+
+/* tag de categoria na funcionalidade */
+.feat .ftag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px}
+/* secção fotos */
+.photos{background:var(--surface);border:1px solid var(--edge);border-radius:24px;padding:clamp(28px,4vw,52px);box-shadow:var(--shadow-m);display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;overflow:hidden}
+.photos h2{font-size:clamp(26px,3.6vw,38px);font-weight:700;margin:12px 0 12px}
+.photos p{color:var(--muted);font-size:17px;margin-bottom:20px}
+.photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.photo-strip .ph{aspect-ratio:3/4;border-radius:14px;border:1px solid var(--edge);position:relative;overflow:hidden;background:var(--surface-2)}
+.photo-strip .ph::after{content:"";position:absolute;inset:0}
+.photo-strip .ph.a{background:linear-gradient(145deg,#c8b48f,#8a7a5c)}
+.photo-strip .ph.b{background:linear-gradient(145deg,#9fb0c4,#5f7186)}
+.photo-strip .ph.c{background:linear-gradient(145deg,#c9a0a8,#8a5f68)}
+.photo-strip .ph.d{background:linear-gradient(145deg,#a7c4b0,#5f8a72)}
+.photo-strip .ph.e{background:linear-gradient(145deg,#c4b89f,#8a7f5f)}
+.photo-strip .ph.f{background:linear-gradient(145deg,#b0a7c4,#6f5f8a)}
+.photo-strip .ph .tag{position:absolute;left:8px;bottom:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:#fff;background:rgba(0,0,0,.4);padding:2px 7px;border-radius:6px;letter-spacing:.04em}
+/* toggle preços */
+.price-toggle{display:inline-flex;align-items:center;gap:4px;background:var(--surface-2);border:1px solid var(--edge);border-radius:100px;padding:4px;margin:18px auto 0;box-shadow:var(--shadow-s)}
+.price-toggle button{border:0;background:none;font-family:"Instrument Sans",sans-serif;font-size:14px;font-weight:600;color:var(--muted);padding:8px 18px;border-radius:100px;cursor:pointer;transition:background .2s,color .2s;display:inline-flex;align-items:center;gap:8px}
+.price-toggle button.on{background:var(--accent);color:var(--accent-ink)}
+.price-toggle .save{font-family:"IBM Plex Mono",monospace;font-size:10.5px;background:var(--good-soft);color:var(--good);padding:2px 7px;border-radius:100px}
+/* Reveal é progressive enhancement: só esconde se o JS marcar <html class="js">.
+   Sem JS (ou preview/SEO) o conteúdo está sempre visível. */
+.js .reveal{opacity:0;transform:translateY(18px)}
+.js .reveal.in{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
+
+@media (max-width:940px){
+  .hero{grid-template-columns:1fr;gap:36px}
+  .hero-visual{order:-1}
+  .safe{grid-template-columns:1fr;gap:28px}
+  .steps,.feat-grid,.plans{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .nav-links,.nav .btn-ghost{display:none}
+  .menu-btn{display:grid}
+  .foot-grid{grid-template-columns:1fr}
+  .band .sep{display:none}
+}
+</style>
 </head>
 <body>
+<script>document.documentElement.className+=' js';</script>
+<header id="hdr">
   <div class="wrap">
-    <header>
-      <div class="logo">Stoq<span>zy</span></div>
-      <a class="cta" href="#planos">Começar</a>
-    </header>
-
-    <section class="hero">
-      <h1>A tua loja Vinted<br>em <em>piloto automático</em></h1>
-      <p class="sub">
-        Republica os parados com fotos sempre novas, repõe os vendidos sozinho,
-        responde a quem dá like e mostra a tua margem real. Tudo ao ritmo de um
-        humano cuidadoso — porque a tua conta vale mais do que a pressa.
-      </p>
-      <a class="cta" href="#planos">Quero vender mais</a>
-      <p class="nota">Extensão para Chrome · funciona nos 21 países da Vinted · sem aceder às tuas passwords</p>
-    </section>
-
-    <h2 class="sec">O que o Stoqzy faz por ti</h2>
-    <p class="sec-sub">Tudo o que fazias à mão, todos os dias — agora acontece sozinho, com limites de segurança que não se desligam.</p>
-    <section class="grid">
-      <div class="card"><div class="emo">🔁</div><h3>Repositor de parados</h3>
-        <p>Artigos esquecidos voltam ao topo do feed com fotos genuinamente editadas — nunca a mesma edição duas vezes.</p></div>
-      <div class="card"><div class="emo">📦</div><h3>Repõe os vendidos</h3>
-        <p>Vendeu? O anúncio renasce sozinho quando a venda fecha. Stock reabastecido sem levantares um dedo.</p></div>
-      <div class="card"><div class="emo">❤️</div><h3>Interessados</h3>
-        <p>Quem dá like recebe uma mensagem humana com o teu desconto — um clique, um de cada vez, sem spam.</p></div>
-      <div class="card"><div class="emo">📉</div><h3>Descidas inteligentes</h3>
-        <p>Preços dos parados descem devagar, com piso que protege a margem. Tu escolhes o modo: cauteloso, equilibrado ou ativo.</p></div>
-      <div class="card"><div class="emo">💰</div><h3>Margem real</h3>
-        <p>Ficha por artigo com custo e SKU: sabes o que ganhas de verdade, que marcas vendem e onde está o dinheiro preso.</p></div>
-      <div class="card"><div class="emo">🛡️</div><h3>Ritmo humano</h3>
-        <p>Limites por hora e por dia, pausas com jitter, paragem automática ao primeiro sinal estranho. A tua conta primeiro.</p></div>
-    </section>
-
-    <div class="faixa">
-      Feito por quem gere <strong>dezenas de contas Vinted</strong> todos os dias —
-      não por quem nunca vendeu uma peça.
-    </div>
-
-    <h2 class="sec" id="planos">Planos simples</h2>
-    <p class="sec-sub">Começa grátis. Sobe quando a tua loja pedir.</p>
-    <section class="planos">
-      <div class="plano">
-        <h3>Grátis</h3>
-        <div class="preco">0 €</div>
-        <ul>
-          <li>Armário, vendas e saldo</li>
-          <li>Números e margem real</li>
-          <li>Ações manuais com ritmo seguro</li>
-        </ul>
+    <nav>
+      <a href="#top" class="logo">Stoq<b>zy</b></a>
+      <div class="nav-links">
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#como">Como funciona</a>
+        <a href="#seguranca">Segurança</a>
+        <a href="#precos">Preços</a>
+        <a href="#faq">FAQ</a>
       </div>
-      <div class="plano pro">
-        <h3>Pro</h3>
-        <div class="preco">9,99 € <small>/mês</small></div>
-        <ul>
-          <li>Tudo do Grátis</li>
-          <li>Repositor de parados e vendidos</li>
-          <li>Descidas de preço automáticas</li>
-          <li>Mensagens a interessados</li>
-          <li>Edição de fotos (20 estilos)</li>
-        </ul>
-      </div>
-      <div class="plano">
-        <h3>Equipa</h3>
-        <div class="preco">Sob consulta</div>
-        <ul>
-          <li>Tudo do Pro</li>
-          <li>Multi-conta central</li>
-          <li>Assistente com IA</li>
-          <li>Suporte prioritário</li>
-        </ul>
-      </div>
-    </section>
-
-    <div class="faixa" id="contacto">
-      <strong>Brevemente disponível.</strong> Quer aceder primeiro?
-      Escreve para <a style="color:var(--accent)" href="mailto:ola@stoqzy.com">ola@stoqzy.com</a>
-    </div>
-
-    <footer>
-      © 2026 Stoqzy · stoqzy.com<br>
-      O Stoqzy é um produto independente e não é afiliado, patrocinado nem aprovado pela Vinted.
-      «Vinted» é marca dos respetivos titulares.
-    </footer>
+      <button class="theme-btn" id="theme" aria-label="Mudar tema" title="Mudar tema">◐</button>
+      <a href="#precos" class="btn btn-ghost">Ver planos</a>
+      <a href="#precos" class="btn btn-primary">Começar grátis</a>
+      <button class="menu-btn" id="menu" aria-label="Menu">☰</button>
+    </nav>
   </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="hero-badge"><span class="pill">Novo</span> Extensão para Chrome · 21 países</span>
+        <h1 class="hero-title">A tua loja Vinted em <em>piloto automático</em></h1>
+        <p class="lede">Republica os parados, repõe os vendidos, responde a quem dá like e mostra a margem real. Tudo ao ritmo de um humano cuidadoso.</p>
+        <div class="hero-cta">
+          <a href="#precos" class="btn btn-primary">Começar grátis</a>
+          <a href="#como" class="btn btn-ghost">Ver como funciona</a>
+        </div>
+        <div class="trust">
+          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Sem aceder às tuas passwords</span>
+          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Corre no teu browser</span>
+          <span><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Cancelas quando quiseres</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="mock" aria-hidden="true">
+          <div class="mock-top">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="title">Stoq<b>zy</b></span>
+          </div>
+          <div class="mock-stat">
+            <div><div class="k">À venda</div><div class="v">148</div></div>
+            <div><div class="k">Margem</div><div class="v up">+412 €</div></div>
+            <div><div class="k">Hoje</div><div class="v">6</div></div>
+          </div>
+          <div class="mock-row"><span class="ic">🔁</span><span><span class="lbl">Repositor de parados</span><br><span class="sub">2 por dia · modo cauteloso</span></span><span class="tg"></span></div>
+          <div class="mock-row"><span class="ic">📦</span><span><span class="lbl">Repor vendidos</span><br><span class="sub">só com stock na ficha</span></span><span class="tg"></span></div>
+          <div class="mock-row off"><span class="ic">📉</span><span><span class="lbl">Descidas de preço</span><br><span class="sub">−5%, piso 5 €</span></span><span class="tg"></span></div>
+          <div class="mock-row"><span class="ic">❤️</span><span><span class="lbl">Mensagem a interessados</span><br><span class="sub">um clique, com desconto</span></span><span class="tg"></span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BANDA DE CONFIANÇA -->
+  <div class="band">
+    <div class="wrap">
+      <div class="stat"><b>21</b><span>países da Vinted</span></div>
+      <div class="sep"></div>
+      <div class="stat"><b>20</b><span>estilos de edição de foto</span></div>
+      <div class="sep"></div>
+      <div class="stat"><b>0</b><span>servidores a tocar na tua conta</span></div>
+      <div class="sep"></div>
+      <div class="stat"><b>24/7</b><span>ao teu ritmo, com pausas</span></div>
+    </div>
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <section class="blk" id="como">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Como funciona</span>
+        <h2>Três passos, e depois esquece.</h2>
+        <p>Instalas, ligas o que quiseres, e o Stoqzy trabalha em segundo plano — sempre com um separador da Vinted aberto.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><span class="n">Passo 01</span><h3>Instala a extensão</h3><p>Adicionas o Stoqzy ao Chrome e entras na tua conta Vinted como sempre. Ele lê o teu armário — nunca a tua palavra-passe.</p></div>
+        <div class="step reveal"><span class="n">Passo 02</span><h3>Liga o que quiseres</h3><p>Escolhes o que corre sozinho: republicar, repor, baixar preços, falar com interessados. Ou pede ao assistente para configurar por ti.</p></div>
+        <div class="step reveal"><span class="n">Passo 03</span><h3>Trabalha ao teu ritmo</h3><p>O Stoqzy age espaçado, com limites e pausas, como um humano atento. Ao primeiro sinal estranho, pára sozinho.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNCIONALIDADES -->
+  <section class="blk" id="funcionalidades" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Funcionalidades</span>
+        <h2>Tudo o que fazias à mão, todos os dias.</h2>
+        <p>Agora acontece sozinho — com limites de segurança que não se desligam.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat reveal"><div class="ic">🔁</div><span class="ftag">Republicar</span><h3>Repositor de parados</h3><p>Artigos esquecidos voltam ao topo do feed com fotos genuinamente editadas — nunca a mesma edição duas vezes.</p></div>
+        <div class="feat reveal"><div class="ic">📦</div><span class="ftag">Stock</span><h3>Repõe os vendidos</h3><p>Vendeu? O anúncio renasce sozinho quando a venda fecha. Stock reabastecido sem levantares um dedo.</p></div>
+        <div class="feat reveal"><div class="ic">❤️</div><span class="ftag">Mensagens</span><h3>Interessados</h3><p>Quem dá like recebe uma mensagem humana com o teu desconto — um clique, um de cada vez, sem spam.</p></div>
+        <div class="feat reveal"><div class="ic">📉</div><span class="ftag">Preço</span><h3>Descidas inteligentes</h3><p>Os parados descem devagar, com piso que protege a margem. Escolhes o modo: cauteloso, equilibrado ou ativo.</p></div>
+        <div class="feat reveal"><div class="ic">💰</div><span class="ftag">Contabilidade</span><h3>Margem real</h3><p>Ficha por artigo com custo e SKU: sabes o que ganhas de verdade, que marcas vendem e onde está o dinheiro preso.</p></div>
+        <div class="feat reveal"><div class="ic">📊</div><span class="ftag">Análise</span><h3>Que produto mais vende</h3><p>Junta as variantes do mesmo produto e mostra o ranking — e sugere subir o preço ao que está a voar.</p></div>
+        <div class="feat reveal"><div class="ic">✨</div><span class="ftag">Fotos</span><h3>Edição de fotos</h3><p>20 estilos e retoques ao píxel, para cada republicação sair diferente da anterior sem perder qualidade.</p></div>
+        <div class="feat reveal"><div class="ic">🤖</div><span class="ftag">Assistente</span><h3>Configura por ti</h3><p>Pergunta por palavras tuas — ou deixa o assistente aplicar as definições certas por ti, num clique.</p></div>
+        <div class="feat reveal"><div class="ic">🌍</div><span class="ftag">Alcance</span><h3>Multi-país</h3><p>Funciona nos 21 mercados da Vinted, com a moeda certa de cada artigo. A tua conta, onde quer que ela esteja.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTOS -->
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="photos reveal">
+        <div>
+          <span class="eyebrow">Fotos</span>
+          <h2>Fotos novas a cada republicação.</h2>
+          <p>Reenviar a mesma foto é o que denuncia um anúncio republicado. O Stoqzy altera de verdade cada imagem — recorte, luz, cor, inclinação — com 20 estilos e retoques ao píxel, sem nunca repetir a edição anterior no mesmo artigo.</p>
+          <a href="#precos" class="btn btn-ghost">Ver nos planos</a>
+        </div>
+        <div class="photo-strip" aria-hidden="true">
+          <div class="ph a"><span class="tag">original</span></div>
+          <div class="ph b"><span class="tag">estilo 04</span></div>
+          <div class="ph c"><span class="tag">estilo 11</span></div>
+          <div class="ph d"><span class="tag">estilo 07</span></div>
+          <div class="ph e"><span class="tag">estilo 15</span></div>
+          <div class="ph f"><span class="tag">estilo 19</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEGURANÇA -->
+  <section class="blk" id="seguranca" style="padding-top:0">
+    <div class="wrap">
+      <div class="safe reveal">
+        <div>
+          <span class="eyebrow">Segurança primeiro</span>
+          <h2>A tua conta vale mais do que a pressa.</h2>
+          <p class="i">O Stoqzy foi construído por quem gere dezenas de contas Vinted todos os dias. Cada decisão põe a segurança da conta antes da velocidade.</p>
+        </div>
+        <ul>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Ritmo humano, não de robô.</b><span>Limites por hora e por dia, pausas com variação, horas ativas. Nunca uma rajada de ações.</span></span></li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Pára ao primeiro sinal.</b><span>Se a Vinted mostrar um bloqueio ou captcha, o Stoqzy pára tudo e avisa-te. Nunca insiste.</span></span></li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Corre no teu browser.</b><span>Nenhum servidor nosso toca na Vinted. Uma fuga do nosso lado nunca compromete a tua conta.</span></span></li>
+          <li><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Sem passwords, sem magia.</b><span>Usa a tua sessão, como tu. Não pede nem guarda a tua palavra-passe da Vinted.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREÇOS -->
+  <section class="blk" id="precos" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Preços</span>
+        <h2>Começa grátis. Sobe quando a loja pedir.</h2>
+        <p class="center" style="margin:0 auto">Sem fidelização. Cancelas quando quiseres, e voltas ao plano grátis sem perder os teus dados.</p>
+        <div class="price-toggle" role="group" aria-label="Ciclo de pagamento">
+          <button id="pm" class="on" type="button">Mensal</button>
+          <button id="pa" type="button">Anual <span class="save">−2 meses</span></button>
+        </div>
+      </div>
+      <div class="plans">
+        <div class="plan reveal">
+          <span class="pname">Grátis</span>
+          <div class="price">0 €</div>
+          <p class="ptag">Para conheceres a tua loja a sério.</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Armário, vendas e saldo</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Números e margem real</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Ações manuais com ritmo seguro</li>
+          </ul>
+          <a href="#top" class="btn btn-ghost">Instalar grátis</a>
+        </div>
+        <div class="plan pop reveal">
+          <span class="pname">Pro</span>
+          <div class="price"><span id="pro-price">9,99 €</span><small id="pro-cycle"> /mês</small></div>
+          <p class="ptag">Para quem vende a sério e quer o tempo de volta.</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Tudo do Grátis</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Repositor de parados e vendidos</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Descidas de preço automáticas</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Mensagens a interessados</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Edição de fotos (20 estilos)</li>
+          </ul>
+          <a href="#top" class="btn btn-primary">Experimentar Pro</a>
+        </div>
+        <div class="plan reveal">
+          <span class="pname">Equipa</span>
+          <div class="price">Sob<small> consulta</small></div>
+          <p class="ptag">Para quem gere muitas contas num só sítio.</p>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Tudo do Pro</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Painel central multi-conta</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Assistente com IA (créditos)</li>
+            <li><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7.3l3.2 3.2L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Suporte prioritário</li>
+          </ul>
+          <a href="mailto:ola@stoqzy.com" class="btn btn-ghost">Falar connosco</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="blk" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Perguntas</span>
+        <h2>O que costumam perguntar</h2>
+      </div>
+      <div class="faq">
+        <details class="reveal"><summary>É seguro para a minha conta?</summary><p>É a razão de o Stoqzy existir. Todas as ações passam por limites de ritmo humano — janelas por hora e por dia, pausas com variação, horas ativas — e ao primeiro sinal de bloqueio ou captcha ele pára sozinho e avisa-te. Nunca há rajadas de ações.</p></details>
+        <details class="reveal"><summary>Precisas da minha palavra-passe da Vinted?</summary><p>Não. O Stoqzy corre no teu próprio browser e usa a sessão que já tens aberta, tal como tu quando navegas. Não pede, não vê e não guarda a tua palavra-passe.</p></details>
+        <details class="reveal"><summary>Funciona no meu país?</summary><p>Sim — o Stoqzy funciona nos 21 mercados da Vinted, com a moeda certa de cada artigo. Não importa se vendes em Portugal, Espanha, França, Alemanha ou qualquer outro.</p></details>
+        <details class="reveal"><summary>Onde estão os meus dados?</summary><p>As tuas fichas, custos e definições ficam no teu browser. Nenhum servidor nosso fala com a Vinted — por isso mesmo uma falha do nosso lado nunca compromete a tua conta.</p></details>
+        <details class="reveal"><summary>Posso cancelar quando quiser?</summary><p>Sim, sem fidelização. Se cancelares o Pro, voltas ao plano grátis e continuas a ver o teu armário, vendas e margem — não perdes nada.</p></details>
+        <details class="reveal"><summary>Substitui a extensão que eu já usava?</summary><p>Faz tudo o que essas ferramentas fazem — e mais — sem servidores a tocar na tua conta. Foi escrito de raiz por quem revende na Vinted todos os dias.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPORTE -->
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="steps">
+        <div class="step reveal"><span class="n">Ajuda</span><h3>Guia dentro da app</h3><p>Cada funcionalidade tem o seu guia e um assistente que responde às tuas dúvidas — sem sair da extensão.</p></div>
+        <div class="step reveal"><span class="n">Contacto</span><h3>Falamos contigo</h3><p>Dúvidas, sugestões ou um problema? Escreve para <a href="mailto:ola@stoqzy.com" style="color:var(--accent)">ola@stoqzy.com</a> e respondemos.</p></div>
+        <div class="step reveal"><span class="n">Feito por quem vende</span><h3>Não por quem nunca vendeu</h3><p>O Stoqzy nasceu da gestão real de dezenas de contas Vinted, todos os dias. As decisões vêm da prática.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-final reveal">
+        <h2>Devolve-te as horas que a Vinted te tira.</h2>
+        <p>Instala o Stoqzy, liga o que quiseres, e deixa a tua loja trabalhar sozinha — com a calma de quem sabe o que faz.</p>
+        <a href="#precos" class="btn btn-primary">Começar grátis</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo">Stoq<b>zy</b></a>
+        <p>A tua loja Vinted em piloto automático, ao ritmo de um humano cuidadoso.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Produto</h4>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#como">Como funciona</a>
+        <a href="#seguranca">Segurança</a>
+        <a href="#precos">Preços</a>
+      </div>
+      <div class="foot-col">
+        <h4>Recursos</h4>
+        <a href="#faq">Perguntas frequentes</a>
+        <a href="mailto:ola@stoqzy.com">Suporte</a>
+        <a href="#precos">Planos</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2026 Stoqzy · stoqzy.com<br>
+      O Stoqzy é um produto independente e não é afiliado, patrocinado nem aprovado pela Vinted. «Vinted» é marca registada dos respetivos titulares.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav com sombra ao rolar
+  const hdr=document.getElementById('hdr');
+  const onScroll=()=>hdr.classList.toggle('scrolled',window.scrollY>12);
+  onScroll();addEventListener('scroll',onScroll,{passive:true});
+
+  // menu simples (mobile): rola para os preços
+  document.getElementById('menu').addEventListener('click',()=>document.getElementById('precos').scrollIntoView({behavior:'smooth'}));
+
+  // tema: alterna claro/escuro (guarda a escolha)
+  const root=document.documentElement, tb=document.getElementById('theme');
+  try{const t=localStorage.getItem('stoqzy-theme');if(t)root.setAttribute('data-theme',t);}catch(e){}
+  tb.addEventListener('click',()=>{
+    const cur=root.getAttribute('data-theme');
+    const dark=cur?cur==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+    const next=dark?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('stoqzy-theme',next);}catch(e){}
+  });
+
+  // toggle de preço mensal/anual (anual = 10x o mensal, 2 meses grátis)
+  const pm=document.getElementById('pm'),pa=document.getElementById('pa');
+  const proP=document.getElementById('pro-price'),proC=document.getElementById('pro-cycle');
+  const setCiclo=(anual)=>{
+    pm.classList.toggle('on',!anual);pa.classList.toggle('on',anual);
+    proP.textContent=anual?'99 €':'9,99 €';
+    proC.textContent=anual?' /ano':' /mês';
+  };
+  pm.addEventListener('click',()=>setCiclo(false));
+  pa.addEventListener('click',()=>setCiclo(true));
+
+  // reveal ao entrar no ecrã
+  const reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach((el,i)=>{el.style.transitionDelay=(i%3*70)+'ms';io.observe(el);});
+  } else {
+    reveals.forEach(el=>el.classList.add('in')); // sem observer: mostra tudo
+  }
+</script>
 </body>
 </html>

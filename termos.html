@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Termos de utilização · Stoqzy</title>
+<meta name="description" content="As regras de utilização da extensão Stoqzy e do Stoqzy Studio: uso por tua conta e risco na Vinted, planos mensais sem fidelização, o que garantimos e o que não podemos garantir, lei portuguesa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens (os mesmos da landing) ---------- */
+:root{
+  --papel:#f7f3ea;
+  --papel-2:#efe9db;
+  --linha:#d9d0bd;
+  --tinta:#1d1a15;
+  --tinta-2:#4a443a;
+  --tinta-3:#665f53;
+  --ambar:#8a5a00;
+  --ambar-2:#b8781a;
+  --ambar-fundo:#f1e3c4;
+  --carvao:#16130f;
+  --serif:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --medida:64ch;
+  --col:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--sans);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ambar);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{color:var(--tinta)}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;margin:0;letter-spacing:-.01em;font-variation-settings:"opsz" 144;text-wrap:balance}
+h1{font-size:clamp(2.2rem,4.4vw,3.6rem);font-weight:300;line-height:1.04}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:300;font-variation-settings:"opsz" 96}
+h3{font-size:clamp(1.25rem,1.8vw,1.5rem);font-variation-settings:"opsz" 48}
+p{margin:0 0 1em}
+em{font-style:italic}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:0}
+.col{max-width:var(--col);margin:0 auto;padding:0 clamp(18px,4vw,48px)}
+.etiqueta{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ambar);display:inline-flex;align-items:center;gap:.6em;margin:0 0 1.1rem}
+.etiqueta::before{content:"";width:22px;height:1px;background:var(--ambar-2)}
+.lede{font-size:1.2rem;color:var(--tinta-2);max-width:var(--medida)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:20;background:rgba(247,243,234,.95);border-bottom:1px solid var(--linha)}
+.nav .col{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+.marca{font-family:var(--serif);font-size:1.5rem;font-weight:600;text-decoration:none;color:var(--tinta);display:flex;align-items:baseline;gap:.6em}
+.marca small{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);font-weight:400}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:26px;align-items:center}
+.nav ul a{text-decoration:none;color:var(--tinta-2);font-size:1rem;font-weight:500}
+.nav ul a:hover{color:var(--ambar)}
+@media (max-width:640px){.marca small{display:none}.nav ul{gap:16px}}
+
+/* ---------- documento ---------- */
+.cabeca{padding:clamp(48px,7vw,88px) 0 clamp(28px,4vw,48px);border-bottom:1px solid var(--tinta)}
+.cabeca .meta{font-family:var(--mono);font-size:.84rem;color:var(--tinta-3);margin-top:1.4rem;display:flex;gap:24px;flex-wrap:wrap}
+.doc{padding:clamp(40px,6vw,72px) 0 clamp(64px,9vw,120px)}
+.doc .col{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(24px,4vw,72px);align-items:start}
+.indice{position:sticky;top:88px;font-size:.95rem}
+.indice p{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ambar);margin:0 0 10px}
+.indice ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--tinta)}
+.indice li{border-bottom:1px solid var(--linha)}
+.indice a{display:grid;grid-template-columns:2.4em 1fr;gap:8px;padding:8px 0;text-decoration:none;color:var(--tinta-2)}
+.indice a:hover{color:var(--ambar)}
+.indice .num{color:var(--ambar);font-size:.78rem;padding-top:.3em}
+.texto{max-width:calc(var(--medida) + 6ch)}
+.texto section{padding:0 0 clamp(28px,4vw,44px);margin-bottom:clamp(28px,4vw,44px);border-bottom:1px solid var(--linha)}
+.texto section:last-child{border-bottom:0}
+.texto h2{margin-bottom:.8rem;display:grid;grid-template-columns:2.6em 1fr;gap:10px;align-items:baseline}
+.texto h2 .num{font-size:.8rem;color:var(--ambar);font-family:var(--mono)}
+.texto h3{margin:1.4rem 0 .5rem}
+.texto p,.texto li{color:var(--tinta-2)}
+.texto b{color:var(--tinta);font-weight:600}
+.texto ul{margin:.2rem 0 1em;padding:0;list-style:none}
+.texto li{padding:.45em 0 .45em 22px;border-top:1px dashed var(--linha);position:relative}
+.texto li::before{content:"";position:absolute;left:0;top:.95em;width:9px;height:9px;border:1.5px solid var(--ambar);background:var(--ambar)}
+.texto .nota{font-size:.98rem;color:var(--tinta-3);border-left:2px solid var(--ambar-2);padding-left:12px;margin:1rem 0}
+.texto .resumo{background:#fffdf8;border:1px solid var(--linha);padding:20px 22px;margin:0 0 1.6rem}
+.texto .resumo p:last-child{margin:0}
+.texto .resumo .titulo{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-3);margin:0 0 10px}
+/* tabela editorial: o que sai e para onde */
+.tabela-wrap{overflow-x:auto;margin:1rem 0 1.4rem}
+table.dados{width:100%;border-collapse:collapse;border-top:1px solid var(--tinta);font-size:.98rem;min-width:560px}
+table.dados th{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);text-align:left;font-weight:400;padding:10px 14px 10px 0;border-bottom:1px solid var(--tinta);vertical-align:bottom}
+table.dados td{padding:14px 14px 14px 0;border-bottom:1px solid var(--linha);vertical-align:top;color:var(--tinta-2)}
+table.dados td:first-child{color:var(--tinta);font-weight:600}
+table.dados td:last-child,table.dados th:last-child{padding-right:0}
+table.dados .mono{font-size:.86rem;color:var(--ambar)}
+table.dados tr.nunca td{color:var(--tinta-3)}
+table.dados tr.nunca td:first-child{color:var(--tinta-3);text-decoration:line-through;text-decoration-color:var(--ambar-2)}
+.permissoes dt{font-family:var(--mono);font-size:.9rem;color:var(--ambar);margin-top:.9em}
+.permissoes dd{margin:.2em 0 0;color:var(--tinta-2)}
+@media (max-width:900px){.doc .col{grid-template-columns:1fr}.indice{position:static}}
+
+/* ---------- rodapé ---------- */
+footer{background:var(--carvao);color:#b3a78f;padding:40px 0 32px;font-size:.98rem}
+footer .col{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:baseline}
+footer a{color:#efe9db}
+footer a:hover{color:#f5b942}
+footer ul{list-style:none;margin:0;padding:0;display:flex;gap:22px;flex-wrap:wrap}
+footer .disclaimer{max-width:var(--col);margin:24px auto 0;padding:18px clamp(18px,4vw,48px) 0;border-top:1px solid #2b251c;font-size:.9rem;color:#a79c85}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="col">
+    <a class="marca" href="index.html">Stoqzy <small>extensão para Chrome · Vinted</small></a>
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="privacidade.html">Privacidade</a></li>
+      <li><a href="mailto:ola@stoqzy.com">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<div class="cabeca">
+  <div class="col">
+    <p class="etiqueta">Documento legal · termos</p>
+    <h1>Termos de utilização</h1>
+    <p class="lede" style="margin-top:1.4rem">Ao instalar a extensão Stoqzy ou ao criar conta no Stoqzy Studio, aceitas estes termos. Estão escritos para serem lidos: dizem o que te damos, o que esperamos de ti, e onde acaba a nossa responsabilidade. A parte mais importante é a secção 03: automatizar a tua conta Vinted é uma decisão tua.</p>
+    <div class="meta">
+      <span>Versão 1.0</span>
+      <span>Em vigor desde 25 de agosto de 2026</span>
+      <span>Stoqzy · Felipe Barbosa, Portugal</span>
+    </div>
+  </div>
+</div>
+
+<div class="doc">
+  <div class="col">
+    <nav class="indice" aria-label="Índice">
+      <p>Índice</p>
+      <ol>
+        <li><a href="#resumo"><span class="num">00</span>Em meia página</a></li>
+        <li><a href="#partes"><span class="num">01</span>Quem somos e o que é o serviço</a></li>
+        <li><a href="#conta"><span class="num">02</span>A tua conta e a tua sessão</a></li>
+        <li><a href="#risco"><span class="num">03</span>Uso na Vinted: por tua conta e risco</a></li>
+        <li><a href="#uso"><span class="num">04</span>Uso aceitável</a></li>
+        <li><a href="#planos"><span class="num">05</span>Planos, pagamento e cancelamento</a></li>
+        <li><a href="#creditos"><span class="num">06</span>Créditos de IA</a></li>
+        <li><a href="#studio"><span class="num">07</span>Stoqzy Studio e o teu VPS</a></li>
+        <li><a href="#garantias"><span class="num">08</span>O que garantimos e o que não</a></li>
+        <li><a href="#responsabilidade"><span class="num">09</span>Limitação de responsabilidade</a></li>
+        <li><a href="#vinted"><span class="num">10</span>Não afiliação à Vinted</a></li>
+        <li><a href="#propriedade"><span class="num">11</span>Propriedade intelectual</a></li>
+        <li><a href="#fim"><span class="num">12</span>Suspensão e fim</a></li>
+        <li><a href="#alteracoes"><span class="num">13</span>Alterações</a></li>
+        <li><a href="#lei"><span class="num">14</span>Lei e foro</a></li>
+        <li><a href="#contacto"><span class="num">15</span>Contacto</a></li>
+      </ol>
+    </nav>
+
+    <div class="texto">
+
+      <section id="resumo">
+        <div class="resumo">
+          <p class="titulo">Em meia página</p>
+          <p><b>O Stoqzy é uma ferramenta que usas na tua conta Vinted, no teu browser.</b> Tu és o titular da conta e o responsável pelo que nela acontece. A extensão impõe um ritmo humano e pára ao primeiro bloqueio, mas não pode garantir que a Vinted nunca restrinja a tua conta.</p>
+          <p><b>Os planos são mensais, sem fidelização.</b> Cancelas quando quiseres e voltas ao grátis sem perder fichas nem histórico. Os créditos de IA são pré-pagos e gastam-se pedido a pedido.</p>
+          <p><b>Não somos a Vinted nem temos ligação a ela.</b> A nossa responsabilidade limita-se ao que nos pagaste nos últimos 12 meses. Aplica-se a lei portuguesa.</p>
+        </div>
+      </section>
+
+      <section id="partes">
+        <h2><span class="num">01</span>Quem somos e o que é o serviço</h2>
+        <p>O Stoqzy é desenvolvido e distribuído por <b>Felipe Barbosa</b>, em Portugal («nós»). O serviço tem duas partes:</p>
+        <ul>
+          <li><b>A extensão Stoqzy</b> para Chrome: corre no teu browser, ao lado da Vinted, e ajuda-te a gerir o armário (fichas e margem), repor stock, republicar, baixar preços, responder a mensagens e tratar vendas, ao ritmo de uma pessoa.</li>
+          <li><b>O Stoqzy Studio</b> (plano Equipa): um painel para várias contas, com fila de expedição, modelos de produto e respostas com IA, que pode correr no servidor alojado por nós ou num VPS teu.</li>
+        </ul>
+        <p>O que cada plano inclui está na <a href="index.html#precos">tabela de preços</a> e faz parte destes termos. Funcionalidades marcadas «por ativar» dentro da extensão ainda não estão disponíveis, e não te prometemos uma data.</p>
+      </section>
+
+      <section id="conta">
+        <h2><span class="num">02</span>A tua conta e a tua sessão</h2>
+        <p>A extensão usa a sessão da Vinted que já tens iniciada no browser. Nunca te pedimos a palavra-passe da Vinted, e não a deves dar a ninguém que diga falar em nosso nome.</p>
+        <p>Só podes usar o Stoqzy em contas Vinted que sejam tuas ou que tenhas autorização para gerir. A conta do Studio (e-mail e palavra-passe) é pessoal: és responsável por a manter segura e pelo que for feito com ela. Tens de ter pelo menos 18 anos.</p>
+      </section>
+
+      <section id="risco">
+        <h2><span class="num">03</span>Uso na Vinted: por tua conta e risco</h2>
+        <p>Este é o ponto que mais importa, por isso está sem rodeios.</p>
+        <p>A Vinted tem os seus próprios termos, e pode entender que a automatização de ações na conta os viola. <b>A decisão de usar uma ferramenta como o Stoqzy na tua conta é tua</b>, e as consequências dessa decisão (avisos, restrições, suspensão ou encerramento da conta pela Vinted, perda de anúncios, atrasos em vendas) são tuas.</p>
+        <p>Da nossa parte, o Stoqzy foi construído para se comportar como uma pessoa atenta, e isto não se desliga:</p>
+        <ul>
+          <li>Toda a escrita na Vinted passa por tetos por hora e por dia, intervalo com variação aleatória e horas ativas. Não há «modo rápido».</li>
+          <li>Ao primeiro sinal de captcha ou de bloqueio, a fila pára e avisa-te. A extensão não resolve captchas, não contorna proteções anti-bot e não muda de endereço IP.</li>
+          <li>Republicar cria o anúncio novo e esconde o antigo na mesma operação; repor vendidos só acontece com a venda concluída.</li>
+        </ul>
+        <p><b>Mas nada disto é uma garantia.</b> A Vinted muda regras e sistemas sem aviso, e pode agir sobre uma conta por razões que não têm nada a ver connosco. Não prometemos que a tua conta nunca é restringida. Prometemos que, se for, não terá sido por uma rajada nossa.</p>
+        <p>És também responsável pelo conteúdo que publicas ou envias através da extensão (anúncios, preços, mensagens, ofertas) e pelo cumprimento das obrigações fiscais e legais da tua atividade de venda.</p>
+      </section>
+
+      <section id="uso">
+        <h2><span class="num">04</span>Uso aceitável</h2>
+        <p>Não podes usar o Stoqzy para:</p>
+        <ul>
+          <li>Enviar mensagens não solicitadas em massa, assediar ou enganar compradores.</li>
+          <li>Vender o que a lei ou a Vinted proíbem, ou anunciar de forma enganosa.</li>
+          <li>Modificar a extensão para remover os limites de ritmo ou a paragem em bloqueios, ou tentar contornar proteções da Vinted por outros meios.</li>
+          <li>Partilhar uma conta de Studio ou uma chave de licença com pessoas fora da tua equipa, ou revender o serviço.</li>
+          <li>Atacar, sobrecarregar ou tentar aceder sem autorização aos nossos servidores ou aos de outros clientes.</li>
+        </ul>
+        <p>Se o fizeres, podemos suspender ou encerrar o acesso (secção 12).</p>
+      </section>
+
+      <section id="planos">
+        <h2><span class="num">05</span>Planos, pagamento e cancelamento</h2>
+        <h3>Planos</h3>
+        <p>Há um plano <b>Grátis</b>, sem cartão e sem prazo, e os planos pagos <b>Pro</b> e <b>Equipa</b>, cobrados ao mês. Os preços estão em euros, com IVA quando aplicável, e são os que estão publicados no momento em que subscreves.</p>
+        <h3>Pagamento</h3>
+        <p>O pagamento é feito por cartão através do nosso processador de pagamentos (Stripe). O plano renova-se automaticamente todos os meses até cancelares. Se um pagamento falhar, avisamos-te; se continuar a falhar, o plano desce para o Grátis.</p>
+        <h3>Cancelamento</h3>
+        <p><b>Sem fidelização.</b> Cancelas quando quiseres, no painel ou por e-mail. O plano fica ativo até ao fim do mês já pago e depois <b>voltas ao Grátis</b>: continuas a ver o armário, as fichas, as vendas e a margem; só as funcionalidades pagas ficam indisponíveis. Não apagamos as tuas fichas nem o histórico por teres cancelado.</p>
+        <h3>Reembolsos</h3>
+        <p>Nos primeiros 14 dias da primeira subscrição paga, se o Stoqzy não te servir, pede o reembolso e devolvemos o valor. Fora disso, o mês em curso não é reembolsado, mas não voltas a ser cobrado. Se formos nós a mudar o serviço de forma que te retire algo essencial, podes cancelar e pedir o valor proporcional do mês.</p>
+        <h3>Alterações de preço</h3>
+        <p>Se subirmos o preço de um plano, avisamos-te por e-mail com pelo menos 30 dias de antecedência. Se não concordares, cancelas antes de a subida entrar em vigor.</p>
+      </section>
+
+      <section id="creditos">
+        <h2><span class="num">06</span>Créditos de IA</h2>
+        <p>As funções de IA (respostas, fotos, assistente) gastam créditos comprados à parte, em carteiras pré-pagas. Cada pedido gasta um número de créditos indicado antes de o fazeres. Quando a carteira chega a zero, a IA pára e diz-te; nada é cobrado sem comprares mais.</p>
+        <p>Os créditos não expiram enquanto tiveres conta no Studio, não são transferíveis e não são reembolsáveis depois de gastos. Se fechares a conta, perdes os créditos por gastar, exceto no caso de reembolso dos 14 dias da secção 05. As respostas da IA são sugestões: revê-as antes de enviar, porque és tu que estás a falar com o comprador.</p>
+      </section>
+
+      <section id="studio">
+        <h2><span class="num">07</span>Stoqzy Studio e o teu VPS</h2>
+        <p>No plano Equipa podes usar o Studio alojado por nós em studio.stoqzy.com ou instalá-lo num servidor teu. Se o instalares no teu VPS, o servidor, os dados que lá ficam (incluindo etiquetas com moradas de compradores), as cópias de segurança e as atualizações são da tua responsabilidade; nós damos-te o software e a documentação. Se usares o nosso alojamento, tratamos do servidor e aplica-se a <a href="privacidade.html">Política de privacidade</a>.</p>
+        <p>O Studio guarda etiquetas com moradas só enquanto precisas delas para expedir e apaga-as 30 dias depois de marcares a venda como embalada. Usar essas moradas para outra coisa que não a expedição é proibido e pode violar a lei de proteção de dados.</p>
+      </section>
+
+      <section id="garantias">
+        <h2><span class="num">08</span>O que garantimos e o que não</h2>
+        <p>Garantimos que fazemos um esforço sério para a extensão e o Studio funcionarem como descrito, e para corrigir falhas que nos reportes. Somos um projeto pequeno, feito por quem o usa todos os dias: as correções são rápidas, mas não há equipa de suporte 24 horas.</p>
+        <p>Não garantimos que:</p>
+        <ul>
+          <li>O serviço esteja sempre disponível ou sem erros. A Vinted muda a interface e a API sem aviso; quando isso acontece, a extensão deteta o desvio e desliga a ação afetada até a atualizarmos.</li>
+          <li>A tua conta Vinted não venha a ser restringida (secção 03).</li>
+          <li>Obtenhas determinado volume de vendas ou margem. O Stoqzy mostra números e executa ações; as decisões de negócio são tuas.</li>
+          <li>As respostas geradas por IA estejam sempre certas.</li>
+        </ul>
+        <p>O serviço é fornecido «tal como está». Na medida em que a lei o permitir, excluímos outras garantias implícitas.</p>
+      </section>
+
+      <section id="responsabilidade">
+        <h2><span class="num">09</span>Limitação de responsabilidade</h2>
+        <p>Na medida máxima permitida pela lei portuguesa, não respondemos por perdas indiretas, lucros cessantes, perda de vendas, perda de dados que não estavam nos nossos servidores, nem por ações da Vinted sobre a tua conta. A nossa responsabilidade total perante ti, por qualquer causa ligada a estes termos, está limitada ao <b>valor que nos pagaste nos 12 meses anteriores</b> ao facto que a originou (e a zero no plano Grátis).</p>
+        <p>Nada nestes termos limita a responsabilidade por dolo, negligência grosseira, ou por danos que a lei não permita excluir, nem afeta os direitos que tens como consumidor quando a lei os aplicar.</p>
+      </section>
+
+      <section id="vinted">
+        <h2><span class="num">10</span>Não afiliação à Vinted</h2>
+        <p>O Stoqzy é um produto independente. <b>Não é afiliado, patrocinado, aprovado nem certificado pela Vinted</b>, e não tem qualquer relação com a Vinted UAB ou as suas empresas. «Vinted» é uma marca dos respetivos donos, usada aqui apenas para dizer com que plataforma a extensão funciona. A relação entre ti e a Vinted é regulada pelos termos da Vinted, que deves conhecer.</p>
+      </section>
+
+      <section id="propriedade">
+        <h2><span class="num">11</span>Propriedade intelectual</h2>
+        <p>O código, o design, os textos e a marca Stoqzy são nossos. Damos-te uma licença pessoal, não exclusiva e revogável para usar a extensão e o Studio nos termos do teu plano. Não podes copiar, descompilar, redistribuir ou vender o software, nem usar a marca sem autorização. Os teus dados (fichas, fotos, anúncios, modelos) continuam a ser teus; dás-nos apenas a licença de os tratar para te prestar o serviço.</p>
+      </section>
+
+      <section id="fim">
+        <h2><span class="num">12</span>Suspensão e fim</h2>
+        <p>Podes deixar de usar o Stoqzy quando quiseres: remove a extensão e, se tiveres, pede o fecho da conta do Studio.</p>
+        <p>Podemos suspender ou encerrar o teu acesso se violares estes termos (em especial a secção 04), se um pagamento ficar por resolver, ou se formos obrigados por lei. Avisamos-te antes, salvo em casos de abuso grave ou de risco para outros clientes. Podemos também descontinuar o serviço, avisando com pelo menos 60 dias de antecedência e reembolsando o que estiver pago e por usar.</p>
+      </section>
+
+      <section id="alteracoes">
+        <h2><span class="num">13</span>Alterações a estes termos</h2>
+        <p>Podemos atualizar estes termos. Se a mudança for relevante, avisamos-te por e-mail ou dentro da extensão com pelo menos 30 dias de antecedência; continuar a usar o serviço depois dessa data é aceitar a nova versão. A versão em vigor está sempre em <span class="mono">stoqzy.com/termos.html</span>, com a data no topo.</p>
+      </section>
+
+      <section id="lei">
+        <h2><span class="num">14</span>Lei e foro</h2>
+        <p>Estes termos regem-se pela <b>lei portuguesa</b>. Para qualquer litígio é competente o tribunal do domicílio do responsável, em Portugal, sem prejuízo das regras imperativas que te deem outro foro como consumidor. Antes de ir a tribunal, escreve-nos: quase tudo se resolve por e-mail. Em caso de litígio de consumo, podes recorrer a uma entidade de resolução alternativa de litígios (lista em <a href="https://www.consumidor.gov.pt" rel="noopener">consumidor.gov.pt</a>) ou à plataforma europeia de resolução de litígios em linha.</p>
+      </section>
+
+      <section id="contacto">
+        <h2><span class="num">15</span>Contacto</h2>
+        <p>Felipe Barbosa · Portugal<br><a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a></p>
+        <p>Ver também a <a href="privacidade.html">Política de privacidade</a>.</p>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="col">
+    <span>© 2026 Stoqzy. Todos os direitos reservados.</span>
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="privacidade.html">Privacidade</a></li>
+      <li><a href="termos.html">Termos</a></li>
+      <li><a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a></li>
+    </ul>
+  </div>
+  <div class="disclaimer">O Stoqzy não é afiliado, patrocinado nem aprovado pela Vinted. «Vinted» é uma marca dos respetivos donos.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidade · Stoqzy</title>
+<meta name="description" content="O que a extensão Stoqzy lê na tua conta Vinted, o que guarda no teu browser, o que sai para o Stoqzy Studio quando o ligas, por quanto tempo, e como pedes acesso ou apagamento dos teus dados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens (os mesmos da landing) ---------- */
+:root{
+  --papel:#f7f3ea;
+  --papel-2:#efe9db;
+  --linha:#d9d0bd;
+  --tinta:#1d1a15;
+  --tinta-2:#4a443a;
+  --tinta-3:#665f53;
+  --ambar:#8a5a00;
+  --ambar-2:#b8781a;
+  --ambar-fundo:#f1e3c4;
+  --carvao:#16130f;
+  --serif:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --medida:64ch;
+  --col:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--sans);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ambar);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{color:var(--tinta)}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;margin:0;letter-spacing:-.01em;font-variation-settings:"opsz" 144;text-wrap:balance}
+h1{font-size:clamp(2.2rem,4.4vw,3.6rem);font-weight:300;line-height:1.04}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:300;font-variation-settings:"opsz" 96}
+h3{font-size:clamp(1.25rem,1.8vw,1.5rem);font-variation-settings:"opsz" 48}
+p{margin:0 0 1em}
+em{font-style:italic}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:0}
+.col{max-width:var(--col);margin:0 auto;padding:0 clamp(18px,4vw,48px)}
+.etiqueta{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ambar);display:inline-flex;align-items:center;gap:.6em;margin:0 0 1.1rem}
+.etiqueta::before{content:"";width:22px;height:1px;background:var(--ambar-2)}
+.lede{font-size:1.2rem;color:var(--tinta-2);max-width:var(--medida)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:20;background:rgba(247,243,234,.95);border-bottom:1px solid var(--linha)}
+.nav .col{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+.marca{font-family:var(--serif);font-size:1.5rem;font-weight:600;text-decoration:none;color:var(--tinta);display:flex;align-items:baseline;gap:.6em}
+.marca small{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);font-weight:400}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:26px;align-items:center}
+.nav ul a{text-decoration:none;color:var(--tinta-2);font-size:1rem;font-weight:500}
+.nav ul a:hover{color:var(--ambar)}
+@media (max-width:640px){.marca small{display:none}.nav ul{gap:16px}}
+
+/* ---------- documento ---------- */
+.cabeca{padding:clamp(48px,7vw,88px) 0 clamp(28px,4vw,48px);border-bottom:1px solid var(--tinta)}
+.cabeca .meta{font-family:var(--mono);font-size:.84rem;color:var(--tinta-3);margin-top:1.4rem;display:flex;gap:24px;flex-wrap:wrap}
+.doc{padding:clamp(40px,6vw,72px) 0 clamp(64px,9vw,120px)}
+.doc .col{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(24px,4vw,72px);align-items:start}
+.indice{position:sticky;top:88px;font-size:.95rem}
+.indice p{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ambar);margin:0 0 10px}
+.indice ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--tinta)}
+.indice li{border-bottom:1px solid var(--linha)}
+.indice a{display:grid;grid-template-columns:2.4em 1fr;gap:8px;padding:8px 0;text-decoration:none;color:var(--tinta-2)}
+.indice a:hover{color:var(--ambar)}
+.indice .num{color:var(--ambar);font-size:.78rem;padding-top:.3em}
+.texto{max-width:calc(var(--medida) + 6ch)}
+.texto section{padding:0 0 clamp(28px,4vw,44px);margin-bottom:clamp(28px,4vw,44px);border-bottom:1px solid var(--linha)}
+.texto section:last-child{border-bottom:0}
+.texto h2{margin-bottom:.8rem;display:grid;grid-template-columns:2.6em 1fr;gap:10px;align-items:baseline}
+.texto h2 .num{font-size:.8rem;color:var(--ambar);font-family:var(--mono)}
+.texto h3{margin:1.4rem 0 .5rem}
+.texto p,.texto li{color:var(--tinta-2)}
+.texto b{color:var(--tinta);font-weight:600}
+.texto ul{margin:.2rem 0 1em;padding:0;list-style:none}
+.texto li{padding:.45em 0 .45em 22px;border-top:1px dashed var(--linha);position:relative}
+.texto li::before{content:"";position:absolute;left:0;top:.95em;width:9px;height:9px;border:1.5px solid var(--ambar);background:var(--ambar)}
+.texto .nota{font-size:.98rem;color:var(--tinta-3);border-left:2px solid var(--ambar-2);padding-left:12px;margin:1rem 0}
+.texto .resumo{background:#fffdf8;border:1px solid var(--linha);padding:20px 22px;margin:0 0 1.6rem}
+.texto .resumo p:last-child{margin:0}
+.texto .resumo .titulo{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-3);margin:0 0 10px}
+/* tabela editorial: o que sai e para onde */
+.tabela-wrap{overflow-x:auto;margin:1rem 0 1.4rem}
+table.dados{width:100%;border-collapse:collapse;border-top:1px solid var(--tinta);font-size:.98rem;min-width:560px}
+table.dados th{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);text-align:left;font-weight:400;padding:10px 14px 10px 0;border-bottom:1px solid var(--tinta);vertical-align:bottom}
+table.dados td{padding:14px 14px 14px 0;border-bottom:1px solid var(--linha);vertical-align:top;color:var(--tinta-2)}
+table.dados td:first-child{color:var(--tinta);font-weight:600}
+table.dados td:last-child,table.dados th:last-child{padding-right:0}
+table.dados .mono{font-size:.86rem;color:var(--ambar)}
+table.dados tr.nunca td{color:var(--tinta-3)}
+table.dados tr.nunca td:first-child{color:var(--tinta-3);text-decoration:line-through;text-decoration-color:var(--ambar-2)}
+.permissoes dt{font-family:var(--mono);font-size:.9rem;color:var(--ambar);margin-top:.9em}
+.permissoes dd{margin:.2em 0 0;color:var(--tinta-2)}
+@media (max-width:900px){.doc .col{grid-template-columns:1fr}.indice{position:static}}
+
+/* ---------- rodapé ---------- */
+footer{background:var(--carvao);color:#b3a78f;padding:40px 0 32px;font-size:.98rem}
+footer .col{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:baseline}
+footer a{color:#efe9db}
+footer a:hover{color:#f5b942}
+footer ul{list-style:none;margin:0;padding:0;display:flex;gap:22px;flex-wrap:wrap}
+footer .disclaimer{max-width:var(--col);margin:24px auto 0;padding:18px clamp(18px,4vw,48px) 0;border-top:1px solid #2b251c;font-size:.9rem;color:#a79c85}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="col">
+    <a class="marca" href="index.html">Stoqzy <small>extensão para Chrome · Vinted</small></a>
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="termos.html">Termos</a></li>
+      <li><a href="mailto:ola@stoqzy.com">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<div class="cabeca">
+  <div class="col">
+    <p class="etiqueta">Documento legal · privacidade</p>
+    <h1>Política de privacidade</h1>
+    <p class="lede" style="margin-top:1.4rem">Isto explica, sem rodeios, o que a extensão Stoqzy e o Stoqzy Studio fazem com os teus dados: o que leem, o que guardam, o que sai do teu computador e para onde, e como pedes para ver ou apagar tudo. Se sobrar uma dúvida, escreve para <a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a> e responde quem escreveu o código.</p>
+    <div class="meta">
+      <span>Versão 1.0</span>
+      <span>Em vigor desde 25 de agosto de 2026</span>
+      <span>Responsável: Felipe Barbosa, Portugal</span>
+    </div>
+  </div>
+</div>
+
+<div class="doc">
+  <div class="col">
+    <nav class="indice" aria-label="Índice">
+      <p>Índice</p>
+      <ol>
+        <li><a href="#resumo"><span class="num">00</span>Em meia página</a></li>
+        <li><a href="#quem"><span class="num">01</span>Quem é responsável</a></li>
+        <li><a href="#le"><span class="num">02</span>O que a extensão lê</a></li>
+        <li><a href="#guarda"><span class="num">03</span>O que guarda no teu browser</a></li>
+        <li><a href="#sai"><span class="num">04</span>O que sai e para onde</a></li>
+        <li><a href="#retencao"><span class="num">05</span>Por quanto tempo</a></li>
+        <li><a href="#ia"><span class="num">06</span>IA e créditos</a></li>
+        <li><a href="#pagamentos"><span class="num">07</span>Pagamentos</a></li>
+        <li><a href="#site"><span class="num">08</span>Este site</a></li>
+        <li><a href="#permissoes"><span class="num">09</span>Permissões do Chrome</a></li>
+        <li><a href="#base"><span class="num">10</span>Base legal</a></li>
+        <li><a href="#direitos"><span class="num">11</span>Os teus direitos</a></li>
+        <li><a href="#seguranca"><span class="num">12</span>Segurança</a></li>
+        <li><a href="#alteracoes"><span class="num">13</span>Alterações</a></li>
+        <li><a href="#contacto"><span class="num">14</span>Contacto</a></li>
+      </ol>
+    </nav>
+
+    <div class="texto">
+
+      <section id="resumo">
+        <div class="resumo">
+          <p class="titulo">Em meia página</p>
+          <p><b>A extensão corre no teu browser, com a sessão da Vinted que já tens aberta.</b> Nunca pede, vê ou guarda a tua palavra-passe. Só lê dados da tua própria conta: os teus anúncios, as tuas vendas, as tuas mensagens, o teu saldo.</p>
+          <p><b>As fichas (SKU, custo, localização, stock), as definições e o histórico ficam no armazenamento local do Chrome.</b> Não há servidor nosso a falar com a Vinted. Sem o Studio ligado, do teu computador só saem as chamadas à Vinted e, se ativaste uma chave de licença paga, a verificação dessa chave em api.stoqzy.com (secção 04).</p>
+          <p><b>Se ligares o Stoqzy Studio</b> (em studio.stoqzy.com ou no teu próprio VPS), a extensão envia um resumo agregado da conta (contagens, vendas a 30 dias, saldo, moeda, estado da conta, levantamentos do mês) e, <b>automaticamente</b>, de 6 em 6 horas e no máximo 10 por ciclo, o URL temporário do PDF de envio das vendas que tens por expedir (também quando pedes uma etiqueta na aba Vendas). Esse PDF tem a morada do comprador e fica só nesse servidor, apagado 30 dias depois de marcares a venda como embalada.</p>
+          <p><b>A IA só trabalha quando tu pedes</b>, gasta créditos, e o que envias nesse pedido vai ao fornecedor do modelo (Gemini, da Google) para ser respondido. <b>Não vendemos dados a ninguém</b>, e este site não tem cookies nem rastreio.</p>
+        </div>
+      </section>
+
+      <section id="quem">
+        <h2><span class="num">01</span>Quem é responsável</h2>
+        <p>O responsável pelo tratamento dos dados descritos nesta política é <b>Felipe Barbosa</b>, em Portugal, que desenvolve e distribui o Stoqzy sob essa marca. Para qualquer assunto de privacidade, o contacto é <a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a>.</p>
+        <p>O Stoqzy não é afiliado, patrocinado nem aprovado pela Vinted. A Vinted tem a sua própria política de privacidade para a conta que tens lá; esta política trata só do que o Stoqzy faz.</p>
+      </section>
+
+      <section id="le">
+        <h2><span class="num">02</span>O que a extensão lê</h2>
+        <p>A extensão abre-se ao lado da Vinted e faz as chamadas à Vinted <b>a partir da tua própria página</b>, com a sessão que já tens iniciada, exatamente como quando navegas. Por isso só vê o que a tua conta vê. Concretamente, lê:</p>
+        <ul>
+          <li><b>Os teus anúncios</b>: título, descrição, preço, fotos, estado (à venda, oculto, vendido), data de publicação.</li>
+          <li><b>As tuas vendas</b>: estado da encomenda, valor, número de seguimento, e, quando pedes, a etiqueta de envio.</li>
+          <li><b>As tuas conversas</b> na Vinted, para as mostrar e para responderes a partir da extensão; e quem deu «like» aos teus artigos, para lhes poderes escrever tu.</li>
+          <li><b>O teu saldo</b> (disponível e pendente) e o identificador da tua conta.</li>
+        </ul>
+        <p>Não lê nada de outras contas além da que está com sessão aberta nesse separador, não lê a tua palavra-passe, e não lê outros sites: as permissões estão limitadas aos domínios da Vinted e ao Studio (ver <a href="#permissoes">09</a>).</p>
+        <p class="nota">Uma parte do que a extensão lê é sobre <em>outras pessoas</em>: o nome de quem te comprou uma peça, a mensagem que te enviou, a morada na etiqueta. Esses dados já são teus na Vinted, como vendedor. O Stoqzy mostra-tos no teu browser e, salvo o que está descrito na secção 04, não os envia para lado nenhum.</p>
+      </section>
+
+      <section id="guarda">
+        <h2><span class="num">03</span>O que guarda no teu browser</h2>
+        <p>Tudo o que a extensão precisa de lembrar fica no armazenamento local do Chrome (<span class="mono">chrome.storage</span>), no teu computador, no perfil de browser onde a instalaste:</p>
+        <ul>
+          <li><b>As fichas por artigo</b> que tu preenches: SKU, custo de compra, localização, quantidade em stock, notas.</li>
+          <li><b>As definições</b>: ritmo, horas ativas, modos do Repositor e das descidas de preço, respostas guardadas, modelos de mensagem.</li>
+          <li><b>A fila e o histórico</b> do que a extensão fez (republicações, descidas, mensagens enviadas), para não repetir e para te mostrar o que aconteceu.</li>
+          <li><b>Uma cópia em cache</b> dos teus anúncios e vendas, para o armário abrir depressa.</li>
+          <li><b>As chaves de ligação ao Studio</b>, se o ligares.</li>
+          <li><b>A chave de licença</b> que colaste e um identificador anónimo e aleatório deste dispositivo (gerado uma vez pela extensão; não é a conta Vinted), se ativares um plano pago.</li>
+        </ul>
+        <p>Podes exportar as fichas em CSV quando quiseres, e apagar tudo ao remover a extensão em <span class="mono">chrome://extensions</span>. Não fazemos cópias disto para nenhum servidor nosso.</p>
+      </section>
+
+      <section id="sai">
+        <h2><span class="num">04</span>O que sai do teu computador, e para onde</h2>
+        <p>Sem o Studio ligado, <b>do teu browser saem só as chamadas à Vinted</b>, feitas com a tua sessão, e, se ativaste uma chave de licença paga (interruptor «Usar licenças do servidor» no painel de Planos, desligado por defeito), a verificação dessa chave, descrita na primeira linha da tabela. Mais nada vai para nós.</p>
+        <p>Se ligares o Stoqzy Studio (plano Equipa), a extensão passa a falar com o servidor do Studio: ou o que nós alojamos em <span class="mono">studio.stoqzy.com</span>, ou um VPS teu onde instalaste o Studio. A tabela diz exatamente o que sai, para onde, e porquê.</p>
+        <div class="tabela-wrap">
+          <table class="dados">
+            <thead>
+              <tr><th scope="col">O que sai</th><th scope="col">Para onde</th><th scope="col">Para quê</th><th scope="col">Quanto tempo fica</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Verificação da licença<br><span class="mono">chave de licença (STQZ-…) · identificador anónimo e aleatório deste dispositivo (gerado pela extensão, não é a conta Vinted) · versão da extensão</span></td>
+                <td><span class="mono">api.stoqzy.com</span> (servidor de licenças, nosso). Não precisa do Studio.</td>
+                <td>Confirmar que a chave é válida e qual o plano. Só com «Usar licenças do servidor» ligado: ao ativares a chave e depois quando abres o painel de Planos e a última verificação tem mais de 6 horas. Nunca leva cookies, sessão nem dados da Vinted.</td>
+                <td>Registo da verificação (chave, identificador do dispositivo, data) enquanto a licença existir. Podes remover a chave ou desligar o interruptor a qualquer momento; o identificador fica no teu browser até removeres a extensão.</td>
+              </tr>
+              <tr>
+                <td>Resumo agregado da conta<br><span class="mono">nº de artigos (total, ativos, vendidos, ocultos) · vendas e valor a 30 dias · saldo disponível e pendente · moeda · estado da conta na Vinted (ativa/bloqueada/restringida) e uma frase curta com o motivo · levantamentos do mês (total levantado, nº de transferências, pendentes, vendido no mês, data do último; nunca o IBAN) · nome de utilizador da conta Vinted</span></td>
+                <td>Servidor do Studio (o nosso ou o teu VPS)</td>
+                <td>Mostrar as contas lado a lado no painel. Só números; nunca dados de compradores. Enviado automaticamente de 6 em 6 horas enquanto o Studio estiver ligado.</td>
+                <td>Enquanto a conta estiver ligada ao Studio; substituído a cada envio.</td>
+              </tr>
+              <tr>
+                <td>Etiqueta de envio<br><span class="mono">URL temporário (pré-assinado) do PDF · id da venda · título · SKU · seguimento (quando existe) · valor e moeda da venda · nome de utilizador da conta</span></td>
+                <td>Servidor do Studio. O servidor descarrega o PDF de imediato e guarda-o lá.</td>
+                <td>Fila de expedição e impressão em lote. <b>O PDF tem a morada do comprador</b> e nunca sai desse servidor. <b>Enviada automaticamente</b> assim que ligas o Studio, para as vendas por expedir (no ciclo de 6 horas, no máximo 10 por ciclo), e também quando pedes uma etiqueta na aba Vendas.</td>
+                <td>Apagado (ficheiro e registo) 30 dias depois de marcares a venda como embalada, por uma limpeza periódica do servidor (corre de 6 em 6 horas).</td>
+              </tr>
+              <tr>
+                <td>Modelos de produto e fotos<br><span class="mono">título, descrição, preço, custo, stock, fotos dos teus artigos</span></td>
+                <td>Servidor do Studio</td>
+                <td>Publicar o mesmo produto em várias contas a partir do painel.</td>
+                <td>Até os apagares no painel ou fechares a conta.</td>
+              </tr>
+              <tr>
+                <td>Pedidos de IA<br><span class="mono">a pergunta do comprador e a ficha do artigo · ou a foto a tratar · ou a tua pergunta ao assistente</span></td>
+                <td>Servidor do Studio, que a reenvia ao fornecedor do modelo (Gemini, Google)</td>
+                <td>Gerar a resposta, a foto ou a sugestão que pediste. Só quando tu clicas.</td>
+                <td>Não guardamos o conteúdo dos pedidos; fica só o registo de créditos gastos (data, tipo, quantidade).</td>
+              </tr>
+              <tr>
+                <td>Conta de cliente do Studio<br><span class="mono">e-mail · palavra-passe do Studio (cifrada) · plano · créditos</span></td>
+                <td>Servidor do Studio</td>
+                <td>Entrar no painel, saber o plano e a carteira de créditos.</td>
+                <td>Enquanto tiveres conta no Studio.</td>
+              </tr>
+              <tr class="nunca">
+                <td>Palavra-passe da Vinted</td><td>Nunca sai. A extensão não a pede nem a vê.</td><td></td><td></td>
+              </tr>
+              <tr class="nunca">
+                <td>Conversas e nomes de compradores</td><td>Nunca saem, exceto o texto de uma mensagem que tu, expressamente, mandes à IA responder.</td><td></td><td></td>
+              </tr>
+              <tr class="nunca">
+                <td>Cookies ou sessão da Vinted</td><td>Nunca saem do teu browser. As chamadas à Vinted partem da tua página.</td><td></td><td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="nota">Se instalares o Studio no teu próprio VPS, o servidor é teu: os dados desta tabela ficam contigo e nós não lhes temos acesso. Só o pedido de IA passa por fora (do teu servidor para o fornecedor do modelo). No Studio alojado por nós, o responsável pelo servidor somos nós, com as mesmas regras.</p>
+        <p><b>Não vendemos, não alugamos e não cedemos dados a terceiros para publicidade ou perfilagem.</b> Os únicos terceiros que tocam em dados são os fornecedores estritamente necessários: o alojamento do servidor do Studio, o fornecedor do modelo de IA quando pedes IA, e o processador de pagamentos quando compras um plano ou créditos (secção 07).</p>
+      </section>
+
+      <section id="retencao">
+        <h2><span class="num">05</span>Por quanto tempo</h2>
+        <ul>
+          <li><b>No teu browser</b>: até tu apagares (remover a extensão, limpar os dados do site, ou apagar fichas dentro da extensão).</li>
+          <li><b>Etiquetas com morada</b>: 30 dias depois de marcares a venda como embalada, o servidor apaga o PDF e a linha correspondente. Uma etiqueta ainda «por embalar» fica até a embalares.</li>
+          <li><b>Resumo agregado das contas</b>: substituído a cada envio; apagado quando fechas a conta do Studio.</li>
+          <li><b>Modelos, fotos e conta do Studio</b>: enquanto a conta existir. Ao pedires o fecho, apagamos tudo em 30 dias, salvo o que a lei obrigue a guardar (faturas).</li>
+          <li><b>Registos de créditos e faturação</b>: pelo prazo legal em Portugal para documentos contabilísticos.</li>
+        </ul>
+      </section>
+
+      <section id="ia">
+        <h2><span class="num">06</span>IA e créditos</h2>
+        <p>As funções de IA (responder a uma pergunta de um comprador, criar uma variação de foto, o assistente) só correm <b>quando tu carregas no botão</b>, e cada pedido gasta créditos da tua carteira. Nada corre em pano de fundo sem um pedido teu.</p>
+        <p>O pedido vai da extensão ao servidor do Studio, e daí ao fornecedor do modelo, hoje o <b>Gemini, da Google</b>, ao abrigo dos termos de API deles. O que enviamos é o mínimo para a tarefa: a pergunta e os factos da ficha do artigo, ou a foto a tratar. Não enviamos o nome do comprador, o teu e-mail, nem a tua conta Vinted. O fornecedor do modelo pode mudar; se mudar, atualizamos esta política.</p>
+        <p>Do lado do Studio guardamos só o registo dos créditos: data, tipo de pedido, quantos créditos custou. Não guardamos o texto das perguntas nem as respostas.</p>
+      </section>
+
+      <section id="pagamentos">
+        <h2><span class="num">07</span>Pagamentos</h2>
+        <p>Os planos pagos e as carteiras de créditos são cobrados através de um processador de pagamentos (<b>Stripe</b>). O número do cartão é introduzido na página deles e nunca chega aos nossos servidores; recebemos apenas a confirmação do pagamento, o identificador do cliente e o e-mail associado, para renovar o plano e creditar a carteira.</p>
+      </section>
+
+      <section id="site">
+        <h2><span class="num">08</span>Este site</h2>
+        <p><span class="mono">stoqzy.com</span> é um site estático. <b>Não usa cookies</b>, não tem analytics, não tem pixels de publicidade e não corre JavaScript. As fontes tipográficas são carregadas dos servidores da Google Fonts, que registam o pedido como qualquer servidor web; se preferires evitar isso, o site continua legível com as fontes do teu sistema. O servidor que aloja o site mantém registos de acesso normais (endereço IP, página pedida, data) por um período curto, para segurança.</p>
+      </section>
+
+      <section id="permissoes">
+        <h2><span class="num">09</span>Permissões que a extensão pede ao Chrome</h2>
+        <p>Cada permissão tem uma razão concreta. Não pedimos nenhuma «para o caso de».</p>
+        <dl class="permissoes">
+          <dt>host_permissions: os 21 domínios vinted.* e studio.stoqzy.com</dt>
+          <dd>Para a extensão correr ao lado da Vinted no país onde vendes e, se o ligares, falar com o Studio (resumo agregado, fila de expedição com o URL das etiquetas, pedidos de IA que tu inicias, fila de publicações e fotos de produto ao importar). A verificação da licença fala com <span class="mono">api.stoqzy.com</span> sem permissão de host adicional (é um pedido normal da extensão, só com os três campos da secção 04). Não tem acesso a mais nenhum site.</dd>
+          <dt>storage</dt>
+          <dd>Para guardar as fichas, as definições e o histórico no teu browser (secção 03).</dd>
+          <dt>alarms</dt>
+          <dd>Para a fila acordar à hora certa dentro das horas ativas que definiste, em vez de manter uma página aberta a fazer contagens.</dd>
+          <dt>notifications</dt>
+          <dd>Para te avisar quando a fila pára (por exemplo, num captcha) ou quando uma tarefa acabou.</dd>
+          <dt>downloads</dt>
+          <dd>Para guardar na pasta de Transferências o PDF da etiqueta de envio quando a pedes (o servidor da Vinted recusa o pedido feito a partir da página, por isso é o browser que descarrega). Os CSV que exportas não precisam desta permissão.</dd>
+        </dl>
+      </section>
+
+      <section id="base">
+        <h2><span class="num">10</span>Base legal</h2>
+        <p>Tratamos dados ao abrigo do Regulamento Geral sobre a Proteção de Dados (RGPD) e da lei portuguesa. As bases são:</p>
+        <ul>
+          <li><b>Execução do contrato</b> contigo: tudo o que é preciso para a extensão e o Studio fazerem o que pediste (ler a tua conta, guardar fichas, enviar etiquetas ao teu Studio, cobrar o plano).</li>
+          <li><b>Consentimento</b>, dado ao clicar: cada pedido de IA e a própria ligação ao Studio. Podes retirar a qualquer momento (desligar o Studio nas definições; não usar a IA).</li>
+          <li><b>Interesse legítimo</b>: registos de acesso e segurança do servidor, prevenção de abuso.</li>
+          <li><b>Obrigação legal</b>: conservar documentos de faturação.</li>
+        </ul>
+        <p>Os dados de compradores que passam por uma etiqueta são tratados por ti, como vendedor, e o Studio limita-se a guardá-los no teu servidor (ou no nosso, por tua conta) enquanto precisas deles para expedir. É a tua responsabilidade usá-los só para isso.</p>
+      </section>
+
+      <section id="direitos">
+        <h2><span class="num">11</span>Os teus direitos</h2>
+        <p>Tens direito a saber que dados temos sobre ti, a recebê-los, a corrigi-los, a pedir que os apaguemos, a limitar ou opor-te ao tratamento, e à portabilidade. Como quase tudo está no teu browser, muitas destas coisas fazes tu, diretamente:</p>
+        <ul>
+          <li><b>Ver e exportar</b>: o CSV das fichas, dentro da extensão.</li>
+          <li><b>Apagar tudo o que está local</b>: remover a extensão em <span class="mono">chrome://extensions</span>.</li>
+          <li><b>Apagar o que está no Studio</b>: apagar modelos e fotos no painel, ou pedir o fecho da conta.</li>
+        </ul>
+        <p>Para o que não conseguires fazer sozinho (por exemplo, apagar a conta do Studio alojado por nós, ou receber uma cópia do que lá está), escreve para <a href="mailto:ola@stoqzy.com?subject=RGPD">ola@stoqzy.com</a> a partir do e-mail da tua conta. Respondemos no máximo em 30 dias, normalmente em muito menos.</p>
+        <p>Se achares que não tratámos bem os teus dados, podes reclamar à Comissão Nacional de Proteção de Dados (CNPD), em <a href="https://www.cnpd.pt" rel="noopener">cnpd.pt</a>.</p>
+      </section>
+
+      <section id="seguranca">
+        <h2><span class="num">12</span>Segurança</h2>
+        <p>A ligação ao Studio é sempre por HTTPS, com uma chave de API por cliente. O servidor só aceita etiquetas vindas do domínio de armazenamento da Vinted, para não poder ser usado como intermediário para outros endereços. As palavras-passe do Studio são guardadas cifradas com um algoritmo de derivação lento. Os PDF com morada ficam fora da base de dados, num diretório do servidor, e são apagados pelo prazo da secção 05.</p>
+        <p>Nenhum sistema é infalível. Se descobrirmos uma fuga que te afete, avisamos-te por e-mail e, quando a lei o exige, a CNPD.</p>
+      </section>
+
+      <section id="alteracoes">
+        <h2><span class="num">13</span>Alterações a esta política</h2>
+        <p>Quando mudar alguma coisa relevante (um fornecedor novo, um dado novo que passe a sair do browser), atualizamos a versão e a data no topo e avisamos dentro da extensão. A versão em vigor é sempre a que está publicada em <span class="mono">stoqzy.com/privacidade.html</span>.</p>
+      </section>
+
+      <section id="contacto">
+        <h2><span class="num">14</span>Contacto</h2>
+        <p>Felipe Barbosa · Portugal<br><a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a></p>
+        <p>Ver também os <a href="termos.html">Termos de utilização</a>.</p>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="col">
+    <span>© 2026 Stoqzy. Todos os direitos reservados.</span>
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="privacidade.html">Privacidade</a></li>
+      <li><a href="termos.html">Termos</a></li>
+      <li><a href="mailto:ola@stoqzy.com">ola@stoqzy.com</a></li>
+    </ul>
+  </div>
+  <div class="disclaimer">O Stoqzy não é afiliado, patrocinado nem aprovado pela Vinted. «Vinted» é uma marca dos respetivos donos.</div>
+</footer>
+
+</body>
+</html>

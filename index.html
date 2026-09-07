@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stoqzy · extensão para quem revende na Vinted</title>
 <meta name="description" content="Extensão para Chrome feita por um revendedor Vinted com 46 contas. Armário com margem real, repositor de stock, republicação ao ritmo humano, mensagens e vendas. Corre no teu browser, com a tua sessão, e pára ao primeiro captcha.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="canonical" href="https://stoqzy.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stoqzy · extensão para quem revende na Vinted">
+<meta property="og:description" content="Armário com a margem ao lado, stock que se repõe sozinho e republicações ao ritmo de uma pessoa. Corre no teu browser e pára ao primeiro captcha.">
+<meta property="og:image" content="https://stoqzy.com/img/og.png">
+<meta property="og:url" content="https://stoqzy.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14161c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -64,7 +74,9 @@ section{padding:clamp(64px,9vw,120px) 0}
 /* ---------- nav (menu móvel sem JavaScript: checkbox + :checked) ---------- */
 .nav{position:sticky;top:0;z-index:20;background:rgba(247,243,234,.95);border-bottom:1px solid var(--linha)}
 .nav .col{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px;position:relative}
-.marca{font-family:var(--serif);font-size:1.5rem;font-weight:600;text-decoration:none;color:var(--tinta);display:flex;align-items:baseline;gap:.6em}
+.marca{font-family:var(--serif);font-size:1.5rem;font-weight:600;text-decoration:none;color:var(--tinta);display:flex;align-items:center;gap:.55em}
+.marca img{width:30px;height:30px;border-radius:7px;flex:none}
+.marca small{align-self:flex-end;margin-bottom:.25em}
 .marca small{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);font-weight:400}
 .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:26px;align-items:center}
 .nav ul a{text-decoration:none;color:var(--tinta-2);font-size:1rem;font-weight:500}
@@ -106,15 +118,21 @@ section{padding:clamp(64px,9vw,120px) 0}
 .recibo .rodape{margin:14px 0 0;font-size:.8rem;color:var(--tinta-3);border-top:1px solid var(--linha);padding-top:10px}
 @media (max-width:900px){.heroi .topo{grid-template-columns:1fr}.recibo{max-width:440px;transform:none}}
 
+/* números reais, em linha */
+.numeros{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,3vw,40px);margin-top:clamp(40px,6vw,72px)}
+.numeros div{display:flex;flex-direction:column;gap:6px;border-left:2px solid var(--ambar-2);padding-left:16px}
+.numeros b{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,3.4vw,3rem);line-height:1;color:var(--tinta);font-variation-settings:"opsz" 144}
+.numeros span{font-size:.95rem;color:var(--tinta-3);line-height:1.35}
+@media (max-width:820px){.numeros{grid-template-columns:1fr 1fr}}
 /* ficha técnica (o que é · para quem · quem fez · estado) */
 .ficha{border-top:1px solid var(--tinta);border-bottom:1px solid var(--linha);margin-top:clamp(40px,6vw,72px)}
 .ficha .col{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.ficha div{padding:18px 20px 18px 0;border-right:1px solid var(--linha);font-size:1rem;color:var(--tinta-2)}
-.ficha div+div{padding-left:20px}
-.ficha div:last-child{border-right:0}
+.ficha .col>div{padding:18px 20px 18px 0;border-right:1px solid var(--linha);font-size:1rem;color:var(--tinta-2)}
+.ficha .col>div+div{padding-left:20px}
+.ficha .col>div:last-child{border-right:0}
 .ficha .rotulo{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ambar);margin-bottom:6px}
-@media (max-width:900px){.ficha .col{grid-template-columns:1fr 1fr}.ficha div:nth-child(odd){padding-left:0;border-right:1px solid var(--linha)}.ficha div:nth-child(even){padding-left:20px;border-right:0}.ficha div:nth-child(n+3){border-top:1px solid var(--linha)}}
-@media (max-width:560px){.ficha .col{grid-template-columns:1fr}.ficha .col div{border-right:0;padding-left:0;border-top:1px solid var(--linha)}.ficha .col div:first-child{border-top:0}}
+@media (max-width:900px){.ficha .col{grid-template-columns:1fr 1fr}.ficha .col>div:nth-child(odd){padding-left:0;border-right:1px solid var(--linha)}.ficha .col>div:nth-child(even){padding-left:20px;border-right:0}.ficha .col>div:nth-child(n+3){border-top:1px solid var(--linha)}}
+@media (max-width:560px){.ficha .col{grid-template-columns:1fr}.ficha .col>div{border-right:0;padding-left:0;border-top:1px solid var(--linha)}.ficha .col>div:first-child{border-top:0}}
 
 /* ---------- capturas ---------- */
 .foto{border:1px solid var(--carvao);border-radius:4px;overflow:hidden;background:#0a0a0c;box-shadow:0 1px 0 rgba(29,26,21,.18),0 12px 20px -16px rgba(29,26,21,.6)}
@@ -128,6 +146,8 @@ section{padding:clamp(64px,9vw,120px) 0}
 figure{margin:0}
 .heroi-foto{margin-top:clamp(40px,6vw,64px)}
 .heroi-foto .foto{aspect-ratio:1484/780}
+.foto.video{aspect-ratio:16/9;background:#14161c}
+.foto.video video{width:100%;height:100%;display:block;object-fit:cover}
 
 /* ---------- o que faz ---------- */
 .faz-cabeca{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(40px,5vw,64px)}
@@ -274,7 +294,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
 
 <header class="nav" id="topo">
   <div class="col">
-    <a class="marca" href="#topo">Stoqzy <small>extensão para Chrome · Vinted</small></a>
+    <a class="marca" href="#topo"><img src="img/marca.svg" alt="" width="30" height="30">Stoqzy <small>extensão para Chrome · Vinted</small></a>
     <input class="nav-check" type="checkbox" id="menu-check" aria-label="Abrir ou fechar o menu">
     <label class="nav-toggle" for="menu-check"><span class="abrir">menu</span><span class="fechar">fechar</span></label>
     <ul id="menu">
@@ -296,8 +316,8 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
   <div class="col topo">
     <div>
       <p class="etiqueta">Extensão para Chrome · Vinted</p>
-      <h1>O armário com a margem ao lado, o stock que se repõe sozinho e as republicações ao ritmo de uma pessoa.</h1>
-      <p class="lede">O Stoqzy foi escrito por um revendedor que gere 46 contas Vinted todos os dias. Corre no teu browser, com a tua sessão. Sabe o que cada peça te custou, repõe o que vendes, republica o que está parado e pára sozinho ao primeiro captcha.</p>
+      <h1>A margem ao lado do preço. O stock que se repõe sozinho.</h1>
+      <p class="lede">Extensão para Chrome escrita por um revendedor que gere 46 contas Vinted todos os dias. Corre no teu browser, com a tua sessão: sabe o que cada peça te custou, repõe o que vendes, republica o que está parado ao ritmo de uma pessoa, e pára sozinho ao primeiro captcha.</p>
       <div class="acoes">
         <a class="btn btn-ambar" href="#precos">Começar grátis</a>
         <a class="btn" href="mailto:ola@stoqzy.com?subject=Pedir%20acesso%20ao%20Stoqzy">Pedir acesso</a>
@@ -321,9 +341,21 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
 
   <div class="col heroi-foto">
     <figure>
-      <div class="foto"><img src="img/painel.webp" alt="Painel de início do Stoqzy: valor parado no armário, vendas da semana, estado da automação e da fila, e um aviso de que há 2 artigos parados com o Repositor desligado" width="1484" height="780" fetchpriority="high"></div>
-      <figcaption class="legenda"><span><b>Fig. 1</b>Início. A extensão tal como abre no Chrome, ao lado da Vinted.</span><span>captura real · conta de teste</span></figcaption>
+      <div class="foto video">
+        <video autoplay muted loop playsinline preload="metadata" poster="img/hero-poster.jpg" aria-label="Animação de 11 segundos: o símbolo do Stoqzy monta-se, depois três ideias — a margem ao lado do preço, o stock que se repõe, o ritmo de uma pessoa que pára ao primeiro captcha">
+          <source src="video/hero.webm" type="video/webm">
+          <source src="video/hero.mp4" type="video/mp4">
+        </video>
+      </div>
+      <figcaption class="legenda"><span><b>Fig. 1</b>Em onze segundos: a margem, o stock que volta, o ritmo humano.</span><span><a href="#faz">ver as capturas reais ↓</a></span></figcaption>
     </figure>
+  </div>
+
+  <div class="col numeros" aria-label="Números do projeto">
+    <div><b class="num">21</b><span>países Vinted, cada artigo na sua moeda</span></div>
+    <div><b class="num">46</b><span>contas do autor a usá-lo todos os dias</span></div>
+    <div><b class="num">1 900</b><span>testes automáticos a cada alteração</span></div>
+    <div><b class="num">0</b><span>captchas contornados. Pára e avisa.</span></div>
   </div>
 
   <div class="ficha">
@@ -331,7 +363,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
       <div><span class="rotulo">O que é</span>Uma extensão para Chrome. Abre-se ao lado da Vinted e usa a sessão que já tens aberta.</div>
       <div><span class="rotulo">Para quem</span>Quem revende, com uma conta ou com muitas. Quem tem custos e quer saber o que ganha.</div>
       <div><span class="rotulo">Quem fez</span>Um revendedor com 46 contas, farto de uma extensão comercial que duplicava anúncios.</div>
-      <div><span class="rotulo">Estado</span>A funcionar, em uso diário. Ainda fora da Chrome Web Store: pedes acesso por e-mail.</div>
+      <div><span class="rotulo">Estado</span>Em uso diário em 46 contas. Republicar provado ao vivo; 1 900 testes automáticos. Fora da Chrome Web Store: pedes acesso por e-mail.</div>
     </div>
   </div>
 </section>
@@ -377,7 +409,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
           <ul>
             <li><span class="num">1</span><span><b>Stock por produto.</b> SKU, reabastecer, quantidade N ou ilimitada.</span></li>
             <li><span class="num">2</span><span><b>Republicar os parados.</b> Anúncio novo, o antigo fica escondido na mesma operação. Nunca dois à venda ao mesmo tempo.</span></li>
-            <li><span class="num">3</span><span><b>Repor os vendidos.</b> Só vendas concluídas. Uma venda ainda em curso pode ser cancelada, e isso daria um duplicado.</span></li>
+            <li><span class="num">3</span><span><b>Repor os vendidos.</b> Logo que a venda aparece (vendeu hoje, publica hoje) ou só depois de concluída, à tua escolha. Uma venda cancelada nunca cria um duplicado sozinha: a Vinted não republica, e o cancelamento passa por ti.</span></li>
             <li><span class="num">4</span><span><b>Descidas de preço lentas,</b> com piso. Modos Cauteloso, Equilibrado e Ativo.</span></li>
           </ul>
           <p class="nao">O que não faz: não apaga anúncios (a Vinted não expõe isso) e não republica em rajada. Cada ação entra na fila e espera a sua vez.</p>
@@ -431,6 +463,10 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
       </div>
     </article>
 
+    <figure class="bloco" style="padding-bottom:0">
+      <div class="foto"><img src="img/painel.webp" alt="Painel de início do Stoqzy: valor parado no armário, vendas da semana, estado da automação e da fila, e um aviso de que há 2 artigos parados com o Repositor desligado" width="1484" height="780" loading="lazy" style="aspect-ratio:1484/780"></div>
+      <figcaption class="legenda"><span><b>Fig. 8</b>Início. A extensão tal como abre no Chrome, ao lado da Vinted.</span><span>captura real · conta de teste</span></figcaption>
+    </figure>
     <div class="indice" aria-label="Outras ferramentas da extensão">
       <dl>
         <div class="linha"><span class="num">1.5</span><dt>Vendas</dt><dd>Estado de cada venda, etiqueta de envio a um clique, marcar embalada, exportar CSV.</dd></div>
@@ -497,7 +533,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
           <li>Não manda mensagens em série. Cada mensagem a um interessado é um clique teu, e entra na fila.</li>
           <li>Não tem botão de «modo rápido». Os tetos de ritmo não se desligam.</li>
           <li>Não apaga anúncios. A Vinted não expõe isso de forma limpa; republicar esconde o antigo.</li>
-          <li>Não repõe uma venda que ainda está em curso. Pode ser cancelada, e o anúncio original voltaria.</li>
+          <li>Não repõe o passado todo. A reposição de vendidos tem uma data de corte: só as vendas a partir do dia em que ligas.</li>
           <li>Não promete que a Vinted nunca te restringe. Promete que, se acontecer, não foi por rajada nossa.</li>
         </ul>
       </div>
@@ -506,7 +542,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
     <div class="prova">
       <figure>
         <div class="foto sem-barra"><img src="img/definicoes.webp" alt="Definições do Stoqzy: automação desligada, ritmo Equilibrado com 24 ações por dia e 6 por hora, pausa entre ações de 90 segundos mais até 120 aleatórios, horas ativas das 9h às 23h, e os modos Cauteloso, Equilibrado e Ativo" width="1484" height="905" loading="lazy"></div>
-        <figcaption class="legenda"><span><b>Fig. 8</b>Definições. Ritmo Equilibrado: 24 por dia, 6 por hora, pausa de 90 s mais até 120 s aleatórios, horas ativas 9h a 23h. Podes apertar mais; não podes tirar.</span></figcaption>
+        <figcaption class="legenda"><span><b>Fig. 9</b>Definições. Ritmo Equilibrado: 24 por dia, 6 por hora, pausa de 90 s mais até 120 s aleatórios, horas ativas 9h a 23h. Podes apertar mais; não podes tirar.</span></figcaption>
       </figure>
       <div>
         <div class="ritmo" aria-label="Exemplo do que a fila faz com cinco republicações">
@@ -536,7 +572,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
 
     <figure class="grande">
       <div class="foto"><img src="img/studio-expedicao.webp" alt="Expedição no Stoqzy Studio: vendas por embalar agrupadas por conta, com valor, número de seguimento, botões Imprimir e Marcar embalada, e a personalização das etiquetas com nome a imprimir, formato térmico 100 por 150 mm e rodapé" width="1440" height="900" loading="lazy"></div>
-      <figcaption class="legenda"><span><b>Fig. 9</b>Expedição. O que falta embalar, conta a conta; as etiquetas saem com o SKU impresso, em lote, num só PDF.</span><span>studio.stoqzy.com</span></figcaption>
+      <figcaption class="legenda"><span><b>Fig. 10</b>Expedição. O que falta embalar, conta a conta; as etiquetas saem com o SKU impresso, em lote, num só PDF.</span><span>studio.stoqzy.com</span></figcaption>
     </figure>
 
     <div class="corpo">
@@ -552,11 +588,11 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
     <div class="par">
       <figure>
         <div class="foto painel"><img src="img/studio-painel.webp" alt="Painel do Stoqzy Studio: saldo do grupo em libras e euros, vendas a 30 dias, stock do grupo, contas ligadas, por embalar, créditos de IA, e a lista do que interessa agora" width="1440" height="560" loading="lazy"></div>
-        <figcaption class="legenda"><span><b>Fig. 10</b>Painel do Studio. Duas contas, uma em euros e outra em libras, e o que precisa de atenção hoje.</span></figcaption>
+        <figcaption class="legenda"><span><b>Fig. 11</b>Painel do Studio. Duas contas, uma em euros e outra em libras, e o que precisa de atenção hoje.</span></figcaption>
       </figure>
       <figure>
         <div class="foto"><img src="img/studio-modelos.webp" alt="Modelos do Studio com a gaveta Publicar aberta: escolher as contas onde publicar o modelo e enfileirar" width="1440" height="560" loading="lazy"></div>
-        <figcaption class="legenda"><span><b>Fig. 11</b>Modelos. Um produto, as contas onde o queres publicar, e «Enfileirar».</span></figcaption>
+        <figcaption class="legenda"><span><b>Fig. 12</b>Modelos. Um produto, as contas onde o queres publicar, e «Enfileirar».</span></figcaption>
       </figure>
     </div>
   </div>
@@ -642,7 +678,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
       </details>
       <details>
         <summary>Republicar duplica os anúncios?</summary>
-        <p>Não. Republicar cria um anúncio novo e esconde o antigo na mesma operação; a ficha, os custos e o histórico passam para o anúncio novo. Repor um vendido só acontece quando a venda está concluída, porque uma venda em curso pode ser cancelada e reativar o original.</p>
+        <p>Não. Republicar cria um anúncio novo e esconde o antigo na mesma operação; a ficha, os custos e o histórico passam para o anúncio novo. Repor um vendido acontece logo que a venda aparece (ou só depois de concluída, se preferires). A Vinted não republica sozinha um artigo de venda cancelada, e o cancelamento precisa da tua aceitação, por isso o duplicado nunca nasce sem tu saberes.</p>
       </details>
       <details>
         <summary>A Vinted reconhece a foto repetida?</summary>
@@ -691,7 +727,7 @@ footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c
 <footer>
   <div class="col grelha">
     <div>
-      <a class="marca" href="#topo">Stoqzy <small>extensão para Chrome · Vinted</small></a>
+      <a class="marca" href="#topo"><img src="img/marca.svg" alt="" width="30" height="30">Stoqzy <small>extensão para Chrome · Vinted</small></a>
       <p style="margin-top:14px;max-width:40ch">Extensão para Chrome e painel multi-conta para quem revende na Vinted. Feita por um revendedor, para revendedores. As capturas desta página são reais, de contas de teste.</p>
     </div>
     <div>

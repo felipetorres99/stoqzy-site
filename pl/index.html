@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stoqzy · rozszerzenie dla sprzedających na Vinted</title>
+<meta name="description" content="Rozszerzenie do Chrome dla sprzedających na Vinted: realna marża przy każdym przedmiocie, uzupełnianie zapasu i ponowne wystawianie w ludzkim tempie. Zatrzymuje się przy pierwszej captchy.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="canonical" href="https://stoqzy.com/pl/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stoqzy · rozszerzenie dla sprzedających na Vinted">
+<meta property="og:description" content="Szafa z marżą obok ceny, zapas, który wraca do szafy, i ponowne wystawienia w tempie człowieka. Działa w twojej przeglądarce i zatrzymuje się przy pierwszej captchy.">
+<meta property="og:image" content="https://stoqzy.com/img/og.png">
+<meta property="og:url" content="https://stoqzy.com/pl/">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="Stoqzy">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Stoqzy, rozszerzenie do Chrome dla sprzedających na Vinted">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Stoqzy, rozszerzenie do Chrome dla sprzedających na Vinted">
+<meta name="theme-color" content="#f7f3ea">
+<link rel="alternate" hreflang="pt" href="https://stoqzy.com/">
+<link rel="alternate" hreflang="de" href="https://stoqzy.com/de/">
+<link rel="alternate" hreflang="en" href="https://stoqzy.com/en/">
+<link rel="alternate" hreflang="es" href="https://stoqzy.com/es/">
+<link rel="alternate" hreflang="fr" href="https://stoqzy.com/fr/">
+<link rel="alternate" hreflang="it" href="https://stoqzy.com/it/">
+<link rel="alternate" hreflang="nl" href="https://stoqzy.com/nl/">
+<link rel="alternate" hreflang="pl" href="https://stoqzy.com/pl/">
+<link rel="alternate" hreflang="x-default" href="https://stoqzy.com/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://stoqzy.com/#org","name":"Stoqzy","url":"https://stoqzy.com/","logo":"https://stoqzy.com/img/og.png","email":"ola@stoqzy.com"},
+ {"@type":"SoftwareApplication","name":"Stoqzy","url":"https://stoqzy.com/","applicationCategory":"BrowserApplication","operatingSystem":"Chrome","inLanguage":"pl-PL","description":"Rozszerzenie do Chrome dla sprzedających na Vinted: realna marża przy każdym przedmiocie, uzupełnianie zapasu i ponowne wystawianie w ludzkim tempie. Zatrzymuje się przy pierwszej captchy.","author":{"@id":"https://stoqzy.com/#org"},"offers":[
+  {"@type":"Offer","name":"Darmowy","price":"0","priceCurrency":"EUR"},
+  {"@type":"Offer","name":"Pro","price":"9.99","priceCurrency":"EUR","description":"miesięcznie, bez zobowiązań"},
+  {"@type":"Offer","name":"Zespół","price":"29.99","priceCurrency":"EUR","description":"miesięcznie, bez zobowiązań"}]},
+ {"@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"Potrzebujecie mojego hasła do Vinted?","acceptedAnswer":{"@type":"Answer","text":"Nie. Rozszerzenie działa w twojej przeglądarce i korzysta z sesji, którą już masz otwartą. Nie prosi o hasło, nie widzi go i nie zapisuje."}},
+  {"@type":"Question","name":"Czy ponowne wystawianie tworzy duplikaty ogłoszeń?","acceptedAnswer":{"@type":"Answer","text":"Nie. Ponowne wystawienie tworzy nowe ogłoszenie i w tej samej operacji ukrywa stare; karta przedmiotu, koszty i historia przechodzą na nowe ogłoszenie."}},
+  {"@type":"Question","name":"Czy jest w Chrome Web Store?","acceptedAnswer":{"@type":"Answer","text":"Jeszcze nie. Prosisz o dostęp mailem, dostajesz plik rozszerzenia i wgrywasz go w chrome://extensions."}}]}
+]}
+</script>
+<link rel="preload" as="image" href="../img/pl/hero-poster.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Source+Sans+3:ital,wght@0,400..600;1,400&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens ----------
+   Ancoragem: papel creme + âmbar (a família do dourado do Studio, escurecida para
+   ter contraste como texto). O azul elétrico da extensão só aparece dentro das
+   capturas, que é onde vive. Um acento só. */
+:root{
+  --papel:#f7f3ea;
+  --papel-2:#efe9db;
+  --linha:#d9d0bd;
+  --tinta:#1d1a15;
+  --tinta-2:#4a443a;
+  --tinta-3:#665f53;     /* 5,7:1 no papel: serve para legendas pequenas */
+  --ambar:#7a4f00;       /* 6,4:1 no papel, 5,6:1 no fundo da linha Pro */
+  --ambar-2:#b8781a;     /* só traços, nunca texto pequeno */
+  --ambar-fundo:#f1e3c4;
+  --carvao:#16130f;      /* papel escuro: secção Studio e rodapé */
+  --noite:#0f1015;       /* tudo o que é ecrã: capturas e vídeo */
+  --serif:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --medida:64ch;
+  --col:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;color-scheme:light}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--sans);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--ambar);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{color:var(--tinta)}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;margin:0;letter-spacing:-.01em;font-variation-settings:"opsz" 144;text-wrap:balance}
+h1{font-size:clamp(2.4rem,4.8vw,4.1rem);font-weight:300;line-height:1.04;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,3.4vw,2.75rem);font-weight:400;letter-spacing:-.015em}
+.studio h2,.fim h2{font-weight:300}
+h3{font-size:clamp(1.35rem,2vw,1.7rem);font-variation-settings:"opsz" 48}
+p{margin:0 0 1em}
+em{font-style:italic}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:0}
+.col{max-width:var(--col);margin:0 auto;padding:0 clamp(18px,4vw,48px)}
+.etiqueta{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ambar);display:inline-flex;align-items:center;gap:.6em;margin:0 0 1.1rem}
+.etiqueta::before{content:"";width:22px;height:1px;background:var(--ambar-2)}
+.lede{font-size:1.3rem;color:var(--tinta-2);max-width:var(--medida)}
+.medida{max-width:var(--medida)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.saltar{position:absolute;left:18px;top:-100px;z-index:30;background:var(--tinta);color:var(--papel);padding:.6em 1em;border-radius:3px;text-decoration:none;font-weight:600}
+.saltar:focus{top:12px}
+section{padding:clamp(64px,9vw,120px) 0}
+/* depois de um salto de âncora fica papel entre a barra fixa e o início da secção */
+section[id]{scroll-margin-top:12px}
+#topo{position:absolute;top:0}
+@media (max-width:1000px){section{padding-top:clamp(56px,9vw,120px)}section[id]{scroll-margin-top:16px}}
+
+/* ---------- botões ---------- */
+.btn{display:inline-block;font-family:var(--sans);font-weight:600;font-size:1.1rem;padding:.72em 1.25em;border:1px solid var(--tinta);border-radius:3px;color:var(--tinta);background:transparent;text-decoration:none;line-height:1.2;transition:background .15s,color .15s}
+.btn:hover{background:var(--tinta);color:var(--papel)}
+.btn-cheio{background:var(--tinta);color:var(--papel)}
+.btn-cheio:hover{background:var(--ambar);border-color:var(--ambar);color:#fff}
+.btn-ambar{background:var(--ambar);border-color:var(--ambar);color:#fff}
+.btn-ambar:hover{background:var(--tinta);border-color:var(--tinta);color:var(--papel)}
+
+/* ---------- nav (menu móvel sem JavaScript: checkbox + :checked) ---------- */
+.nav{position:sticky;top:0;z-index:20;background:var(--papel);border-bottom:1px solid var(--linha)}
+.nav .col{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px;position:relative}
+.marca{font-family:var(--serif);font-size:1.5rem;font-weight:600;text-decoration:none;color:var(--tinta);display:flex;align-items:center;gap:.55em}
+.marca img{width:30px;height:30px;border-radius:7px;flex:none}
+.marca small{align-self:flex-end;margin-bottom:.25em}
+.marca small{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);font-weight:400}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:clamp(14px,1.8vw,26px);align-items:center}
+.nav ul a{text-decoration:none;color:var(--tinta-2);font-size:1.1rem;font-weight:500}
+.nav ul a,.marca small{white-space:nowrap}
+.nav ul a:hover{color:var(--ambar)}
+.nav ul a.btn{padding:.5em 1em;font-size:.95rem;color:var(--papel)}
+.nav ul a.btn:hover{color:#fff}
+.nav-check{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.nav-toggle{display:none;min-height:44px;align-items:center;border:1px solid var(--linha);border-radius:3px;padding:0 14px;font-family:var(--mono);font-size:.85rem;color:var(--tinta);cursor:pointer;user-select:none}
+.nav-toggle .fechar{display:none}
+.nav-check:focus-visible + .nav-toggle{outline:2px solid var(--ambar);outline-offset:3px}
+/* A barra é a mesma em 8 idiomas e os rótulos alemães/franceses/neerlandeses são muito
+   mais compridos do que os portugueses: sem estes degraus a nav empurra a página e
+   nasce scroll horizontal (o pt já rebentava a 1200 px, o de/fr a 1280).
+   Primeiro cai a legenda da marca, depois aperta-se o intervalo e o tamanho. */
+@media (max-width:1340px){.marca small{display:none}}
+@media (max-width:1180px){.nav ul{gap:16px}.nav ul a{font-size:1.05rem}}
+@media (max-width:1080px){.nav .col{gap:16px}.nav ul{gap:12px}.nav ul a{font-size:1rem}.nav ul a.btn{font-size:.88rem;padding:.5em .8em}.nav .idioma summary{padding:0 7px}}
+@media (max-width:980px){.nav ul{gap:16px}}
+@media (max-width:1000px){
+  .marca small{display:none}
+  .nav-toggle{display:inline-flex}
+  .nav ul{display:none;position:absolute;left:0;right:0;top:64px;background:var(--papel);border-bottom:1px solid var(--linha);flex-direction:column;align-items:stretch;padding:8px clamp(18px,4vw,48px) 20px;gap:0;max-height:calc(100dvh - 64px);overflow-y:auto}
+  .nav ul li{border-top:1px dashed var(--linha)}
+  .nav ul li a{display:block;padding:12px 0}
+  .nav ul li .btn{margin-top:12px;text-align:center}
+  .nav-check:checked ~ nav ul{display:flex}   /* o ul vive dentro do <nav>: o irmão da checkbox é o nav */
+  .nav-check:checked + .nav-toggle .abrir{display:none}
+  .nav-check:checked + .nav-toggle .fechar{display:inline}
+}
+
+/* ---------- herói ---------- */
+.heroi{padding:clamp(56px,8vw,104px) 0 clamp(40px,6vw,80px)}
+.heroi .topo{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,72px);align-items:start}
+.heroi .recibo{margin-top:2.3rem;transform:rotate(-1deg)}   /* alinha o topo do talão com a primeira linha do h1 */
+.heroi .lede{margin-top:1.6rem}
+.heroi .acoes{display:flex;gap:14px;flex-wrap:wrap;margin-top:2rem;align-items:center}
+.heroi .nota{font-size:.95rem;color:var(--tinta-3);margin-top:1rem;max-width:46ch}
+/* talão com a ficha do artigo (exemplo verdadeiro do que a extensão guarda) */
+.recibo{background:#fffdf8;border:1px solid var(--linha);border-radius:2px;padding:26px 26px 20px;font-family:var(--mono);font-size:.88rem;color:var(--tinta-2);line-height:1.5;box-shadow:0 1px 0 var(--linha),0 6px 14px -10px rgba(29,26,21,.35);position:relative}
+.recibo::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:7px;background:radial-gradient(circle at 6px -1px,transparent 5px,#fffdf8 5.5px) repeat-x;background-size:12px 7px}
+.recibo .titulo{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-3);margin:0 0 12px}
+.recibo dl{margin:0;display:grid;grid-template-columns:1fr auto;row-gap:6px;column-gap:16px}
+.recibo dt{margin:0}
+.recibo dd{margin:0;text-align:right;color:var(--tinta)}
+/* a linha tracejada antes do total é contínua: o dt cobre o column-gap com right:-16px */
+.recibo dt.total,.recibo dd.total{margin-top:10px;padding-top:10px;position:relative}
+.recibo dt.total::before{content:"";position:absolute;left:0;right:-16px;top:0;border-top:1px dashed var(--linha)}
+.recibo dd.total::before{content:"";position:absolute;left:0;right:0;top:0;border-top:1px dashed var(--linha)}
+.recibo dd.total{color:var(--ambar);font-weight:500}
+.recibo .rodape{margin:14px 0 0;font-size:.8rem;color:var(--tinta-3);border-top:1px solid var(--linha);padding-top:10px}
+@media (max-width:900px){.heroi .topo{grid-template-columns:1fr}.recibo{max-width:440px;transform:none}.heroi .recibo{margin-top:1.5rem}}
+@media (max-width:480px){
+  .recibo{padding:18px 16px 14px;font-size:.8rem}
+  .recibo dl{column-gap:10px}
+  .recibo dt{overflow-wrap:anywhere}
+  .recibo .rodape{font-size:.74rem}
+}
+@media (max-width:560px){
+  .lede{font-size:1.08rem;line-height:1.5}
+  .heroi .lede{margin-top:1.2rem}
+  .heroi .acoes{margin-top:1.5rem}
+  .heroi .nota{font-size:.9rem}
+}
+
+/* números reais, 2×2 ao lado do vídeo */
+.numeros{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,2.5vw,32px)}
+.numeros div{display:flex;flex-direction:column;gap:6px;border-left:2px solid var(--ambar-2);padding-left:16px}
+.numeros b{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,3vw,2.75rem);line-height:1;color:var(--tinta);font-variation-settings:"opsz" 144}
+.numeros span{font-size:.95rem;color:var(--tinta-3);line-height:1.35}
+/* ficha técnica (o que é · para quem · quem fez · estado) */
+.ficha{border-top:1px solid var(--tinta);border-bottom:1px solid var(--linha);margin-top:clamp(40px,6vw,72px)}
+.ficha .col{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.ficha .col>div{padding:18px 20px 18px 0;border-right:1px solid var(--linha);font-size:1rem;color:var(--tinta-2)}
+.ficha .col>div+div{padding-left:20px}
+.ficha .col>div:last-child{border-right:0}
+.ficha .rotulo{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ambar);margin-bottom:6px}
+@media (max-width:900px){.ficha .col{grid-template-columns:1fr 1fr}.ficha .col>div:nth-child(odd){padding-left:0;border-right:1px solid var(--linha)}.ficha .col>div:nth-child(even){padding-left:20px;border-right:0}.ficha .col>div:nth-child(n+3){border-top:1px solid var(--linha)}}
+@media (max-width:560px){.ficha .col{grid-template-columns:1fr}.ficha .col>div,.ficha .col>div:nth-child(even){border-right:0;padding-left:0;border-top:1px solid var(--linha)}.ficha .col>div:first-child{border-top:0}}
+
+/* ---------- capturas ---------- */
+/* moldura de um tom intermédio entre o papel e o ecrã, em vez do bordo carvão duro */
+.foto{border:1px solid var(--linha);border-radius:4px;overflow:hidden;background:var(--noite);box-shadow:0 0 0 6px var(--papel-2),0 1px 0 6px var(--linha),0 12px 20px -16px rgba(29,26,21,.6)}
+.duas .foto,.seg .prova .foto{box-shadow:0 0 0 4px var(--papel-2),0 1px 0 4px var(--linha)}
+.foto img{width:100%;height:100%;object-fit:cover;object-position:0 0}
+.foto.inteira{aspect-ratio:1484/905}
+.foto.sem-barra img{object-position:100% 0}       /* corta a barra lateral da extensão */
+.legenda{font-family:var(--mono);font-size:.82rem;color:var(--tinta-3);margin-top:10px;display:flex;justify-content:space-between;gap:12px;line-height:1.4}
+.legenda b{font-weight:500;color:var(--ambar);margin-right:.6em}
+.legenda span+span{text-align:right;flex:0 0 auto;max-width:40%}
+.legenda span:first-child{min-width:0}
+.legenda a{display:inline-block;padding:10px 0;margin:-10px 0}   /* alvo de toque de 37 px sem mexer na linha */
+@media (max-width:560px){.legenda{flex-direction:column;gap:2px}.legenda span+span{text-align:left}.legenda a{margin:2px 0 0;padding:10px 0}}
+figure{margin:0}
+.heroi-foto{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,72px);align-items:end;margin-top:clamp(40px,6vw,64px)}
+.foto.video{aspect-ratio:16/9;background:var(--noite)}
+.foto.video video{width:100%;height:100%;display:block;object-fit:cover}
+.foto.video{position:relative}
+.foto.video video{cursor:pointer}
+.foto.video::after{content:"▶  Odtwórz";position:absolute;left:14px;bottom:14px;background:rgba(20,22,28,.88);color:#fbf7ee;font:600 .85rem var(--sans);padding:.55em 1em;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
+.foto.video.bloqueado::after{opacity:1}
+/* clips das secções: um por funcionalidade, ao lado da captura real */
+.duas .foto.recorte16,.duas .foto.video{aspect-ratio:16/9}
+.duas .foto.recorte16 img{object-position:0 0}
+.bloco>figure.clipe{max-width:min(100%,900px);margin-bottom:clamp(20px,3vw,32px)}
+.bloco>figure.clipe.direita{margin-left:auto}
+.seg .prova figure.clipe{margin-bottom:18px}
+.studio .par.tres{grid-template-columns:repeat(3,1fr)}
+.studio .par.tres .foto{aspect-ratio:16/9}
+@media (max-width:900px){.studio .par.tres{grid-template-columns:1fr}.bloco>figure.clipe{max-width:none}}
+@media (max-width:900px){.heroi-foto{grid-template-columns:1fr}.numeros{margin-top:clamp(32px,6vw,48px)}}
+
+/* ---------- o que faz ---------- */
+.faz-cabeca{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(40px,5vw,64px)}
+.bloco{padding:clamp(40px,5vw,64px) 0;border-top:1px solid var(--linha)}
+.bloco .texto{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);margin-bottom:clamp(24px,3vw,36px);align-items:start}
+.bloco h3{margin-bottom:.5rem}
+.bloco .numero{font-family:var(--mono);font-size:.8rem;color:var(--ambar);display:block;margin-bottom:10px}
+.bloco p{color:var(--tinta-2)}
+.bloco ul{margin:.4rem 0 0;padding:0;list-style:none}
+.bloco li{padding:.45em 0;border-top:1px dashed var(--linha);display:grid;grid-template-columns:auto 1fr;gap:12px;color:var(--tinta-2)}
+.bloco li b{font-weight:600;color:var(--tinta)}
+.bloco li .num{color:var(--ambar);font-size:.8rem;padding-top:.25em}
+.bloco .nao{margin-top:1rem;font-size:.98rem;color:var(--tinta-3);border-left:2px solid var(--ambar-2);padding-left:12px}
+.duas{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,40px);align-items:start}
+.duas .foto{aspect-ratio:4/3}
+.duas .foto.topo-so{aspect-ratio:1484/640}   /* ecrãs com o conteúdo só em cima: recorte ao topo */
+/* as capturas inteiras ficam a ~10/12 e alternam o lado, para não caírem todas no mesmo eixo;
+   a figura do Início (figure.bloco) fica inteira porque mostra a extensão ao lado da Vinted */
+.bloco>figure{max-width:min(100%,900px)}
+#faz .col>article:nth-of-type(1)>figure{margin-left:auto}   /* 1.1 Armário: encosta à direita, sob a lista */
+#faz .col>article:nth-of-type(3)>figure{margin-right:auto}  /* 1.3 Mensagens: encosta à esquerda, sob o título */
+@media (max-width:900px){.faz-cabeca,.bloco .texto,.duas{grid-template-columns:1fr}.bloco>figure{max-width:none}}
+
+/* o resto da extensão: um índice em linhas, não cartões */
+.indice{margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--tinta)}
+.indice dl{margin:0}
+.indice .linha{display:grid;grid-template-columns:3.2em minmax(0,3fr) minmax(0,8fr);gap:12px 20px;padding:16px 0;border-bottom:1px solid var(--linha);align-items:baseline}
+.indice dt{font-family:var(--serif);font-size:1.35rem;font-variation-settings:"opsz" 48;margin:0}
+.indice dd{margin:0;color:var(--tinta-2)}
+.indice .num{color:var(--ambar);font-size:.8rem}
+@media (max-width:640px){
+  .indice .linha{grid-template-columns:2.2em 1fr;gap:6px 12px;padding:14px 0}
+  .indice dd{grid-column:2}
+  .indice dt{font-size:1.25rem}
+}
+
+/* ---------- como funciona ---------- */
+.como{background:var(--papel-2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,48px);margin-top:clamp(32px,4vw,56px);counter-reset:passo}
+.passo{position:relative;padding-top:18px;border-top:1px solid var(--tinta)}
+.passo::before{counter-increment:passo;content:"0" counter(passo);font-family:var(--serif);font-size:3rem;font-weight:300;line-height:1;color:var(--ambar);display:block;margin-bottom:12px;font-variation-settings:"opsz" 144}
+.passo h3{margin-bottom:.5rem}
+.passo p{color:var(--tinta-2);font-size:1.02rem}
+@media (max-width:820px){.passos{grid-template-columns:1fr}}
+
+/* ---------- segurança ---------- */
+.seg .cabeca{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(36px,4vw,56px)}
+.faz-nao{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);border-top:1px solid var(--tinta);padding-top:28px}
+.faz-nao h3{margin-bottom:14px}
+.faz-nao ul{list-style:none;margin:0;padding:0}
+.faz-nao li{padding:11px 0 11px 26px;border-top:1px dashed var(--linha);color:var(--tinta-2);position:relative}
+.faz-nao li::before{content:"";position:absolute;left:0;top:19px;width:11px;height:11px;border:1.5px solid var(--ambar);background:var(--ambar)}
+.faz-nao .nao li::before{background:transparent}
+.faz-nao li b{color:var(--tinta);font-weight:600}
+.faz-nao .rotulo{font-family:var(--mono);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);margin-right:.6em}
+/* na coluna com rótulo, o rótulo é o marcador; o quadrado fica só na coluna «recusa» */
+.faz-nao>div:first-child li{padding-left:0}
+.faz-nao>div:first-child li::before{display:none}
+.faz-nao .rotulo{display:inline-block;min-width:7.5em}   /* alinha os textos numa coluna, como os dt do talão */
+.seg .prova{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);margin-top:clamp(40px,5vw,64px);align-items:start}
+.seg .prova .foto{aspect-ratio:1484/905}
+.ritmo{background:#fffdf8;border:1px solid var(--linha);padding:18px 20px;font-family:var(--mono);font-size:.84rem;color:var(--tinta-2)}
+.ritmo .titulo{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-3);margin:0 0 8px}
+.ritmo b{color:var(--tinta);font-weight:500;text-align:right;white-space:nowrap}
+.ritmo .linha{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--linha)}
+.ritmo .linha span{overflow-wrap:anywhere}
+.ritmo .linha:last-child{border-bottom:0}
+.ritmo .stop{color:var(--ambar)}
+@media (max-width:420px){.ritmo{padding:14px 14px;font-size:.8rem}}
+.seg .prova p{color:var(--tinta-2);font-size:1rem;margin-top:16px}
+@media (max-width:900px){.seg .cabeca,.faz-nao,.seg .prova{grid-template-columns:1fr}.faz-nao .nao{border-top:1px solid var(--linha);padding-top:20px}}
+
+/* ---------- studio ---------- */
+.studio{background:var(--carvao);color:#efe9db}
+.studio .etiqueta{color:#f5b942}
+.studio .etiqueta::before{background:#f5b942}
+.studio h2{color:#fbf7ee}
+.studio .lede{color:#cbc2ae}
+.studio-cabeca{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:end}
+.studio .foto{border-color:#3a3226;box-shadow:0 0 0 1px rgba(245,185,66,.14),0 14px 24px -18px rgba(0,0,0,.9);background:var(--noite)}
+.studio .grande{margin-top:clamp(36px,5vw,56px)}
+.studio .grande .foto{aspect-ratio:1440/900}
+.studio .par{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,40px)}
+.studio .par .foto{aspect-ratio:1440/560}                   /* nas duas, o conteúdo está no topo do ecrã */
+.studio .legenda{color:#b3a78f}
+.studio .legenda b{color:#f5b942}
+.studio .corpo{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);margin-top:clamp(36px,5vw,56px);align-items:start}
+.studio .lista{list-style:none;margin:0;padding:0;border-top:1px solid #3a3226}
+.studio .lista li{padding:14px 0;border-bottom:1px solid #2b251c;display:grid;grid-template-columns:auto 1fr;gap:14px;color:#cbc2ae}
+.studio .lista li b{color:#fbf7ee;font-weight:600;display:block}
+.studio .lista .num{color:#f5b942;font-size:.8rem;padding-top:.3em}
+.studio .aviso{font-size:1rem;color:#cbc2ae;border-left:2px solid #f5b942;padding-left:14px}
+.studio a{color:#f5b942}
+.studio a:hover{color:#fff}
+@media (max-width:900px){.studio-cabeca,.studio .par,.studio .corpo{grid-template-columns:1fr}}
+
+/* ---------- preços (tabela editorial, não três cartões) ---------- */
+.planos{width:100%;border-collapse:collapse;margin-top:clamp(32px,4vw,48px);border-top:1px solid var(--tinta)}
+.planos th{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);text-align:left;font-weight:400;padding:12px 16px 12px 0;border-bottom:1px solid var(--tinta)}
+.planos td{padding:26px 16px 26px 0;border-bottom:1px solid var(--linha);vertical-align:top;color:var(--tinta-2)}
+.planos td:last-child,.planos th:last-child{padding-right:0}
+.planos .nome{font-family:var(--serif);font-size:1.7rem;font-variation-settings:"opsz" 48;color:var(--tinta);line-height:1.1}
+.planos .para{font-size:.95rem;color:var(--tinta-3);margin:6px 0 0;max-width:22ch}
+.planos .preco{font-family:var(--mono);font-size:1.6rem;color:var(--tinta);white-space:nowrap}
+.planos .preco small{font-size:.8rem;color:var(--tinta-3);margin-left:.2em}
+.planos ul{list-style:none;margin:0;padding:0}
+.planos li{padding:3px 0}
+.planos li.x{color:var(--tinta-3);text-decoration:line-through;text-decoration-color:var(--ambar-2)}
+.planos .lim{font-family:var(--mono);font-size:.86rem;color:var(--ambar);line-height:1.5}
+.planos .cta{white-space:nowrap}
+.planos .cta .btn{font-size:.95rem;padding:.6em 1em}
+/* um realce só, plano, com um fio âmbar à esquerda a marcar o plano recomendado;
+   a tabela sangra 14 px para a margem para que os três nomes fiquem alinhados com o texto da secção */
+.planos{width:calc(100% + 14px);margin-left:-14px}
+.planos th:first-child,.planos td:first-child{padding-left:14px}
+.planos tr.pro td{background:var(--ambar-fundo)}
+.planos tr.pro td:first-child{padding-left:12px;border-left:2px solid var(--ambar)}
+.planos tr.pro td:last-child{padding-right:14px}
+.precos-nota{margin-top:18px;font-size:.98rem;color:var(--tinta-3);max-width:70ch}
+@media (max-width:1000px){
+  .planos,.planos tbody,.planos tr,.planos td{display:block}
+  .planos{width:auto;margin-left:0}
+  .planos thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .planos tr{border-bottom:1px solid var(--tinta);padding:22px 0}
+  .planos tr.pro td{background:none}
+  .planos tr.pro{background:var(--ambar-fundo);margin:0 calc(-1 * clamp(18px,4vw,48px));padding-left:clamp(18px,4vw,48px);padding-right:clamp(18px,4vw,48px)}
+  .planos td{border:0;padding:8px 0}
+  .planos td:first-child,.planos tr.pro td:first-child{padding-left:0;border-left:0}
+  .planos tr.pro td:last-child{padding-right:0}
+  .planos td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3);margin-bottom:4px}
+  .planos td.cta{padding-top:14px}
+  .planos td.cta .btn{display:block;text-align:center;min-height:44px;padding:.75em 1em}
+}
+
+/* ---------- FAQ ---------- */
+.faq .col{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,72px)}
+.faq details{border-top:1px solid var(--linha)}
+.faq details:last-child{border-bottom:1px solid var(--linha)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-family:var(--serif);font-size:1.3rem;font-variation-settings:"opsz" 48;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--ambar);font-size:1.1rem;flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq details p{color:var(--tinta-2);padding-bottom:18px;max-width:var(--medida)}
+@media (max-width:900px){.faq .col{grid-template-columns:1fr}}
+
+/* ---------- CTA final ---------- */
+.fim{background:var(--papel-2);border-top:1px solid var(--linha)}
+.fim .col{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px;align-items:end}
+.fim .acoes{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:900px){.fim .col{grid-template-columns:1fr}.fim .acoes{justify-content:flex-start}}
+
+/* ---------- rodapé ---------- */
+footer{background:var(--carvao);color:#b3a78f;padding:48px 0 32px;font-size:.98rem}
+footer .col.grelha{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+footer .rotulo{color:#efe9db;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin:0}
+footer li a{display:inline-block;padding:7px 0}   /* alvo de toque maior no rodapé */
+footer a{color:#efe9db}
+footer a:hover{color:#f5b942}
+footer .marca{color:#fbf7ee}
+footer .marca small{color:#b3a78f}
+footer .disclaimer{margin-top:36px;padding-top:18px;border-top:1px solid #2b251c;font-size:.9rem;color:#a79c85;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:820px){footer .col.grelha{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){footer .col.grelha{grid-template-columns:1fr}}
+
+/* QA 2026-09-07: alvos de toque, foco, checkbox fora da tabulação em desktop */
+@media (min-width:1001px){.nav-check{display:none}}
+.nav ul a{display:inline-block;padding:10px 0;margin:-10px 0}
+.nav ul a.btn{padding:.6em 1em;min-height:44px;display:inline-flex;align-items:center;margin:0}
+.marca{min-height:44px;align-items:center}
+footer :focus-visible,.studio :focus-visible{outline-color:#f5b942}
+footer li a{display:inline-block;padding:10px 0}
+.legenda a{display:inline-block;padding:13px 0;margin:-13px 0;white-space:nowrap}
+@media (max-width:1000px){.nav ul li a.btn{display:block;min-height:44px;padding:.7em 1em;text-align:center;margin-top:12px;font-size:1rem}}
+@media (max-width:900px){.heroi .recibo{transform:none;margin-top:1.5rem}}
+@media (max-width:640px){.faz-nao>div:first-child .rotulo{display:block;min-width:0;margin:0 0 4px}}
+@media (max-width:560px){.legenda a{margin:2px 0 0;padding:13px 0}}
+@media (max-width:480px){.recibo dt.total::before{right:-10px}}
+
+/* ---------- seletor de idioma (o HTML é injetado pelo build nos marcadores seletor_idioma e seletor_idioma_rodape) ----------
+   Na nav é um <details> mono, pequeno, antes do botão; no menu móvel é um <li> como os outros. */
+.nav .idioma{position:relative;margin:0}
+.nav .idioma summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.45em;min-height:36px;padding:0 10px;border:1px solid var(--linha);border-radius:3px;font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;color:var(--tinta-2);user-select:none;white-space:nowrap}
+.nav .idioma summary::-webkit-details-marker{display:none}
+.nav .idioma summary::after{content:"▾";color:var(--ambar)}
+.nav .idioma[open] summary::after{content:"▴"}
+.nav .idioma summary:hover{color:var(--ambar);border-color:var(--ambar-2)}
+/* :not([open]) dá especificidade acima de «.nav-check:checked ~ nav ul», que senão mostrava a lista interior no menu móvel */
+.nav .idioma:not([open]) ul{display:none}
+.nav .idioma[open] ul{display:flex;flex-direction:column;position:absolute;right:0;top:calc(100% + 8px);min-width:11em;margin:0;padding:6px 0;gap:0;background:var(--papel);border:1px solid var(--linha);border-radius:3px;box-shadow:0 8px 18px -12px rgba(29,26,21,.5);z-index:25;max-height:none;overflow:visible}
+.nav .idioma ul li{list-style:none;border-top:0}
+.nav .idioma ul a{display:block;padding:8px 14px;margin:0;font-size:1rem;white-space:nowrap}
+.nav .idioma ul a[aria-current]{color:var(--ambar)}
+@media (max-width:1000px){
+  .nav .idioma summary{min-height:44px;padding:0;border:0;font-size:.9rem}
+  .nav .idioma[open] ul{position:static;border:0;box-shadow:none;background:none;padding:0 0 6px 14px;min-width:0}
+  .nav .idioma ul a{padding:10px 0}
+}
+footer .idiomas{margin:28px 0 0;font-family:var(--mono);font-size:.85rem;color:#a79c85}
+footer .idiomas a{display:inline-block;padding:7px 0}
+footer .idiomas a[aria-current]{color:#f5b942}
+</style>
+</head>
+<body>
+<a class="saltar" href="#conteudo">Przejdź do treści</a>
+
+<span id="topo" aria-hidden="true"></span>
+<header class="nav">
+  <div class="col">
+    <a class="marca" href="#topo"><img src="../img/marca.svg" alt="" width="30" height="30">Stoqzy <small>rozszerzenie do Chrome · Vinted</small></a>
+    <input class="nav-check" type="checkbox" id="menu-check" aria-label="Menu" aria-controls="menu">
+    <label class="nav-toggle" for="menu-check"><span class="abrir">menu</span><span class="fechar">zamknij</span></label>
+    <nav aria-label="Główne"><ul id="menu">
+      <li><a href="#faz">Co robi</a></li>
+      <li><a href="#como">Jak działa</a></li>
+      <li><a href="#seguranca">Bezpieczeństwo</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#precos">Ceny</a></li>
+      <li><a href="#faq">Pytania</a></li>
+      <li class="idioma-li"><details class="idioma"><summary aria-label="Idioma">PL</summary><ul><li><a href="/" lang="pt" hreflang="pt">Português</a></li><li><a href="/de/" lang="de" hreflang="de">Deutsch</a></li><li><a href="/en/" lang="en" hreflang="en">English</a></li><li><a href="/es/" lang="es" hreflang="es">Español</a></li><li><a href="/fr/" lang="fr" hreflang="fr">Français</a></li><li><a href="/it/" lang="it" hreflang="it">Italiano</a></li><li><a href="/nl/" lang="nl" hreflang="nl">Nederlands</a></li><li><a href="/pl/" lang="pl" hreflang="pl" aria-current="page">Polski</a></li></ul></details></li>
+      <li><a class="btn btn-cheio" href="mailto:ola@stoqzy.com?subject=Pro%C5%9Bba%20o%20dost%C4%99p%20do%20Stoqzy%20(Darmowy)&amp;body=Cze%C5%9B%C4%87%2C%0A%0AChc%C4%99%20wypr%C3%B3bowa%C4%87%20Stoqzy.%0AKonta%20Vinted%3A%20%0AKraj%3A%20%0AKorzystam%20ju%C5%BC%20z%20innego%20rozszerzenia%3A%20%0APlan%3A%20Darmowy">Poproś o dostęp</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ============ HERÓI ============ -->
+<section class="heroi">
+  <div class="col topo">
+    <div>
+      <p class="etiqueta">Dla sprzedających na Vinted, z 1 kontem albo z 50</p>
+      <h1>Marża obok ceny. Zapas, który uzupełnia się sam.</h1>
+      <p class="lede">Działa w twojej przeglądarce, na sesji, którą już masz otwartą. Wie, ile kosztowała cię każda rzecz, przygotowuje uzupełnienie tego, co sprzedajesz, i wystawia ponownie to, co stoi, w tempie człowieka. Przy pierwszej captchy zatrzymuje się i daje ci znać. Zrobione przez sprzedających, dla sprzedających.</p>
+      <div class="acoes">
+        <a class="btn btn-cheio" href="mailto:ola@stoqzy.com?subject=Pro%C5%9Bba%20o%20dost%C4%99p%20do%20Stoqzy%20(Darmowy)&amp;body=Cze%C5%9B%C4%87%2C%0A%0AChc%C4%99%20wypr%C3%B3bowa%C4%87%20Stoqzy.%0AKonta%20Vinted%3A%20%0AKraj%3A%20%0AKorzystam%20ju%C5%BC%20z%20innego%20rozszerzenia%3A%20%0APlan%3A%20Darmowy">Poproś o darmowy dostęp</a>
+        <a class="btn" href="#faz">Zobacz, co robi</a>
+      </div>
+      <p class="nota">Jeszcze go nie ma w Chrome Web Store. Piszesz na <a href="mailto:ola@stoqzy.com?subject=Pro%C5%9Bba%20o%20dost%C4%99p%20do%20Stoqzy%20(Darmowy)&body=Cze%C5%9B%C4%87%2C%0A%0AChc%C4%99%20wypr%C3%B3bowa%C4%87%20Stoqzy.%0AKonta%20Vinted%3A%20%0AKraj%3A%20%0AKorzystam%20ju%C5%BC%20z%20innego%20rozszerzenia%3A%20%0APlan%3A%20Darmowy">ola@stoqzy.com</a>, mówisz, ile masz kont i w jakim kraju, i dostajesz plik rozszerzenia z instrukcją. Odpowiada osoba, która napisała kod. W planie darmowym bez karty.</p>
+    </div>
+
+    <aside class="recibo" aria-label="Przykład karty przedmiotu z realną marżą">
+      <p class="titulo">Karta przedmiotu · przykład</p>
+      <dl>
+        <dt>Złoty zegarek Casio</dt><dd>SKU casio-gold</dd>
+        <dt>Cena sprzedaży</dt><dd>15,00 €</dd>
+        <dt>Koszt zakupu</dt><dd>4,50 €</dd>
+        <dt>Lokalizacja</dt><dd>pudło B · półka 2</dd>
+        <dt>Zapas (uzupełniaj)</dt><dd>3 szt.</dd>
+        <dt class="total">Realna marża</dt><dd class="total">10,50 € · 70 %</dd>
+      </dl>
+      <p class="rodape">karta zostaje w twojej przeglądarce · Vinted jej nie widzi</p>
+    </aside>
+  </div>
+
+  <div class="col heroi-foto">
+    <figure>
+      <div class="foto video">
+        <video class="clip" autoplay muted loop playsinline preload="metadata" poster="../img/pl/hero-poster.webp" aria-label="Animacja, 11 sekund: maskotka Stoqzy składa się w całość, a potem trzy rzeczy: marża obok ceny, zapas, który wraca, i tempo człowieka, które staje przy pierwszej captchy">
+          <source src="../video/pl/hero.mp4" type="video/mp4">
+          <source src="../video/pl/hero.webm" type="video/webm">
+        </video>
+      </div>
+      <figcaption class="legenda"><span><b>Rys. 1</b> W jedenaście sekund: marża, zapas, który wraca, ludzkie tempo.</span><span><a href="#faz">zobacz prawdziwe zrzuty ↓</a></span></figcaption>
+    </figure>
+    <div class="numeros" role="group" aria-label="Liczby projektu">
+      <div><b>21</b><span>krajów Vinted, każdy przedmiot w swojej walucie</span></div>
+      <div><b>24</b><span>akcji dziennie w tempie Zrównoważonym; nigdy więcej niż 60</span></div>
+      <div><b>20</b><span>profili zdjęć, żeby wystawiać ponownie bez powtarzania tego samego zdjęcia</span></div>
+      <div><b>0</b><span>obejść captchy. Zatrzymuje się i ostrzega.</span></div>
+    </div>
+  </div>
+
+  <div class="ficha">
+    <div class="col">
+      <div><span class="rotulo">Co to jest</span>Rozszerzenie do Chrome. Otwiera się obok Vinted i korzysta z sesji, którą już masz otwartą.</div>
+      <div><span class="rotulo">Dla kogo</span>Dla sprzedających, z jednym kontem albo z wieloma. Dla tych, którzy mają koszty i chcą wiedzieć, ile zarabiają.</div>
+      <div><span class="rotulo">Kto zrobił</span>Sprzedawca na Vinted, zmęczony komercyjnym rozszerzeniem, które dublowało ogłoszenia. Stoqzy używa codziennie na swoich kontach.</div>
+      <div><span class="rotulo">Stan</span>W codziennym użyciu na kontach autora. Ponowne wystawianie sprawdzone na żywo; uzupełnianie sprzedanych w testach. Poza Chrome Web Store: prosisz o dostęp mailem i instalujesz samodzielnie.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O QUE FAZ ============ -->
+<section id="faz">
+  <div class="col">
+    <div class="faz-cabeca">
+      <div>
+        <p class="etiqueta">01 · Co robi</p>
+        <h2>Wszystko, co robisz ręcznie, tylko z arkuszem kosztów obok.</h2>
+      </div>
+      <p class="lede">Vinted pokazuje ci cenę. Stoqzy pokazuje, co zostaje. Dalej każde narzędzie robi jedną konkretną rzecz: uzupełnia, wystawia ponownie, odpowiada, wysyła. Zrzuty są prawdziwe, z konta testowego z trzema przedmiotami.</p>
+    </div>
+
+    <figure class="bloco">
+      <div class="foto" style="aspect-ratio:1484/780"><img src="../img/painel.webp" srcset="../img/painel-742.webp 742w, ../img/painel.webp 1484w" sizes="(max-width:900px) calc(100vw - 36px), 1084px" alt="Panel startowy Stoqzy: wartość, która stoi w szafie, sprzedaże z tygodnia, stan automatyzacji i kolejki oraz ostrzeżenie, że 2 przedmioty stoją, a Uzupełniacz jest wyłączony" width="1484" height="905" loading="lazy"></div>
+      <figcaption class="legenda"><span><b>Rys. 2</b> Start. Rozszerzenie tak, jak otwiera się w Chrome, obok Vinted: co stoi, co się sprzedało i co kolejka zrobi dalej.</span><span>prawdziwy zrzut · konto testowe</span></figcaption>
+    </figure>
+
+    <article class="bloco">
+      <div class="texto">
+        <div>
+          <span class="numero">1.1</span>
+          <h3>Szafa z kartą dla każdego przedmiotu</h3>
+          <p>Kafelki albo tabela, jak wolisz. Do każdego ogłoszenia dokładasz SKU, koszt i miejsce, gdzie leży. Realna marża pojawia się obok ceny, a CSV wchodzi i wychodzi, kiedy chcesz.</p>
+        </div>
+        <ul>
+          <li><span class="num">a</span><span><b>Edycja bez wychodzenia.</b> Cena, tytuł i opis. Po zapisaniu rozszerzenie czyta ogłoszenie jeszcze raz i sprawdza, czy zmieniło się tylko to, o co prosisz.</span></li>
+          <li><span class="num">b</span><span><b>Ukrywanie i pokazywanie</b> zbiorczo, żeby wyjąć z katalogu to, czego nie chcesz sprzedawać w tym tygodniu.</span></li>
+          <li><span class="num">c</span><span><b>Zdjęcia w 12 stylach</b> i poprawki co do piksela w edytorze. Każde ponowne wystawienie dostaje jeden z 20 profili obróbki (kadr, przechylenie, odbicie lustrzane, kolor), którego ten przedmiot jeszcze nie miał, żeby zdjęcie nie wyszło takie samo jak poprzednio.</span></li>
+        </ul>
+      </div>
+      <div class="duas">
+        <figure>
+          <div class="foto video"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="../img/pl/clip-armario.webp" aria-label="Animacja, 8 sekund: kafelek przedmiotu, karta z SKU i kosztem, i realna marża pojawiająca się obok ceny; potem widok tabeli"><source src="../video/pl/armario.mp4" type="video/mp4"><source src="../video/pl/armario.webm" type="video/webm"></video></div>
+          <figcaption class="legenda"><span><b>Rys. 3</b> Karta przedmiotu: SKU, koszt, lokalizacja i marża obok ceny.</span><span>animacja</span></figcaption>
+        </figure>
+        <figure>
+        <div class="foto recorte16"><img src="../img/armario.webp" srcset="../img/armario-742.webp 742w, ../img/armario.webp 1484w" sizes="(max-width:900px) calc(100vw - 36px), 1084px" alt="Szafa Stoqzy w kafelkach: każdy przedmiot z ceną, kosztem, wiekiem ogłoszenia i przyciskami Wystaw ponownie, Zdjęcia, Tekst, Karta i Ukryj" width="1484" height="905" loading="lazy"></div>
+        <figcaption class="legenda"><span><b>Rys. 4</b> Szafa w kafelkach. Trzy przedmioty, 52,00 € czeka na sprzedaż, wszystkie stoją ponad 60 dni; jeden ukryty.</span><span>jest też widok tabeli</span></figcaption>
+      </figure>
+      </div>
+    </article>
+
+    <article class="bloco">
+      <div class="texto">
+        <div>
+          <span class="numero">1.2</span>
+          <h3>Uzupełniacz: zapas, stojące, sprzedane, ceny</h3>
+          <p>Vinted nie ma stanów magazynowych: sprzedane to koniec. Tutaj oznaczasz każdy produkt jako „uzupełniaj” i wpisujesz, ile masz sztuk. Kiedy produkt się sprzeda, ogłoszenie powstaje na nowo, zaraz po pojawieniu się sprzedaży albo dopiero po jej zakończeniu, jak wolisz, a ilość spada o jeden. Ponowne wystawianie stojących jest sprawdzone na żywo; uzupełnianie sprzedanych idzie tą samą drogą i jest w testach na naszym koncie.</p>
+        </div>
+        <div>
+          <ul>
+            <li><span class="num">1</span><span><b>Zapas na produkt.</b> SKU, uzupełnianie, ilość N albo bez limitu.</span></li>
+            <li><span class="num">2</span><span><b>Ponowne wystawianie stojących.</b> Nowe ogłoszenie, stare zostaje ukryte w tej samej operacji. Nigdy dwa naraz na sprzedaży.</span></li>
+            <li><span class="num">3</span><span><b>Uzupełnianie sprzedanych.</b> Zaraz po pojawieniu się sprzedaży (sprzedane dziś, wystawione dziś) albo dopiero po jej zakończeniu, jak wolisz. Anulowana sprzedaż nigdy sama nie tworzy duplikatu: Vinted nie wystawia ponownie, a anulowanie przechodzi przez ciebie.</span></li>
+            <li><span class="num">4</span><span><b>Powolne obniżki cen,</b> z podłogą. Tryby Ostrożny, Zrównoważony i Aktywny.</span></li>
+          </ul>
+          <p class="nao">Czego nie robi: nie kasuje ogłoszeń (wchodzi tylko to, co potwierdziliśmy na prawdziwym ruchu, a kasowanie jeszcze nie jest potwierdzone) i nie wystawia seriami. Każda akcja wchodzi do kolejki i czeka na swoją kolej.</p>
+        </div>
+      </div>
+      <figure class="clipe direita">
+          <div class="foto video"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="../img/pl/clip-repositor.webp" aria-label="Animacja, 9 sekund: tabela zapasu z uzupełnianiem i ilością, przychodzi sprzedaż, przedmiot wraca z nowymi zdjęciami, a ilość spada z 3 na 2"><source src="../video/pl/repositor.mp4" type="video/mp4"><source src="../video/pl/repositor.webm" type="video/webm"></video></div>
+          <figcaption class="legenda"><span><b>Rys. 5</b> Zapas na SKU: sprzedane, a ogłoszenie wraca z nowymi zdjęciami; ilość spada o jeden.</span><span>animacja</span></figcaption>
+        </figure>
+      <div class="duas">
+        <figure>
+          <div class="foto"><img src="../img/repositor-stock.webp" srcset="../img/repositor-stock-742.webp 742w, ../img/repositor-stock.webp 1484w" sizes="(max-width:900px) calc(100vw - 36px), 632px" alt="Zakładka Zapas w Uzupełniaczu: tabela z tytułem, SKU, przełącznikiem Uzupełniaj, ilością i aktywnym ogłoszeniem, z tempem między akcjami wybranym u góry" width="1484" height="905" loading="lazy" style="object-position:100% 0"></div>
+          <figcaption class="legenda"><span><b>Rys. 6</b> Uzupełniacz, zakładka Zapas, przed konfiguracją: każdy przedmiot ze swoim SKU, przełącznikiem Uzupełniaj i ilością.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="foto"><img src="../img/repositor-parados.webp" srcset="../img/repositor-parados-742.webp 742w, ../img/repositor-parados.webp 1484w" sizes="(max-width:900px) calc(100vw - 36px), 632px" alt="Zakładka Stojące w Uzupełniaczu: bierze do 3 przedmiotów dziennie, które stoją ponad 45 dni, wystawia je ponownie z nową obróbką zdjęć i obniża cenę o 5 procent, nigdy poniżej 3 euro; tryby Ostrożny, Zrównoważony i Aktywny" width="1484" height="905" loading="lazy" style="object-position:100% 0"></div>
+          <figcaption class="legenda"><span><b>Rys. 7</b> Stojące. Do 3 dziennie, stojące ponad 45 dni, 5 % niżej i nigdy poniżej 3,00 €; w każdym nowa obróbka zdjęć.</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="bloco">
+      <div class="texto">
+        <div>
+          <span class="numero">1.3</span>
+          <h3>Wiadomości, zainteresowani i oferty</h3>
+          <p>Rozmowy w prostym układzie lista-szczegół, zapisane odpowiedzi, żeby nie pisać tego samego dwadzieścia razy, i oferty wysyłane z tego samego okna. W sekcji <em>Zainteresowani</em> widzisz, kto dodał przedmiot do ulubionych, i jednym kliknięciem wysyłasz ludzką wiadomość z rabatem, który wybierzesz.</p>
+        </div>
+        <p class="nao" style="margin-top:0">Każda wiadomość przechodzi przez kolejkę i ludzkie tempo. Zanim powstała kolejka, test z wiadomościami wysyłanymi seriami skończył się ograniczeniem naszego konta testowego. Stąd wzięło się obowiązkowe tempo i od tamtej pory każda wiadomość czeka na swoją kolej.</p>
+      </div>
+      <div class="duas">
+        <figure>
+          <div class="foto video"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="../img/pl/clip-mensagens.webp" aria-label="Animacja, 8 sekund: pytanie kupującego, trzy zapisane odpowiedzi, jedna z nich wpisywana w pole i przycisk oferty"><source src="../video/pl/mensagens.mp4" type="video/mp4"><source src="../video/pl/mensagens.webm" type="video/webm"></video></div>
+          <figcaption class="legenda"><span><b>Rys. 8</b> Zapisana odpowiedź wchodzi w pole; wysłanie dalej jest twoim kliknięciem.</span><span>animacja</span></figcaption>
+        </figure>
+        <figure>
+        <div class="foto recorte16"><img src="../img/mensagens.webp" srcset="../img/mensagens-742.webp 742w, ../img/mensagens.webp 1484w" sizes="(max-width:900px) calc(100vw - 36px), 1084px" alt="Wiadomości w Stoqzy: lista rozmów po lewej i otwarta rozmowa po prawej, z zapisanymi odpowiedziami i przyciskiem oferty" width="1484" height="905" loading="lazy"></div>
+        <figcaption class="legenda"><span><b>Rys. 9</b> Wiadomości. Rozmowy po lewej, otwarta po prawej, zapisane odpowiedzi i oferta w tym samym miejscu.</span></figcaption>
+      </figure>
+      </div>
+    </article>
+
+    <article class="bloco">
+      <div class="texto">
+        <div>
+          <span class="numero">1.4</span>
+          <h3>Liczby: uczciwy portret szafy</h3>
+          <p>Ile pieniędzy stoi, od jak dawna i które marki trzymają najwięcej. Vinted nie daje historii, więc Stoqzy nie rysuje udawanych trendów: pokazuje obraz na teraz i pozwala wyeksportować CSV, żeby porównać później.</p>
+        </div>
+        <p style="margin-top:0">Dopiero patrząc na te liczby, zobaczyliśmy we własnej szafie, że połowa zapasu stoi i że ceny są za wysokie. Stąd wziął się Uzupełniacz i obniżki cen.</p>
+      </div>
+      <div class="duas">
+        <figure>
+          <div class="foto sem-barra"><img src="../img/numeros.webp" srcset="../img/numeros-742.webp 742w, ../img/numeros.webp 1484w" sizes="(max-width:900px) calc(100vw - 36px), 632px" alt="Liczby Stoqzy: pierścień z przedmiotami na sprzedaży, stojącymi i ukrytymi, 52 euro zamrożone, mediana ceny 15 euro i mediana wieku 434 dni" width="1484" height="905" loading="lazy"></div>
+          <figcaption class="legenda"><span><b>Rys. 10</b> Liczby. Zamrożone pieniądze, mediana ceny, mediana wieku ogłoszeń.</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <div class="indice" role="region" aria-label="Inne narzędzia rozszerzenia">
+      <dl>
+        <div class="linha"><span class="num">1.5</span><dt>Sprzedaże</dt><dd>Stan każdej sprzedaży, etykieta wysyłkowa jednym kliknięciem, oznaczenie jako zapakowane, eksport CSV.</dd></div>
+        <div class="linha"><span class="num">1.6</span><dt>Saldo</dt><dd>Dostępne i oczekujące, bez otwierania portfela Vinted.</dd></div>
+        <div class="linha"><span class="num">1.7</span><dt>Kolejka</dt><dd>Wszystko, co się wykona, po kolei, w ustawionym tempie. Widzisz, co jest zaplanowane, i zatrzymujesz, kiedy chcesz.</dd></div>
+        <div class="linha"><span class="num">1.8</span><dt>Automatyzacje</dt><dd>Jedno miejsce, żeby włączyć i wyłączyć Uzupełniacz, obniżki cen i przyjmowanie ofert powyżej twojego minimum. Wszystko startuje wyłączone.</dd></div>
+        <div class="linha"><span class="num">1.9</span><dt>Wystawianie</dt><dd>Nowe ogłoszenie na podstawie twojego ogłoszenia, które służy za wzór, z szablonami opisu i już obrobionymi zdjęciami, wypełnione w formularzu Vinted tak, jak robisz to ty.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
+<section class="como" id="como">
+  <div class="col">
+    <p class="etiqueta">02 · Jak działa</p>
+    <h2 class="medida">Trzy kroki i żaden nie prosi o twoje hasło.</h2>
+    <div class="passos">
+      <div class="passo">
+        <h3>Instalujesz rozszerzenie</h3>
+        <p>Prosisz o dostęp, dostajesz plik i wgrywasz go w chrome://extensions. Otwierasz Vinted na koncie, którego już używasz. Stoqzy korzysta z tej sesji, tak samo jak ty, kiedy przeglądasz.</p>
+      </div>
+      <div class="passo">
+        <h3>Wpisujesz to, co wiesz tylko ty</h3>
+        <p>Koszt, SKU, gdzie leży, ile masz sztuk. To dziesięć minut roboty z CSV i to właśnie zamienia „cenę” w „marżę”.</p>
+      </div>
+      <div class="passo">
+        <h3>Włączasz, co chcesz, a Stoqzy czeka na swoją kolej</h3>
+        <p>Uzupełniacz, obniżki, przyjmowanie ofert. Każda akcja wchodzi do kolejki i wychodzi z odstępem i wahaniem, w godzinach aktywnych, które ustawisz. Jeśli Vinted pokaże blokadę, wszystko się zatrzymuje i dostajesz powiadomienie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEGURANÇA ============ -->
+<section class="seg" id="seguranca">
+  <div class="col">
+    <div class="cabeca">
+      <div>
+        <p class="etiqueta">03 · Bezpieczeństwo i tempo</p>
+        <h2>Konto jest warte więcej niż pośpiech.</h2>
+      </div>
+      <p class="lede">Po to Stoqzy powstał. Przeczytaj obie kolumny: to, co robi, i to, czego robić odmawia, waży tyle samo i żadnej z tych zasad nie da się wyłączyć.</p>
+    </div>
+
+    <div class="faz-nao">
+      <div>
+        <h3>Co robi</h3>
+        <ul>
+          <li><span class="rotulo">Sesja</span><b>Działa w twojej przeglądarce, na twojej sesji.</b> Żaden nasz serwer nie rozmawia z Vinted. Zapytania wychodzą z twojej strony, tak jak przy twoim własnym kliknięciu.</li>
+          <li><span class="rotulo">Tempo</span><b>Ludzkie tempo, obowiązkowo.</b> Limity na godzinę i na dobę, przerwa między akcjami z losowym wahaniem i godziny aktywne, które ustawiasz ty (fabrycznie od 9:00 do 23:00). Poza nimi kolejka czeka.</li>
+          <li><span class="rotulo">Profile</span><b>Kilka kont na jednym komputerze nie budzi się o tej samej godzinie.</b> Każdy profil zaczyna godziny aktywne z własnym, stałym opóźnieniem do 45 minut. Dziesiątki kont wystawiających ponownie o 09:00 równo, z tego samego IP, nie wyglądają na ludzi.</li>
+          <li><span class="rotulo">Captcha</span><b>Zatrzymuje się przy pierwszej blokadzie i daje ci znać.</b> Kolejka stoi, dopóki nie zdecydujesz.</li>
+          <li><span class="rotulo">Duplikaty</span><b>Ponowne wystawienie tworzy nowe i ukrywa stare w tej samej operacji.</b> Dwie otwarte karty przeglądarki nie tworzą dwóch ogłoszeń: tylko jedna może przejąć dane zadanie.</li>
+          <li><span class="rotulo">Dane</span><b>Karty, koszty i ustawienia zostają w twoim Chrome.</b> Eksportujesz wszystko do CSV, kiedy chcesz.</li>
+          <li><span class="rotulo">Waluta</span><b>21 krajów Vinted,</b> z ceną każdego przedmiotu liczoną w walucie tego przedmiotu.</li>
+          <li><span class="rotulo">Kiedy się zmienia</span><b>Jeśli Vinted zmieni API, rozszerzenie wykryje odchylenie</b> i wyłączy daną akcję, zamiast pisać na oślep.</li>
+        </ul>
+      </div>
+      <div class="nao">
+        <h3>Czego robić odmawia</h3>
+        <ul>
+          <li>Nie rozwiązuje captchy, nie obchodzi zabezpieczeń anti-bot, nie zmienia IP. Jeśli Vinted mówi nie, to nie.</li>
+          <li>Nie prosi o twoje hasło, nie widzi go i nie zapisuje.</li>
+          <li>Nie wysyła wiadomości seriami. Każda wiadomość do zainteresowanego to twoje kliknięcie i wchodzi do kolejki.</li>
+          <li>Nie ma przycisku „tryb szybki”. Limitów tempa nie da się wyłączyć.</li>
+          <li>Nie kasuje ogłoszeń. Robi tylko to, co potwierdziliśmy na prawdziwym ruchu, a kasowanie nie jest jeszcze potwierdzone; ponowne wystawienie ukrywa stare.</li>
+          <li>Nie uzupełnia wstecz całej przeszłości. Uzupełnianie sprzedanych ma datę odcięcia: liczą się tylko sprzedaże od dnia, w którym je włączysz.</li>
+          <li>Nie obiecuje, że Vinted nigdy cię nie ograniczy. Obiecuje, że jeśli tak się stanie, to nie przez serię zapisów z naszej strony.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prova">
+      <figure>
+        <div class="foto sem-barra"><img src="../img/definicoes.webp" srcset="../img/definicoes-742.webp 742w, ../img/definicoes.webp 1484w" sizes="(max-width:900px) calc(100vw - 36px), 632px" alt="Ustawienia Stoqzy: automatyzacja wyłączona, tempo Zrównoważone z 24 akcjami dziennie i 6 na godzinę, przerwa między akcjami 90 sekund plus do 120 losowo, godziny aktywne od 9:00 do 23:00 oraz tryby Ostrożny, Zrównoważony i Aktywny" width="1484" height="905" loading="lazy"></div>
+        <figcaption class="legenda"><span><b>Rys. 11</b> Ustawienia. Tempo Zrównoważone: 24 dziennie, 6 na godzinę, przerwa 90 s plus do 120 s losowo, godziny aktywne 9:00 do 23:00. Możesz zaostrzyć limity; nie możesz przekroczyć maksimum z kodu (60 dziennie, 12 na godzinę, 45 s między akcjami).</span></figcaption>
+      </figure>
+      <div>
+        <figure class="clipe">
+          <div class="foto video"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="../img/pl/clip-ritmo.webp" aria-label="Animacja, 9 sekund: oś od 9:00 do 23:00, na której pięć akcji spada w nierównych odstępach, z odpoczynkiem w środku; ostatnia trafia na captchę i wszystko się zatrzymuje"><source src="../video/pl/ritmo.mp4" type="video/mp4"><source src="../video/pl/ritmo.webm" type="video/webm"></video></div>
+          <figcaption class="legenda"><span><b>Rys. 12</b> Pięć akcji w ciągu dnia, w nierównych odstępach, odpoczynek i zatrzymanie przy captchy.</span><span>animacja</span></figcaption>
+        </figure>
+        <div class="ritmo" role="group" aria-label="Przykład tego, co kolejka robi z pięcioma ponownymi wystawieniami">
+          <p class="titulo">Przykładowa kolejka</p>
+          <div class="linha"><span>ponowne wystawianie stojących</span><b>5 przedmiotów</b></div>
+          <div class="linha"><span>odstęp</span><b>90 s + do 120 s losowo</b></div>
+          <div class="linha"><span>odpoczynek</span><b>12 min co 4 akcje</b></div>
+          <div class="linha"><span>godziny aktywne</span><b>09:00 do 23:00</b></div>
+          <div class="linha"><span>dzisiejszy limit</span><b>24 akcje (maks. 60)</b></div>
+          <div class="linha"><span>wykryta captcha</span><b class="stop">stop i powiadomienie</b></div>
+        </div>
+        <p>Konto, które robi sto rzeczy w minutę, nie wygląda na człowieka, a Vinted o tym wie. Trzy tryby (Ostrożny, Zrównoważony, Aktywny) zmieniają limity dzienne i godzinowe, odstęp między akcjami i odpoczynek między seriami; maksimum z kodu (60 dziennie, 12 na godzinę) i zatrzymanie przy captchy zostają zawsze.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STUDIO ============ -->
+<section class="studio" id="studio">
+  <div class="col">
+    <div class="studio-cabeca">
+      <div>
+        <p class="etiqueta">04 · Stoqzy Studio · plan Zespół</p>
+        <h2>Kiedy kont jest dużo, potrzebujesz warsztatu.</h2>
+      </div>
+      <p class="lede">Rozszerzenie zajmuje się jednym kontem naraz. Studio to panel, w którym widzisz wszystkie: saldo, sprzedaże i zapas na każdym koncie, kolejkę do wysyłki ze spersonalizowanymi etykietami, szablony produktów do wystawiania na wielu kontach i odpowiedzi podpowiadane przez AI, które zatwierdzasz przed wysłaniem. Działa na studio.stoqzy.com: każdy klient ma swój klucz API, a jego dane są odizolowane od danych innych klientów.</p>
+    </div>
+
+    <figure class="grande">
+      <div class="foto"><img src="../img/studio-expedicao.webp" srcset="../img/studio-expedicao-742.webp 742w, ../img/studio-expedicao.webp 1440w" sizes="(max-width:900px) calc(100vw - 36px), 1084px" alt="Wysyłka w Stoqzy Studio: sprzedaże do zapakowania pogrupowane według konta, z kwotą, numerem śledzenia, przyciskami Drukuj i Oznacz jako zapakowane oraz personalizacją etykiet z nazwą do wydruku, formatem termicznym 100 na 150 mm i stopką" width="1440" height="961" loading="lazy"></div>
+      <figcaption class="legenda"><span><b>Rys. 13</b> Wysyłka. Co zostało do zapakowania, konto po koncie; etykiety wychodzą z wydrukowanym SKU, zbiorczo, w jednym PDF.</span><span>studio.stoqzy.com</span></figcaption>
+    </figure>
+
+    <div class="corpo">
+      <ul class="lista">
+        <li><span class="num">a</span><span><b>Konta obok siebie</b>Saldo dostępne i oczekujące, sprzedaże z ostatnich 30 dni i zapas każdego konta, w jednej tabeli. W euro i w funtach, każde konto w swojej walucie.</span></li>
+        <li><span class="num">b</span><span><b>Wysyłka zbiorcza</b>Etykiety wychodzą z nazwą, którą ustawisz (SKU, tytuł albo numer śledzenia), w formacie termicznym 100 × 150 mm albo innym, razem w jednym PDF. Te starsze niż 48 h są pierwsze.</span></li>
+        <li><span class="num">c</span><span><b>Szablony produktów</b>Jeden szablon, wiele kont. Wybierasz, na których kontach wystawić, a Studio trzyma kolejkę, z taksonomią Vinted (kategoria, rozmiar, stan, kolory) już w karcie. Automatyczne wystawianie przez rozszerzenie każdego konta jest w testach na naszym własnym koncie i włączy się, kiedy przejdzie; do tego czasu szablon otwiera się w Wystawianiu w rozszerzeniu i wychodzi w normalnym tempie.</span></li>
+        <li><span class="num">d</span><span><b>Odpowiedzi z AI, zatwierdzane przez ciebie</b>W rozmowie jednym przyciskiem prosisz o podpowiedź odpowiedzi, z kartą przedmiotu jako kontekstem, w języku konta. Czytasz, poprawiasz, jeśli chcesz, i to ty wysyłasz. Każda podpowiedź kosztuje 1 kredyt; bez kredytów ostrzega i nic nie zużywa.</span></li>
+      </ul>
+      <p class="aviso">Etykiety zawierają adresy kupujących. Dlatego każdy klient loguje się swoim kluczem, widzi tylko swoje konta, a PDF-y powstają na bieżąco i nie są przechowywane. Nie sprzedajemy tych danych ani nie dzielimy się nimi z nikim.</p>
+    </div>
+
+    <div class="par tres">
+      <figure>
+        <div class="foto painel"><img src="../img/studio-painel.webp" srcset="../img/studio-painel-742.webp 742w, ../img/studio-painel.webp 1440w" sizes="(max-width:900px) calc(100vw - 36px), 632px" alt="Panel Stoqzy Studio: saldo grupy w funtach i euro, sprzedaże z 30 dni, zapas grupy, podłączone konta, do zapakowania, kredyty AI i lista tego, co jest teraz ważne" width="1440" height="900" loading="lazy"></div>
+        <figcaption class="legenda"><span><b>Rys. 14</b> Panel Studio. Dwa konta, jedno w euro i drugie w funtach, i to, co dziś wymaga uwagi.</span></figcaption>
+      </figure>
+      <figure>
+        <div class="foto"><img src="../img/studio-modelos.webp" srcset="../img/studio-modelos-742.webp 742w, ../img/studio-modelos.webp 1440w" sizes="(max-width:900px) calc(100vw - 36px), 632px" alt="Szablony w Studio z otwartą szufladą Wystaw: wybór kont, na których wystawić szablon, i dodanie do kolejki" width="1440" height="900" loading="lazy"></div>
+        <figcaption class="legenda"><span><b>Rys. 15</b> Szablony. Produkt (jeszcze bez zdjęcia, stąd ostrzeżenie), konta, na których chcesz go wystawić, i „Do kolejki”. Automatyczne wystawianie jest w testach.</span></figcaption>
+      </figure>
+      <figure>
+          <div class="foto video"><video class="clip" autoplay muted loop playsinline preload="metadata" poster="../img/pl/clip-studio.webp" aria-label="Animacja, 9 sekund: tabela czterech kont z saldem, sprzedażami i zapasem, które się naliczają, sumy według walut i kolejka wysyłki drukująca sześć etykiet w jednym PDF"><source src="../video/pl/studio.mp4" type="video/mp4"><source src="../video/pl/studio.webm" type="video/webm"></video></div>
+          <figcaption class="legenda"><span><b>Rys. 16</b> Konta obok siebie, sumy według walut i sześć etykiet wychodzących w jednym PDF.</span><span>animacja</span></figcaption>
+        </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREÇOS ============ -->
+<section id="precos">
+  <div class="col">
+    <p class="etiqueta">05 · Ceny</p>
+    <h2 class="medida">Trzy plany, miesięczne, bez zobowiązań. Na razie aktywowane mailem.</h2>
+    <p class="lede" style="margin-top:1rem">Zaczynasz od darmowego i przechodzisz wyżej, kiedy szafa tego wymaga. Prosisz mailem, dostajesz klucz i umawiamy się z tobą na miesięczną płatność; automatyczna płatność na stronie będzie potem. Jeśli zrezygnujesz, wracasz na darmowy i nie tracisz kart ani historii.</p>
+
+    <table class="planos">
+      <thead>
+        <tr><th scope="col">Plan</th><th scope="col">Cena</th><th scope="col">Zawiera</th><th scope="col">Limity</th><th scope="col"><span class="sr">Poproś</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="nome">Darmowy</span><p class="para">Żeby zobaczyć szafę z marżą obok i odpowiadać ludziom.</p></td>
+          <td data-l="Cena"><span class="preco">0 €</span></td>
+          <td data-l="Zawiera"><ul>
+            <li>Szafa (kafelki i tabela)</li>
+            <li>Karta przedmiotu i realna marża</li>
+            <li>Wiadomości i zapisane odpowiedzi</li>
+            <li>Sprzedaże i etykiety</li>
+            <li>Wystawianie</li>
+            <li class="x">Ponowne wystawianie, Uzupełniacz i obniżki</li>
+            <li class="x">Oferty, edytor zdjęć, Liczby</li>
+          </ul></td>
+          <td data-l="Limity" class="lim">konta Vinted bez limitu<br>3 akcje dziennie, na konto (edycja, ukrywanie, wystawianie)</td>
+          <td class="cta"><a class="btn" href="mailto:ola@stoqzy.com?subject=Pro%C5%9Bba%20o%20dost%C4%99p%20do%20Stoqzy%20(Darmowy)&amp;body=Cze%C5%9B%C4%87%2C%0A%0AChc%C4%99%20wypr%C3%B3bowa%C4%87%20Stoqzy.%0AKonta%20Vinted%3A%20%0AKraj%3A%20%0AKorzystam%20ju%C5%BC%20z%20innego%20rozszerzenia%3A%20%0APlan%3A%20Darmowy">Poproś o darmowy dostęp</a></td>
+        </tr>
+        <tr class="pro">
+          <td><span class="nome">Pro</span><p class="para">Dla konta, które ma chodzić samo, we właściwym tempie.</p></td>
+          <td data-l="Cena"><span class="preco">9,99 €<small>/mies.</small></span></td>
+          <td data-l="Zawiera"><ul>
+            <li>Wszystko, co robi rozszerzenie</li>
+            <li>Ponowne wystawianie stojących i uzupełnianie sprzedanych</li>
+            <li>Uzupełniacz z zapasem na produkt</li>
+            <li>Obniżki cen z podłogą</li>
+            <li>Zainteresowani i oferty</li>
+            <li>Edytor zdjęć (12 stylów) i 20 profili ponownego wystawiania</li>
+            <li>Liczby</li>
+          </ul></td>
+          <td data-l="Limity" class="lim">konta Vinted bez limitu<br>60 akcji dziennie, na konto</td>
+          <td class="cta"><a class="btn btn-ambar" href="mailto:ola@stoqzy.com?subject=Pro%C5%9Bba%20o%20dost%C4%99p%20do%20Stoqzy%20(Pro)&amp;body=Cze%C5%9B%C4%87%2C%0A%0AChc%C4%99%20plan%20Pro%20w%20Stoqzy.%0AKonta%20Vinted%3A%20%0AKraj%3A%20%0AKorzystam%20ju%C5%BC%20z%20innego%20rozszerzenia%3A%20%0APlan%3A%20Pro">Poproś o Pro</a></td>
+        </tr>
+        <tr>
+          <td><span class="nome">Zespół</span><p class="para">Dla tych, którzy prowadzą kilka kont i pakują codziennie.</p></td>
+          <td data-l="Cena"><span class="preco">29,99 €<small>/mies.</small></span></td>
+          <td data-l="Zawiera"><ul>
+            <li>Wszystko z Pro, na każdym koncie</li>
+            <li>Stoqzy Studio (studio.stoqzy.com, własny klucz)</li>
+            <li>Wysyłka ze zbiorczym drukiem etykiet</li>
+            <li>Szablony produktów na wiele kont (kolejka w Studio; automatyczne wystawianie w testach)</li>
+            <li>Odpowiedzi podpowiadane przez AI, na kredyty</li>
+          </ul></td>
+          <td data-l="Limity" class="lim">konta Vinted bez limitu<br>60 akcji dziennie, na konto<br>Studio: do 25 kont w panelu; jeśli więcej, pogadajmy</td>
+          <td class="cta"><a class="btn" href="mailto:ola@stoqzy.com?subject=Pro%C5%9Bba%20o%20dost%C4%99p%20do%20Stoqzy%20(Zesp%C3%B3%C5%82)&amp;body=Cze%C5%9B%C4%87%2C%0A%0AChc%C4%99%20porozmawia%C4%87%20o%20planie%20Zesp%C3%B3%C5%82%20w%20Stoqzy.%0AKonta%20Vinted%3A%20%0AKraj%3A%20%0AKorzystam%20ju%C5%BC%20z%20innego%20rozszerzenia%3A%20%0APlan%3A%20Zesp%C3%B3%C5%82">Porozmawiajmy</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="precos-nota">„Akcja” to zapis w Vinted zrobiony przez Stoqzy: wystawienie, zmiana ceny, ukrycie ogłoszenia, ponowne wystawienie, uzupełnienie, obniżka ceny, wysłanie oferty. Czytanie szafy, oglądanie sprzedaży czy twoja własna odpowiedź na wiadomość nie liczą się. W darmowym te 3 akcje służą do edycji, ukrywania i wystawiania; ponowne wystawianie, uzupełnianie i obniżki cen są w Pro. W ramach limitu tempo między akcjami dalej jest ludzkie. Żeby poprosić o którykolwiek plan, napisz na ola@stoqzy.com z nazwą planu w temacie.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="col">
+    <div>
+      <p class="etiqueta">06 · Pytania</p>
+      <h2>O co pytają najczęściej przed instalacją.</h2>
+      <p class="lede" style="margin-top:1.2rem">Jeśli twojego pytania tu nie ma, napisz na <a href="mailto:ola@stoqzy.com?subject=Pytanie%20o%20Stoqzy&body=Cze%C5%9B%C4%87%2C%0A%0AMoje%20pytanie%3A%20%0A%0AKonta%20Vinted%3A%20%0AKraj%3A%20">ola@stoqzy.com</a>. Odpowiada osoba, która napisała kod.</p>
+    </div>
+    <div>
+      <details open>
+        <summary>Czy to bezpieczne dla mojego konta?</summary>
+        <p>Po to Stoqzy istnieje. Każdy zapis przechodzi przez limity godzinowe i dzienne, odstęp z wahaniem i godziny aktywne, a przy pierwszym sygnale blokady albo captchy kolejka zatrzymuje się i daje ci znać. Nie ma trybu „szybkiego”. Mimo to żadne narzędzie nie może obiecać, że konto nigdy nie dostanie ograniczeń: my obiecujemy, że nie zrobimy nic, czego nie zrobiłaby uważna osoba.</p>
+      </details>
+      <details>
+        <summary>Używam profili przeglądarki (GoLogin, Multilogin) do kilku kont. Zadziała?</summary>
+        <p>Tak, dokładnie tak autor prowadzi swoje konta: jeden profil na konto i rozszerzenie zainstalowane w każdym. Rozszerzenie rozmawia tylko z kontem otwartym w tym profilu, a każdy profil zaczyna godziny aktywne z własnym opóźnieniem, żeby nie budziły się wszystkie w tej samej minucie. Żeby zobaczyć wszystkie konta w jednym panelu, jest Studio, w planie Zespół.</p>
+      </details>
+      <details>
+        <summary>Potrzebujecie mojego hasła do Vinted?</summary>
+        <p>Nie. Rozszerzenie działa w twojej przeglądarce i korzysta z sesji, którą już masz otwartą. Nie prosi o hasło, nie widzi go i nie zapisuje.</p>
+      </details>
+      <details>
+        <summary>Czy ponowne wystawianie tworzy duplikaty ogłoszeń?</summary>
+        <p>Nie. Ponowne wystawienie tworzy nowe ogłoszenie i w tej samej operacji ukrywa stare; karta przedmiotu, koszty i historia przechodzą na nowe ogłoszenie. Uzupełnienie sprzedanego dzieje się zaraz po pojawieniu się sprzedaży (albo dopiero po jej zakończeniu, jeśli wolisz). Vinted sam nie wystawia ponownie przedmiotu z anulowanej sprzedaży, a anulowanie wymaga twojej zgody, więc duplikat nigdy nie powstaje bez twojej wiedzy.</p>
+      </details>
+      <details>
+        <summary>Czy przez ponowne wystawienie tracę ulubione i wyświetlenia?</summary>
+        <p>Tak. Nowe ogłoszenie startuje od zera i właśnie dlatego wraca na górę wyników wyszukiwania. Dlatego Uzupełniacz wystawia ponownie tylko to, co stoi dłużej, niż ustawisz (domyślnie 45 dni); to, co się sprzedaje, zostaje w spokoju.</p>
+      </details>
+      <details>
+        <summary>Czy Vinted rozpoznaje powtórzone zdjęcie?</summary>
+        <p>Może rozpoznać. Dlatego każde ponowne wystawienie wychodzi z jednym z 20 profili obróbki, którego ten przedmiot jeszcze nie miał, a kiedy profile się skończą, rozszerzenie ostrzega, zamiast powtarzać. Na kontach w Studio zalecamy własne zdjęcia na każdym koncie.</p>
+      </details>
+      <details>
+        <summary>Czy działa w moim kraju?</summary>
+        <p>Tak, na 21 rynkach Vinted, z właściwą walutą każdego przedmiotu. Polska, Portugalia, Hiszpania, Francja, Niemcy, Włochy, Wielka Brytania i reszta.</p>
+      </details>
+      <details>
+        <summary>Gdzie zostają moje dane?</summary>
+        <p>Karty, koszty i ustawienia zostają w pamięci twojej przeglądarki i eksportujesz wszystko do CSV, kiedy chcesz. W planie Zespół sprzedaże, saldo i etykiety podłączonych kont zaczynają żyć w Studio, na studio.stoqzy.com, odizolowane kluczem klienta; z Vinted dalej rozmawia tylko twoja przeglądarka.</p>
+      </details>
+      <details>
+        <summary>Czy jest w Chrome Web Store?</summary>
+        <p>Jeszcze nie. Prosisz o dostęp mailem, dostajesz plik rozszerzenia i wgrywasz go w chrome://extensions. Damy znać, kiedy zostanie opublikowane.</p>
+      </details>
+      <details>
+        <summary>Jak dostaję aktualizacje?</summary>
+        <p>Mailem, z nowym plikiem. Podmieniasz folder rozszerzenia na nowy i klikasz „Załaduj ponownie” w chrome://extensions. Karty, koszty i ustawienia zostają tam, gdzie były.</p>
+      </details>
+      <details>
+        <summary>Jak płaci się za Pro i Zespół?</summary>
+        <p>Umawiamy się mailem, kiedy prosisz o plan, miesiąc po miesiącu. Strona nie przechowuje kart ani danych płatniczych.</p>
+      </details>
+      <details>
+        <summary>Czy mogę zrezygnować, kiedy chcę?</summary>
+        <p>Tak. Plany są miesięczne i bez zobowiązań; dopóki płatność jest umawiana mailem, rezygnujesz jednym mailem. Po rezygnacji wracasz na darmowy i dalej widzisz szafę, sprzedaże i marżę.</p>
+      </details>
+      <details>
+        <summary>A czego jeszcze nie robi?</summary>
+        <p>Nie kasuje ogłoszeń (jeszcze nie potwierdziliśmy tego zapisu na prawdziwym ruchu), nie obchodzi captchy ani zabezpieczeń anti-bot i nie prowadzi księgowości. To, co nie jest jeszcze potwierdzone, stoi w rozszerzeniu jako „do włączenia”, zamiast udawać, że działa. Każda zmiana przechodzi przez 1 900 automatycznych testów, zanim trafi do ciebie.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="fim">
+  <div class="col">
+    <div>
+      <p class="etiqueta">Zaczynamy</p>
+      <h2>Poproś o dostęp, wpisz koszty i pozwól kolejce pracować.</h2>
+      <p class="lede" style="margin-top:1rem">Darmowy plan pokazuje ci szafę z marżą obok i sprzedaże, bez karty. Powiedz, ile masz kont i w jakim kraju, a dostaniesz plik z instrukcją.</p>
+    </div>
+    <div class="acoes">
+      <a class="btn btn-cheio" href="mailto:ola@stoqzy.com?subject=Pro%C5%9Bba%20o%20dost%C4%99p%20do%20Stoqzy%20(Darmowy)&amp;body=Cze%C5%9B%C4%87%2C%0A%0AChc%C4%99%20wypr%C3%B3bowa%C4%87%20Stoqzy.%0AKonta%20Vinted%3A%20%0AKraj%3A%20%0AKorzystam%20ju%C5%BC%20z%20innego%20rozszerzenia%3A%20%0APlan%3A%20Darmowy">Poproś o darmowy dostęp</a>
+      <a class="btn" href="#precos">Zobacz plany</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="col grelha">
+    <div>
+      <a class="marca" href="#topo"><img src="../img/marca.svg" alt="" width="30" height="30">Stoqzy <small>rozszerzenie do Chrome · Vinted</small></a>
+      <p style="margin-top:14px;max-width:40ch">Rozszerzenie do Chrome i panel do wielu kont dla sprzedających na Vinted. Zrobione przez sprzedawcę, dla sprzedawców. Zrzuty na tej stronie są prawdziwe, z kont testowych.</p>
+    </div>
+    <div>
+      <p class="rotulo">Produkt</p>
+      <ul>
+        <li><a href="#faz">Rozszerzenie</a></li>
+        <li><a href="#studio">Stoqzy Studio</a></li>
+        <li><a href="#precos">Ceny</a></li>
+        <li><a href="#seguranca">Bezpieczeństwo</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="rotulo">Kontakt</p>
+      <ul>
+        <li><a href="mailto:ola@stoqzy.com?subject=Kontakt%20Stoqzy&body=Cze%C5%9B%C4%87%2C%0A%0A">ola@stoqzy.com</a></li>
+        <li><a href="https://studio.stoqzy.com" rel="noopener">studio.stoqzy.com</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="rotulo">Pomoc</p>
+      <ul>
+        <li><a href="#faq">Częste pytania</a></li>
+        <li><a href="#como">Jak działa</a></li>
+        <li><a href="../privacidade.html">Prywatność</a></li>
+        <li><a href="../termos.html">Regulamin</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="col">
+    <p class="idiomas"><a href="/" lang="pt" hreflang="pt">Português</a> · <a href="/de/" lang="de" hreflang="de">Deutsch</a> · <a href="/en/" lang="en" hreflang="en">English</a> · <a href="/es/" lang="es" hreflang="es">Español</a> · <a href="/fr/" lang="fr" hreflang="fr">Français</a> · <a href="/it/" lang="it" hreflang="it">Italiano</a> · <a href="/nl/" lang="nl" hreflang="nl">Nederlands</a> · <a href="/pl/" lang="pl" hreflang="pl" aria-current="page">Polski</a></p>
+    <div class="disclaimer">
+      <span>© 2026 Stoqzy. Wszelkie prawa zastrzeżone.</span>
+      <span>Stoqzy nie jest powiązany z Vinted, nie jest przez Vinted sponsorowany ani zatwierdzony. „Vinted” jest znakiem towarowym należącym do jego właścicieli.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Os clips só tocam quando estão no ecrã e se o visitante não pediu menos
+   movimento; fora do ecrã param (poupa bateria e dados). Sem JS: fica o poster. */
+(function(){
+  /* Fechar o menu móvel ao escolher uma secção (sem JS o checkbox ficava marcado). */
+  var menuCheck = document.getElementById('menu-check');
+  document.querySelectorAll('#menu a').forEach(function(a){ a.addEventListener('click', function(){ menuCheck.checked = false; }); });
+
+  /* O seletor de idioma fecha ao clicar fora ou com Escape (sem JS fica aberto até novo clique). */
+  function fecharIdiomas(excepto){
+    document.querySelectorAll('details.idioma[open]').forEach(function(d){ if (d !== excepto) d.removeAttribute('open'); });
+  }
+  document.addEventListener('click', function(ev){ fecharIdiomas(ev.target.closest ? ev.target.closest('details.idioma') : null); });
+  document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') fecharIdiomas(null); });
+
+  /* Os clips tocam quando entram no ecrã e param fora dele. Se o browser
+     bloquear o autoplay (perfis com política restrita), aparece «Reproduzir» e
+     o primeiro gesto na página desbloqueia; um clique no vídeo alterna. */
+  var clips = document.querySelectorAll('video.clip');
+  if (!clips.length) return;
+  function marcar(v, bloq){ var f = v.closest('.foto'); if (f) f.classList.toggle('bloqueado', bloq); }
+  function tocar(v){
+    var p; try { p = v.play(); } catch (e) { marcar(v, true); return; }
+    if (p && p.then) p.then(function(){ marcar(v, false); }).catch(function(){ marcar(v, true); });
+  }
+  function visivel(v){ var r = v.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }
+  function tocarSeQuiser(v){ if (!v.dataset.pausado) tocar(v); }
+  clips.forEach(function(v){
+    v.addEventListener('playing', function(){ marcar(v, false); });
+    /* o pointerdown do mesmo clique já passou pelo gesto(); a intenção fica na flag */
+    v.addEventListener('click', function(){
+      if (v.dataset.pausado) { delete v.dataset.pausado; tocar(v); }
+      else { v.dataset.pausado = '1'; v.pause(); }
+    });
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) tocarSeQuiser(e.target); else e.target.pause(); });
+    }, { rootMargin: '120px 0px', threshold: 0.15 });
+    clips.forEach(function(v){ io.observe(v); });
+  } else {
+    clips.forEach(tocarSeQuiser);
+  }
+  function gesto(){ clips.forEach(function(v){ if (v.paused && !v.dataset.pausado && visivel(v)) tocar(v); }); }
+  ['pointerdown', 'keydown', 'touchend'].forEach(function(ev){ document.addEventListener(ev, gesto, { passive: true }); });
+})();
+</script>
+</body>
+</html>

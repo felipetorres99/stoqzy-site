@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /candidato-
+Disallow: /candidatos/
+Sitemap: https://stoqzy.com/sitemap.xml

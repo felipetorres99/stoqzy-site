@@ -1,8 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Stoqzy">
-  <!-- Ícone Stoqzy: a mascote (rato com etiqueta) num quadrado creme. Mesma geometria de mascote.svg. -->
-  <rect width="64" height="64" rx="15" fill="#F7F3EA"/>
-  <g transform="translate(3.5 3) scale(0.9)">
-<g stroke="#14161C" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+  <!-- Rato F: sem fundo (mascote solta para o site), contorno carvão à autocolante, cabeça em pera, etiqueta pendurada na orelha. -->
+  <g stroke="#14161C" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
     <!-- cauda -->
     <path d="M47 47c8 2 12-3 9-7s-8-2-7 2 6 5 10 3" fill="none" stroke="#14161C" stroke-width="5.4"/>
     <path d="M47 47c8 2 12-3 9-7s-8-2-7 2 6 5 10 3" fill="none" stroke="#F5B942" stroke-width="2.6"/>
@@ -30,6 +28,5 @@
       <path d="M51 22h6l3 3v8a1.5 1.5 0 0 1-1.5 1.5H51A1.5 1.5 0 0 1 49.5 33v-9.5A1.5 1.5 0 0 1 51 22z" fill="#FBF7EE" stroke-width="2"/>
       <circle cx="53" cy="25" r="1.1" fill="#14161C" stroke="none"/>
     </g>
-  </g>
   </g>
 </svg>

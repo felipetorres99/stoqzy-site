@@ -1,0 +1,10 @@
+# Hostinger servia .webm como text/plain (Firefox recusa; Chrome tolera). MIME certo:
+AddType video/webm .webm
+AddType video/mp4 .mp4
+AddType image/webp .webp
+AddType image/svg+xml .svg
+<IfModule mod_headers.c>
+  <FilesMatch "\.(mp4|webm|webp|png|jpg|svg|woff2)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
